@@ -1,0 +1,89 @@
+.category-view-wrapper  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+ 
+}
+
+
+
+.category-view {
+    &_banner {
+        margin-top: 20px;
+        &_images {
+            display: flex;
+            justify-content: center;
+        }
+    }
+    &_header {
+        background-color: #fff;
+        width: 1200px;
+        margin: 0 auto;
+        &_title {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            &_text {
+                color: #cb4405;
+                font-size: 18pt;
+                text-transform: uppercase;
+                padding-left: 20px;
+            }
+            &_viewmore {
+                color: #cb4405;
+                font-size: 12pt;
+                padding-right: 20px;
+            }
+        }
+        &_brand {
+            & ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                list-style: none;
+                & li {
+                    border: 1px solid #dad6d6;
+                }
+            }
+        }
+    }
+    &_main {
+        display: flex;
+        background-color: #fff;
+        flex-direction: row;
+        width: 1200px;
+        margin: 0 auto;
+        &__sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+        &_content {
+            display: flex;
+            flex-direction: column;
+            
+            &_menu {
+                display: flex;
+                height: 60px;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+
+            }
+            &_product {
+                
+                & ul {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    list-style: none;
+                    & li {
+                        padding: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

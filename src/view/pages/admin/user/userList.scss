@@ -1,0 +1,22 @@
+.demo-loadmore-list {
+  min-height: 550px;
+}
+
+.user-list-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-list {
+    &-header {
+        display: flex;
+        height: 60px;
+        align-items: center;
+        padding-left: 20px;
+        & p {
+            font-size: 16pt;
+            color: #ee4d2d;
+        }
+        
+    }
+}

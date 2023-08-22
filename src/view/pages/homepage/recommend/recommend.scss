@@ -1,0 +1,48 @@
+.recommend-wrapper {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+    
+
+}
+.recommend {
+    &-title {
+        position: sticky;
+        z-index: 50;
+        top: 8.25rem;
+        &_text {
+           
+            background-color: #fff;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: #ee4d2d solid 4px;
+
+            
+            
+            & p {
+                color: #ee4d2d;
+                font-size: 1.25rem;
+                text-transform: uppercase;
+            }
+        }
+
+    }
+    &-products {
+        & ul {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            list-style: none;
+            & li {
+                padding: 5px;
+            }
+        }
+
+    }
+}

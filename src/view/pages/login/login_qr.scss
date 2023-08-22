@@ -1,0 +1,83 @@
+
+.login-qr-header {
+    font-size: 22px;
+    font-weight: lighter;
+
+}
+.login-qr-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.login-qr-pic {
+    width : 100px;
+}
+.login-qr-des {
+    font-size: 19px;
+    color : #ee4d4f;
+    text-align: center;
+    margin: 12px 0;
+}
+.login-qr-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-qr-how {
+    font-size: 18px;
+    color : blue;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: 100;
+    border : none;
+    background-color: #fff;
+
+}
+.login-qr-how:hover {
+    cursor: pointer;
+}
+.login-qr-form {
+    position: relative;
+}
+.login-qr-sidebar {
+    position: absolute;
+    top : 250px ;
+    right : 400px;  
+    background-color: #fff;
+    padding : 30px;
+    max-width : 400px;
+    margin-right: 150px;
+    min-height: 470px;
+    min-width: 380px;
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,.14);
+    border-radius: 5px;
+    // display : none;
+}
+.login-sidebar-mark {
+    position: absolute;
+    top : 30px;
+    right : 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.login-sidebar-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    text-align: center;
+}
+.login-sidebar-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.login-sidebar-pic {
+    width :400px;
+    margin-bottom: 40px;
+}
+.login-sidebar-footer {
+    text-align: center;
+}

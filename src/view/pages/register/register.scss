@@ -1,0 +1,133 @@
+* {
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif
+}
+:root {
+    --primary-color : #f14d2d;
+    --height-header: 80px;
+    --text-color : #222222;
+}
+.register-content {
+    background-color: rgb(255, 235, 226);
+    width : 100%;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    padding : 85px 0;
+    flex: 1;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color : var(--text-color);
+}
+
+.register-form {
+    background-color: #fff;
+    padding : 30px;
+    max-width : 400px;
+    margin-right: 150px;
+    min-width: 380px;
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,.14);
+    border-radius: 5px;
+}
+.register-form-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.register-label {
+    font-size: 14px;
+}
+.register-input {
+    padding : 8px 12px;
+    width: 100%;
+    margin-top: 8px;
+    border : 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+.register-input:focus {
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,.14);
+    border : 1px solid #ccc;
+}
+
+.register-btn {
+    width : 100%;
+    background-color: var(--primary-color);
+    color : white;
+    padding : 8px 0;
+    border : none;
+    font-size: 15px;
+    margin : 20px 0;
+    // opacity: 0.8;
+}
+.register-btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.register-footer-top {
+    margin-bottom: 12px;
+    font-size: 14px;
+    color : #ccc ;
+    display: flex;
+    align-items: center;
+}
+.register-line {
+    display: block;
+    height : 1px;
+    flex : 1;
+    width : 100%;
+    background-color: #dbdbdb;
+}
+.register-line-des {
+    color : #ccc;
+    padding : 0 16px;
+}
+
+.register-footer-icon {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex : 1;
+}
+
+.register-footer-btn {
+    display: flex;
+    align-items: center;
+    padding : 6px 12px;
+    background-color: #fff;
+    font-size: 15px;
+    border : 1px solid #ccc;
+    min-width: 150px;
+}
+.register-footer-btn:hover {
+    background-color: rgba(0,0,0,0.06)
+}
+.register-footer-img {
+    width : 25px;
+    margin-right: 12px;
+}
+
+.register-footer-des {
+    font-size: 11px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.register-login {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.register-link {
+    text-decoration:  none;
+    color : var(--primary-color);
+    border : none;
+    background-color: #fff;
+}
+.register-link:hover {
+    cursor: pointer;
+}
