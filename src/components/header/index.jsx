@@ -12,7 +12,6 @@ import {
 import './index.scss';
 import { Input, Space } from 'antd';
 import SearchResult from "./search-result";
-import { Link } from "react-router-dom";
 const { Search } = Input;
 
 // const suffix = (
