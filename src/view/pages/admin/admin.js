@@ -21,14 +21,14 @@ function Admin() {
 
     const [user, setUser] = useState([]);
     const [showAdd, setShowAdd] = useState(false);
-    useEffect(()=> {
-        const fetchProducts = async () => {
-            // const params = {_limit: 30}
-            const userList = await userApi.getAllUser();
-            setUser(userList.users);
-        }
-        fetchProducts();
-    }, [])
+    // useEffect(()=> {
+    //     const fetchProducts = async () => {
+    //         // const params = {_limit: 30}
+    //         const userList = await userApi.getAllUser();
+    //         setUser(userList.users);
+    //     }
+    //     fetchProducts();
+    // }, [])
 
     function addProduct () {
         setShowAdd(!showAdd);
