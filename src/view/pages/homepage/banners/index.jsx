@@ -31,16 +31,16 @@ function Banners () {
                   <ul>
                     <li><a href="/">
                       <Item
-                      imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      imageURL="https://cf.shopee.vn/file/e4a404283b3824c211c1549aedd28d5f_xhdpi"
+                      itemName='Khung giờ săn sale'
                       width='45px'
                       height='45px'
                     />
                       </a></li>
                     <li><a href="/">
                       <Item
-                      imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      imageURL="https://cf.shopee.vn/file/a8d76bca057ba0b117dcf8e1ef068d16_xhdpi"
+                      itemName='Miễn phí vận chuyển cho mọi đơn'
                       width='45px'
                       height='45px'
                     />

@@ -7,5 +7,23 @@
 
 .item-name {
     text-align: center;
-    color: rgba(0,0,0,.7);
+    width: 100px;
+    height: 36px;
+    overflow: hidden;
+
+    &_text {
+        color: rgba(0,0,0,.7);
+        display: -webkit-box;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        font-size: 12pt;
+        line-height: 18px;
+        max-width: 150px;
+        margin-bottom: 8px;
+        word-wrap: break-word;
+        overflow: hidden;
+        white-space: pre-line;
+    }
+
 }

@@ -13,7 +13,9 @@ function Item (props){
     return (
         <div className="item-wrapper">
             <div className="item-image" style={itemStyle}></div>
-            <div className="item-name">{props.itemName}</div>
+            <div className="item-name">
+                <p className="item-name_text">{props.itemName}</p>
+            </div>
         </div>
     );
 }
