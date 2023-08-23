@@ -6,12 +6,29 @@ import {
     NotificationOutlined, 
     QuestionCircleOutlined,
     GlobalOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    AudioOutlined 
 } from '@ant-design/icons';
 import './index.scss';
 import { Input, Space } from 'antd';
+import SearchResult from "./search-result";
+import { Link } from "react-router-dom";
 const { Search } = Input;
+
+// const suffix = (
+//     <AudioOutlined
+//       style={{
+//         fontSize: 16,
+//         color: '#1677ff',
+//       }}
+//     />
+//   );
+
+//   const onSearch = (value) => console.log(value);
+//   const onChange = (value) => console.log(value);
+
 function Header(props) {
+    
     const styleHeader = {
         position: `${props.position || 'fixed'}`,
     }
@@ -76,9 +93,10 @@ function Header(props) {
                                     }}
                                 // suffix={suffix}
                                 // onSearch={onSearch}
+                                // onChange={onChange}
                             />
                         </Space>
-                            
+                            {/* <SearchResult   /> */}
                         </div>
                         <div className="header-shop_main_search_recommend">
                             <ul>
@@ -93,7 +111,10 @@ function Header(props) {
                     </div>
                     <div className="header-shop_main_cart">
                         <div className="header-shop_main_cart_logo">
-                            <a href="/"><ShoppingCartOutlined className="header-shop_main_cart_logo_image" /></a>
+                            <Link to='/cart' >
+                                <a href="/"><ShoppingCartOutlined className="header-shop_main_cart_logo_image" /></a>
+                            </Link>
+                            
                         </div>
                     </div>
 

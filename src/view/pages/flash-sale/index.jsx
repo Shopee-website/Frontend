@@ -42,7 +42,7 @@ function FlashSale(){
                                     imageURL={post.images[0]}
                                     name={post.name}
                                     discount ="giảm 25k"
-                                    price={"$"+post.originalPrice}
+                                    price={"$"+post.salePrice}
                                     height = "188px"
                                     width = '187.5px'
                                     sold="7,2k"  

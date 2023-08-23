@@ -28,6 +28,7 @@ function Register (){
         const sendPostRequest = async () => {
             try {
                 const resp = await axios.post('http://localhost:8000/api/auth/register', {
+                    
                     email : email,
                     password : password,
                     password2 : password2
