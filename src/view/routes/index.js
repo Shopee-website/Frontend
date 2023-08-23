@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 import MainLayout from "components/layout/MainLayout";
 import LoadableComponent from "components/loadable-component";
+import RegisterLayout from "components/registerLayout/registerLayout";
 
 const HomePage = LoadableComponent(()=> import('view/pages/homepage'))
 const ProductView = LoadableComponent(()=> import('view/pages/product-view'))
@@ -11,7 +12,6 @@ const Login = LoadableComponent(()=> import('view/pages/login/login.js'))
 const Register = LoadableComponent(()=> import('view/pages/register/register.js'))
 const Cart = LoadableComponent(()=> import('view/pages/cart/cart.js'))
 const Admin= LoadableComponent(()=> import('view/pages/admin/admin.js'))
-const ProductDetails= LoadableComponent(()=> import('view/pages/product-details/ProductDetails.js'))
 
 
 function AllRoutes(){
@@ -33,19 +33,24 @@ function AllRoutes(){
                     element={<MainLayout component={FlashSale} />}/>
                 <Route 
                     path="/login/" 
-                    element={<Login />}/>
+                    element={
+                        <RegisterLayout>
+                            <Login/>
+                        </RegisterLayout>
+                    }/>
                 <Route 
                     path="/register/" 
-                    element={<Register />}/>
+                    element={
+                        <RegisterLayout>
+                            <Register/>
+                        </RegisterLayout>
+                    }/>
                 <Route 
                     path="/cart/" 
                     element={<Cart />}/>
                 <Route 
                     path="/admin/" 
-                    element={<Admin />}/>
-                <Route 
-                    path="/product-details/" 
-                    element={<ProductDetails />}/>       
+                    element={<Admin />}/>    
 
             </Route>
         </Routes>

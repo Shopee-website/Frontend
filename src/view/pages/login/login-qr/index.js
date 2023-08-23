@@ -1,7 +1,7 @@
 import './login_qr.scss'
-import qrcode from '../../../assets/images/qr-shopee.png'
+import qrcode from 'assets/images/qr-shopee.png'
 import React, {useState, useEffect} from 'react'
-import shopeehelp from "../../../assets/images/shopee-how.png"
+import shopeehelp from 'assets/images/shopee-how.png'
 
 function LoginQR() {
 
