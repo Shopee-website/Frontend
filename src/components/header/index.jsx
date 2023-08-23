@@ -1,4 +1,5 @@
 import React from "react";
+import {Link, useNavigate} from 'react-router-dom'
 import {
     FacebookOutlined, 
     InstagramOutlined, 
@@ -11,11 +12,15 @@ import './index.scss';
 import { Input, Space } from 'antd';
 const { Search } = Input;
 function Header(props) {
-
     const styleHeader = {
         position: `${props.position || 'fixed'}`,
     }
-
+    let user = JSON.parse(localStorage.getItem('user-infor'))
+    const nagivate = useNavigate()
+    function signout (){
+        localStorage.clear('user-infor')
+        nagivate('/login')
+    }
     return (
         <div className="header-shop-wrapper" style={styleHeader}>
             <div className="header-shop">
@@ -33,8 +38,18 @@ function Header(props) {
                             <li><a href=""><NotificationOutlined />Thông báo</a></li>
                             <li><a href=""><QuestionCircleOutlined />Hỗ trợ</a></li>
                             <li><a href=""><GlobalOutlined />Tiếng Việt</a></li>
-                            <li><a href="">Đăng ký</a></li>
-                            <li><a href="">Đăng nhập</a></li>
+
+                            {localStorage.getItem('user-infor') ?
+                                <>
+                                <li>Xin chào {user.email}</li>
+                                <li><a href = "" onClick={signout}>Đăng xuất</a></li>
+                                </>
+                                :
+                                <>
+                                    <li><Link to = "/register">Đăng ký</Link></li>
+                                    <li><Link to = "/login">Đăng nhập</Link></li>
+                                </>
+                            }
                         </ul>
                     </div>
                 </div>
