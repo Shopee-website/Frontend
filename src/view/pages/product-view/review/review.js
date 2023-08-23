@@ -1,7 +1,7 @@
 import {useEffect, useState } from 'react'
 import './review.scss'
 import axios from 'axios'
-import avatar from '../../../assets/images/avatar-review.jpg'
+import avatar from 'assets/images/avatar-review.jpg'
 import {Rating} from '@mui/material'
 function Review() {
     const [review, setReview] = useState([])
@@ -9,6 +9,7 @@ function Review() {
     useEffect (()=> {
         axios.get('http://localhost:8000/api/feedback/get-by-product/3')
         .then (res => {
+            console.log(res.data.feedback)
            setReview(res.data.feedback)
            setMainReview(res.data.feedback)
         })

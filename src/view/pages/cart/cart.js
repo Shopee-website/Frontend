@@ -17,6 +17,7 @@ function Cart() {
         axios.get('http://localhost:8000/api/cart/user-cart/3')
         .then (res => {
            setCart(res.data.cart)
+           console.log(res.data)
         })
         .catch(err => console.log(err));
     }, [])

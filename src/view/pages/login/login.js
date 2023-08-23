@@ -1,10 +1,10 @@
 import './login.scss'
-import facebook from '../../../assets/images/Facebook_Logo.png'
-import google from '../../../assets/images/google_logo.png'
+import facebook from 'assets/images/Facebook_Logo.png'
+import google from 'assets/images/google_logo.png'
 import React , {useState} from 'react'
-import Background from '../../../assets/images/register-background.jpg'
+import Background from 'assets/images/register-background.jpg'
 import {Link} from 'react-router-dom'
-import LoginEmail from './login_email'
+import LoginEmail from './login-email'
 import LoginQR from './login-qr'
 
 function Login() {
