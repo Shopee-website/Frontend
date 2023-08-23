@@ -3,8 +3,17 @@ import { Layout } from "antd";
 import Header from 'components/header'
 import Footer from 'components/footer'
 
+// const headerFixed = ['HomePage'];
 
 function MainLayout(props) {
+
+    // let positionHeader = 'fixed';
+
+    // if (!headerFixed.includes(String(props.component))) {
+    //     console.log(props.component);
+    //     positionHeader = 'status';
+    // }
+
     return (
         <div className="body-wrapper">
             <div className="content-wrapper">

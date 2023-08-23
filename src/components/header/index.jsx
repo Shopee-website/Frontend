@@ -30,11 +30,11 @@ function Header(props) {
                     </div>
                     <div className="header-shop_navbar_support">
                         <ul className="header-shop_navbar_support_list">
-                            <li><a href=""><NotificationOutlined />Thông báo</a></li>
-                            <li><a href=""><QuestionCircleOutlined />Hỗ trợ</a></li>
-                            <li><a href=""><GlobalOutlined />Tiếng Việt</a></li>
-                            <li><a href="">Đăng ký</a></li>
-                            <li><a href="">Đăng nhập</a></li>
+                            <li><a href="/"><NotificationOutlined />Thông báo</a></li>
+                            <li><a href="/"><QuestionCircleOutlined />Hỗ trợ</a></li>
+                            <li><a href="/"><GlobalOutlined />Tiếng Việt</a></li>
+                            <li><a href="/">Đăng ký</a></li>
+                            <li><a href="/">Đăng nhập</a></li>
                         </ul>
                     </div>
                 </div>

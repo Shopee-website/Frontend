@@ -48,7 +48,7 @@ function Banners () {
                     <li><a href="/">
                       <Item
                       imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển abc def'
+                      itemName='Voucher Giảm Đến 500.000Đ'
                       width='45px'
                       height='45px'
                     />
@@ -56,39 +56,39 @@ function Banners () {
                     <li><a href="/">
                       <Item
                       imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      itemName='Voucher Giảm Đến 500.000Đ'
                       width='45px'
                       height='45px'
                     />
                       </a></li>
                     <li><a href="/">
                       <Item
-                      imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      imageURL="https://cf.shopee.vn/file/vn-50009109-8a387d78a7ad954ec489d3ef9abd60b4_xhdpi"
+                      itemName='mã giảm giá'
                       width='45px'
                       height='45px'
                     />
                       </a></li>
                       <li><a href="/">
                       <Item
-                      imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      imageURL="https://cf.shopee.vn/file/b3535d7e56c58c4ebe9a87672d38cc5e_xhdpi"
+                      itemName='Gì Cũng Rẻ - Deal Sốc 9.000Đ'
                       width='45px'
                       height='45px'
                     />
                       </a></li>
                       <li><a href="/">
                       <Item
-                      imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      imageURL="https://cf.shopee.vn/file/9df57ba80ca225e67c08a8a0d8cc7b85_xhdpi"
+                      itemName='Nạp Thẻ, Dịch Vụ & Khách Sạn'
                       width='45px'
                       height='45px'
                     />
                       </a></li>
                       <li><a href="/">
                       <Item
-                      imageURL="https://cf.shopee.vn/file/vn-50009109-852300c407c5e79bf5dc1854aa0cfeef_xhdpi"
-                      itemName='Miễn phí vận chuyển'
+                      imageURL="https://cf.shopee.vn/file/a08ab28962514a626195ef0415411585_xhdpi"
+                      itemName='hàng quốc tế'
                       width='45px'
                       height='45px'
                     />

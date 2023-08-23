@@ -11,10 +11,6 @@ import { Menu } from 'antd';
 import { Select, Space, Radio } from 'antd';
 
 
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
-
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -48,8 +44,10 @@ const items = [
 
 
 function ProductCategory(){
+ 
 
     const [placement, SetPlacement] = useState('topLeft');
+
     const placementChange = (e) => {
         SetPlacement(e.target.value);
     };
@@ -57,6 +55,7 @@ function ProductCategory(){
     const onClick = (e) => {
         console.log('click ', e);
       };
+
 
     const  {categoryId}  = useParams();
     
@@ -80,7 +79,23 @@ function ProductCategory(){
         
     }, [categoryId])
 
+       
+    const [data, setData] = useState(products);
 
+    const sortByPrice = () => {
+        const sortedData = [...data]; // Create a shallow copy of the data array
+        sortedData.sort((a, b) => a.price - b.price);
+        setData(sortedData);
+      };
+    
+    const handleChangeSelect = (value) => {
+        if (value === 'min') {
+            sortByPrice();
+        }
+    console.log(`selected ${value}`);
+    console.log(data);
+    };
+  
     
 
     return (
@@ -112,77 +127,77 @@ function ProductCategory(){
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/75d88079993e481881ae8a3390f2edaa"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/b8cdb3f55c26a37a899f90aa7df78045"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/5de88eb8d4bbefc253794bdd2d8946e6"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/f3f25e17f2b6839fdb3fae228ff9998b"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/cea0e96150243cc3d551980c8a741def"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/0c7732b82a4bd949ae3edfab7d1e315a"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/e353d002868251a550c5f21261c5b36a"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/f08725b2245cc86d32eae65d314dd5ad"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/e08870897b8e588d1715da24a48d08a2"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/0f7270a6805f480c1cc110f64bc34880"
                                 height='112px'
                                 width= '198px'
                             />
                             </li>
                             <li>
                             <Banner
-                                imageURL="https://down-vn.img.susercontent.com/file/e929e6171253f09977fbdde17b4fa04c"
+                                imageURL="https://down-vn.img.susercontent.com/file/c6ba07ecb5c3600ac36eb6ea933de944"
                                 height='112px'
                                 width= '198px'
                             />
@@ -206,39 +221,32 @@ function ProductCategory(){
                     items={items}
                 />
                 </div>
+
                 <div className="category-view_main_content">
                     <div className="category-view_main_content_menu" >
                     <Radio.Group value={placement} onChange={placementChange}>
-                        <Radio.Button value="Sắp xếp theo">Sắp xếp theo</Radio.Button>
+                        {/* <Radio.Text value="Sắp xếp theo">Sắp xếp theo </Radio.Text> */}
                         <div style={{width: '50px' , display: 'inline-block'}}></div>
                         <Radio.Button value="Phổ biến">Phổ biến</Radio.Button>
                         <Radio.Button value="Mới nhất">Mới nhất</Radio.Button>
                         <Radio.Button value="Bán chạy">Bán chạy</Radio.Button>
                     </Radio.Group>
+
                         <Space wrap>
                             <Select
-                            defaultValue="lucy"
+                            defaultValue="Giá"
                             style={{
-                                width: 120,
+                                width: 200,
                             }}
-                            onChange={handleChange}
+                            onChange={handleChangeSelect}
                             options={[
                                 {
-                                value: 'jack',
-                                label: 'Jack',
+                                value: 'min',
+                                label: 'Giá : Thấp Đến Cao',
                                 },
                                 {
-                                value: 'lucy',
-                                label: 'Lucy',
-                                },
-                                {
-                                value: 'Yiminghe',
-                                label: 'yiminghe',
-                                },
-                                {
-                                value: 'disabled',
-                                label: 'Disabled',
-                                disabled: true,
+                                value: 'max',
+                                label: 'Giá : Caoo Đến Thấp',
                                 },
                             ]}
                             />
@@ -248,7 +256,7 @@ function ProductCategory(){
                         <ul>
                         {products.map(post => {
                             return (
-                                <Link key = {post.id} to={`/product-view/${post.id}`}>
+                                <Link key = {post.id} to={`/product-view/${post.name}/${post.id}`}>
                                     <li>
                                         <Product 
                                             imageURL={post.images[0]}

@@ -3,6 +3,9 @@ import { Navigate, Routes, Route } from "react-router-dom";
 import MainLayout from "components/layout/MainLayout";
 import LoadableComponent from "components/loadable-component";
 import RegisterLayout from "components/registerLayout/registerLayout";
+import { MyProfile} from "view/pages/profile/myProfile";
+const Profile = LoadableComponent(() => import("view/pages/profile"));
+
 
 const HomePage = LoadableComponent(()=> import('view/pages/homepage'))
 const ProductView = LoadableComponent(()=> import('view/pages/product-view'))
@@ -23,10 +26,10 @@ function AllRoutes(){
                     path="/homepage" 
                     element={<MainLayout component={HomePage} />}/>
                 <Route 
-                    path="/product-view/:productId" 
+                    path="/product-view/:name/:productId" 
                     element={<ProductView />} />
                 <Route 
-                    path="/category-view/:categoryId" 
+                    path="/category-view/:name/:categoryId" 
                     element={<MainLayout component={CategoryView} />}/>
                 <Route 
                     path="/flash-sale/" 
@@ -51,7 +54,10 @@ function AllRoutes(){
                 <Route 
                     path="/admin/" 
                     element={<Admin />}/>    
-
+                <Route path="/profile" element={<MainLayout component={Profile} />}>
+                    <Route path="/profile" element={<MyProfile />} />
+                    <Route path="/profile/my_profile" element={<MyProfile />} />
+                </Route>
             </Route>
         </Routes>
     )

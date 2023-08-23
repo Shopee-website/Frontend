@@ -16,7 +16,7 @@ function Recommend (props){
                 <ul>
                   {products.map(post => {
                           return (
-                          <Link key = {post.id} to={`/product-view/${post.id}`}>
+                          <Link key = {post.id} to={`/product-view/${post.name}/${post.id}`}>
                             <li>
                               <Product 
                                     imageURL={post.images[0]}

@@ -15,7 +15,7 @@ function CategoryList (props) {
                       {category.map((info)=> {
                       return (
                               <Col key = {info.id}  span={3} className="home-page-main-content_category_list" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <Link  to={`/category-view/${info.id}`}>
+                                <Link  to={`/category-view/${info.name}/${info.id}`}>
                                   <Item
                                     imageURL='https://icons.veryicon.com/png/o/object/material-design-icons-1/tag-24.png'
                                     itemName={info.name} 
