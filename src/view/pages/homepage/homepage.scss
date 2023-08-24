@@ -70,8 +70,7 @@
             width: 1200px;
             margin: 0 auto;
             background-color: #ffff;
-            // display: flex;
-            // flex-direction: column;
+
             &_title {
                 height: 60px;
                 display: flex;
@@ -86,6 +85,9 @@
                 font-size: 15pt;
                 border: 1px solid rgba($color: #b1aeae, $alpha: 0.2);
                 color: rgba(0,0,0,.7);
+                &:hover {
+                    box-shadow: 1px 1px 1px 1px  #b9b8b8
+                }
             }
         }
         &_flash-sale{
@@ -116,8 +118,14 @@
             width: 1200px;
             margin: 0 auto;
         }
-        &__recommend {
+        &_recommend {
             position: relative;
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
             
         }
     }

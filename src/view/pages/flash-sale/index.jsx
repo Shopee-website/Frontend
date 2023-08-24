@@ -4,7 +4,7 @@ import Banner from "components/banner";
 import Product from "components/product";
 import productApi from "api/productAPI";
 import { Link } from "react-router-dom";
-
+import FlashSaleProduct from "./flash-sale-card";
 function FlashSale(){
     
   const [products, setProducts] = useState([]);
@@ -33,8 +33,13 @@ function FlashSale(){
             </div>
             <div className="flash-sale_products">
                 <ul>
+                    <li>
+                        <FlashSaleProduct
+                            imageURL = 'https://down-vn.img.susercontent.com/file/vn-50009109-60c7b81feb0aec3703fee2f702f96c54_tn'
+                        />
+                    </li>
                    
-                    {products.map(post => {
+                    {/* {products.map(post => {
                           return (
                           <Link key = {post.id} to={`/product-view/${post.id}`}>
                             <li>
@@ -43,15 +48,15 @@ function FlashSale(){
                                     name={post.name}
                                     discount ="giảm 25k"
                                     price={"$"+post.salePrice}
-                                    height = "188px"
-                                    width = '187.5px'
+                                    height = "291px"
+                                    width = '457px'
                                     sold="7,2k"  
                                 />
                             </li>
                               
                           </Link>
                           )
-                      })}
+                      })} */}
                    
                 </ul>
             </div>

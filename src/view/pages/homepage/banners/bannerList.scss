@@ -1,6 +1,8 @@
 .home-page_banners_offers_list {
     & ul {
         & li {
+            display: flex;
+            justify-content: center;
             & a {
                
                 text-transform: capitalize;

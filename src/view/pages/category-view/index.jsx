@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import './category-view.scss'
 
 import { useParams, Link } from 'react-router-dom';
@@ -50,6 +50,9 @@ function ProductCategory(){
 
     const placementChange = (e) => {
         SetPlacement(e.target.value);
+        if (e.target.value === 'new'){
+            sortByCreate();
+        }
     };
 
     const onClick = (e) => {
@@ -61,7 +64,7 @@ function ProductCategory(){
     
     const [products, setProducts] = useState([])
  
-    useEffect(() => {
+    useLayoutEffect(() => {
 
         const fetchCategoryInfo = async () => {
             try {
@@ -70,30 +73,50 @@ function ProductCategory(){
                 }
                 const productResult =  await productApi.getAllProduct(params);
                 setProducts(productResult);
+                
 
             } catch (error) {
                 console.log(error);
             }
         }
         fetchCategoryInfo();
-        
-    }, [categoryId])
+    },[])
 
-       
-    const [data, setData] = useState(products);
+  
 
     const sortByPrice = () => {
-        const sortedData = [...data]; // Create a shallow copy of the data array
-        sortedData.sort((a, b) => a.price - b.price);
-        setData(sortedData);
+        const sortedData = [...products]; // Create a shallow copy of the data array
+        sortedData.sort((a, b) => a.originalPrice - b.originalPrice);
+        setProducts(sortedData);
       };
+    
+      const sortByPrice2 = () => {
+        const sortedData = [...products]; // Create a shallow copy of the data array
+        sortedData.sort((a, b) => b.originalPrice - a.originalPrice);
+        setProducts(sortedData);
+      };
+
+      const sortByCreate = () => {
+        const sortedData = [...products]; // Create a shallow copy of the data array
+        sortedData.sort((a, b) => b.createdAt - a.createdAt);
+        setProducts(sortedData);
+      };
+
+    //   const sortByPromotion = () => {
+    //     setProducts(()=> (
+    //         products.filter(products.isPromotion === '1')
+    //     ))
+    //   };
+    
     
     const handleChangeSelect = (value) => {
         if (value === 'min') {
             sortByPrice();
         }
-    console.log(`selected ${value}`);
-    console.log(data);
+        else if (value === 'max') {
+            sortByPrice2();
+        }
+    
     };
   
     
@@ -224,11 +247,11 @@ function ProductCategory(){
 
                 <div className="category-view_main_content">
                     <div className="category-view_main_content_menu" >
+                        <div className="category-view_main_content_menu_option">Sắp xếp theo</div>
                     <Radio.Group value={placement} onChange={placementChange}>
-                        {/* <Radio.Text value="Sắp xếp theo">Sắp xếp theo </Radio.Text> */}
                         <div style={{width: '50px' , display: 'inline-block'}}></div>
                         <Radio.Button value="Phổ biến">Phổ biến</Radio.Button>
-                        <Radio.Button value="Mới nhất">Mới nhất</Radio.Button>
+                        <Radio.Button value="new">Mới nhất</Radio.Button>
                         <Radio.Button value="Bán chạy">Bán chạy</Radio.Button>
                     </Radio.Group>
 

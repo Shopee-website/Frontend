@@ -4,6 +4,8 @@ import Banner from "components/banner";
 import Item from "components/item";
 
 function ShopMall () {
+
+    const products = [1,1,1,1,1,1,1,1];
     return(
         <div className="shopmall-wrapper">
             <div className="shopmall-title">
@@ -32,80 +34,24 @@ function ShopMall () {
                 </div>
                 <div className="shopmall-content_products">
                     <ul>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        <li><a href="/">
-                            <Item
-                                imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
-                                itemName='Voucher 500k'
-                                width='160px'
-                                height='160px'
-                            />
-                            </a>
-                        </li>
-                        
 
+                        {
+                            products.map(()=> (
+                                <li><a href="/">
+                                <Item
+                                    imageURL="https://down-vn.img.susercontent.com/file/vn-50009109-1eb6a76463db64d0ff01a2fe12af2f2f_xhdpi"
+                                    itemName='Voucher 500k'
+                                    width='160px'
+                                    height='160px'
+                                    textSize = '16pt'
+                                    textHeight = '40px'
+                                    textWidth = '172px'
+                                    textColor = 'red'
+                                />
+                                </a>
+                            </li>
+                            ))
+                        }
                     </ul>
                 
                 </div>
