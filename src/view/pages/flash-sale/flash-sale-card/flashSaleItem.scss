@@ -45,7 +45,9 @@
             }
         }
         &_buy {
-            
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             &_price {
                 font-size: 1.75rem;
                 font-weight: 400;
@@ -53,7 +55,23 @@
                 color: #ee4d2d;
             }
             &_buybtn {
+                width: 5.75rem;
+                height: 2.75rem;
+                align-self: end;
+                background: #ee4d2d;
+
+                font-size: 1.15rem;
+                font-weight: 200;
+                color: #fff;
+                text-transform: capitalize;
+                border: none;
                 
+                margin: 5px;
+
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }
