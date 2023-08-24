@@ -12,6 +12,13 @@ function Login_email() {
     const [err, setErr] = useState(false)
     const [err1, setErr1] = useState(false)
     const navigate = useNavigate()
+
+    
+    useEffect(()=> {
+        if (localStorage.getItem('user-infor')){
+            navigate('/homepage')
+        }
+    }, [])
     function handleSubmit(e){
         e.preventDefault();
         const sendPostRequest = async () => {
@@ -20,6 +27,7 @@ function Login_email() {
                     email : email,
                     password   : password
                 })
+                localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
                 toast.success('Đăng ký thành công, bạn sẽ chuyển sang trang chính', {
                     position: "top-center",
                     autoClose: 5000,
@@ -54,6 +62,7 @@ function Login_email() {
         }
         sendPostRequest()
     }
+
 
     return ( 
         <div>

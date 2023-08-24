@@ -1,9 +1,9 @@
 import './register.scss'
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import facebook from '../../../assets/images/Facebook_Logo.png'
 import google from '../../../assets/images/google_logo.png'
 import Background from '../../../assets/images/register-background.jpg'
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,6 +17,11 @@ function Register (){
     const navigate = useNavigate();
     const [err, setErr] = useState([false, false, false])
 
+    useEffect(()=> {
+        if (localStorage.getItem('user-infor')){
+            navigate('/homepage')
+        }
+    }, [])
 
     function handleValidation(e){
         e.preventDefault();
@@ -28,7 +33,8 @@ function Register (){
                     password : password,
                     password2 : password2
                 })
-                {
+                {   
+                    localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
                     toast.success('Đăng ký thành công, bạn sẽ chuyển sang trang chính', {
                         position: "top-center",
                         autoClose: 5000,

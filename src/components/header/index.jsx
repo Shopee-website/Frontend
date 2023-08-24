@@ -1,4 +1,5 @@
 import React from "react";
+import {Link, useNavigate} from 'react-router-dom'
 import {
     FacebookOutlined, 
     InstagramOutlined, 
@@ -11,17 +12,16 @@ import {
 import './index.scss';
 import { Input, Space } from 'antd';
 import SearchResult from "./search-result";
-import { Link } from "react-router-dom";
 const { Search } = Input;
 
-const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: '#1677ff',
-      }}
-    />
-  );
+// const suffix = (
+//     <AudioOutlined
+//       style={{
+//         fontSize: 16,
+//         color: '#1677ff',
+//       }}
+//     />
+//   );
 
 //   const onSearch = (value) => console.log(value);
 //   const onChange = (value) => console.log(value);
@@ -31,7 +31,12 @@ function Header(props) {
     const styleHeader = {
         position: `${props.position || 'fixed'}`,
     }
-
+    let user = JSON.parse(localStorage.getItem('user-infor'))
+    const nagivate = useNavigate()
+    function signout (){
+        localStorage.clear('user-infor')
+        nagivate('/login')
+    }
     return (
         <div className="header-shop-wrapper" style={styleHeader}>
             <div className="header-shop">
@@ -46,23 +51,21 @@ function Header(props) {
                     </div>
                     <div className="header-shop_navbar_support">
                         <ul className="header-shop_navbar_support_list">
-                            <li><a href="/"><NotificationOutlined />Thông báo</a></li>
-                            <li><a href="/"><QuestionCircleOutlined />Hỗ trợ</a></li>
-                            <li><a href="/"><GlobalOutlined />Tiếng Việt</a></li>
-                            <li>
-                                <Link to='/login' >
-                                    <a href="/"
-                                    >Đăng ký
-                                    </a>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='/login' >
-                                    <a href="/"
-                                    >Đăng nhập
-                                    </a>
-                                </Link>
-                            </li>
+                            <li><a href=""><NotificationOutlined />Thông báo</a></li>
+                            <li><a href=""><QuestionCircleOutlined />Hỗ trợ</a></li>
+                            <li><a href=""><GlobalOutlined />Tiếng Việt</a></li>
+
+                            {localStorage.getItem('user-infor') ?
+                                <>
+                                <li>Xin chào {user.email}</li>
+                                <li><a href = "" onClick={signout}>Đăng xuất</a></li>
+                                </>
+                                :
+                                <>
+                                    <li><Link to = "/register">Đăng ký</Link></li>
+                                    <li><Link to = "/login">Đăng nhập</Link></li>
+                                </>
+                            }
                         </ul>
                     </div>
                 </div>

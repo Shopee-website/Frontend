@@ -66,10 +66,12 @@
             flex-direction: column;
             
             &_menu {
+                &_option {
+                    padding: 0 20px;
+                }
                 display: flex;
                 height: 60px;
                 flex-direction: row;
-                justify-content: space-around;
                 align-items: center;
                 background-color: rgba(0,0,0,.03);
                 width: 1010px;

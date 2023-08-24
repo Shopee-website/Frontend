@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 function CategoryList (props) {
 
   const category = props.category;
+  const category2 = props.category2;
+  // console.log(category2);
   
     return (
         <>
@@ -15,12 +17,34 @@ function CategoryList (props) {
                       {category.map((info)=> {
                       return (
                               <Col key = {info.id}  span={3} className="home-page-main-content_category_list" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <Link  to={`/category-view/${info.name}/${info.id}`}>
+                                <Link  to={`/category-view/${info.name.replace(/ /g, '-')}/${info.id}`}>
                                   <Item
                                     imageURL='https://icons.veryicon.com/png/o/object/material-design-icons-1/tag-24.png'
                                     itemName={info.name} 
                                     width='88px'
                                     height='84px'
+                                    textSize = '14pt'
+                                    textHeight = '40px'
+                                    textWidth = '110px'
+                                  />
+                                </Link>
+                              </Col>
+                            )
+                            })
+                      }
+
+                    {category2.slice(0,10).map((info)=> {
+                      return (
+                              <Col key = {info.id}  span={3} className="home-page-main-content_category_list" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                <Link  to={`/category-view/${info.name.replace(/ /g, '-')}/${info.id}`}>
+                                  <Item
+                                    imageURL={info.image}
+                                    itemName={info.name} 
+                                    width='88px'
+                                    height='84px'
+                                    textSize = '14pt'
+                                    textHeight = '40px'
+                                    textWidth = '110px'
                                   />
                                 </Link>
                               </Col>

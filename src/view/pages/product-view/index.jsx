@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import Review from './review/review'
 import Header from "components/header";
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import productApi from "api/productAPI";
 import Footer from "components/footer";
 import './product_view.scss'
@@ -26,7 +26,7 @@ function ProductInfo () {
     
     const [product, setProduct] = useState()
  
-    useEffect(() => {
+    useLayoutEffect(() => {
         const fetchProductInfo = async () => {
             try {
                 const productResult =  await productApi.getProductById(productId);
@@ -40,7 +40,11 @@ function ProductInfo () {
         fetchProductInfo();
     }, [productId])
 
-    const [picture, setPicture] = useState(img2)
+    
+    const [picture, setPicture] = useState()
+
+
+
     const [like , setLike] = useState(false)
     const [active , setActive] = useState('')
     const [count, setCount] = useState(1)
@@ -53,7 +57,7 @@ function ProductInfo () {
 
 
     const [active1, setActive1] = useState('')
-
+    
     function handleSubmit(e) {
         e.preventDefault();
         const requestPost = async () => {
@@ -62,6 +66,7 @@ function ProductInfo () {
                     user_id : 3,
                     product_detail_id : 3,
                     quantity : count
+                    
 
                 })
                 toast.success('Thêm vào giỏ hàng thành công', {
@@ -73,7 +78,10 @@ function ProductInfo () {
                     draggable: true,
                     progress: undefined,
                     theme: "colored",
+                
                     });
+
+                
             }
             catch (e){
                 console.log(e)

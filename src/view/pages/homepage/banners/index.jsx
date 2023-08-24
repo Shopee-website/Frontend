@@ -1,6 +1,7 @@
 import React  from "react";
 import Item from "components/item";
 import Banner from "components/banner";
+import './bannerList.scss'
 
 function Banners () {
     return (

@@ -4,6 +4,7 @@ import Banner from "components/banner";
 import Product from "components/product";
 import productApi from "api/productAPI";
 import { Link } from "react-router-dom";
+import FlashSaleProduct from "./flash-sale-card";
 
 function FlashSale(){
     
@@ -12,7 +13,7 @@ function FlashSale(){
 
   useEffect(()=> {
       const fetchProducts = async () => {
-          const params = {_limit: 30}
+          const params = {_limit: 30, _page: 3}
           const productList = await productApi.getAllProduct(params);
           setProducts(productList.data);
       }
@@ -33,20 +34,18 @@ function FlashSale(){
             </div>
             <div className="flash-sale_products">
                 <ul>
+                    
                    
                     {products.map(post => {
                           return (
                           <Link key = {post.id} to={`/product-view/${post.id}`}>
                             <li>
-                              <Product 
-                                    imageURL={post.images[0]}
-                                    name={post.name}
-                                    discount ="giảm 25k"
-                                    price={"$"+post.salePrice}
-                                    height = "188px"
-                                    width = '187.5px'
-                                    sold="7,2k"  
-                                />
+                                {console.log(post)}
+                            <FlashSaleProduct
+                                imageURL = {post.images[0]}
+                                name = {post.name}
+                                price = {post.salePrice}
+                            />
                             </li>
                               
                           </Link>
