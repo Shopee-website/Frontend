@@ -32,7 +32,7 @@ function FlashSaleList (props) {
                                   height='170px'
                                 />
                                 <div className='flash-sale_product_info'>
-                                  <div className='flash-sale_product_info_price'><p>{"$"+post.originalPrice}</p></div>
+                                  <div className='flash-sale_product_info_price'><p>{"$"+post.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p></div>
                                   <div className='flash-sale_product_info_sold'>
                                     <div className='flash-sale_product_info_sold_status'>Đang bán chạy</div>
                                     <div className='flash-sale_product_info_sold_visual' style={{borderRadius:' 8px 0px 0px 8px'}}></div>

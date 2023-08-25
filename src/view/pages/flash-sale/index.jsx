@@ -44,7 +44,7 @@ function FlashSale(){
                             <FlashSaleProduct
                                 imageURL = {post.images[0]}
                                 name = {post.name}
-                                price = {post.salePrice}
+                                price = {'$' + post.salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                             />
                             </li>
                               

@@ -82,7 +82,7 @@ function Header(props) {
                         <div className="header-shop_main_search_button">
                             <Space>
                                 <Search
-                                placeholder="input search text"
+                                placeholder="Shopee bao ship 0 Đồng - Đăng ký ngay"
                                 enterButton="Search"
                                 size="large"
                                 className="header-shop_main_search_button_section"

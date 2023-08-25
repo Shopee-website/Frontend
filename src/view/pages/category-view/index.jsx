@@ -279,7 +279,7 @@ function ProductCategory(){
                         <ul>
                         {products.map(post => {
                             return (
-                                <Link key = {post.id} to={`/product-view/${post.name}/${post.id}`}>
+                                <Link key = {post.id} to={`/product-view/${post.name.replace(/ /g, '-')}/${post.id}`}>
                                     <li>
                                         <Product 
                                             imageURL={post.images[0]}
