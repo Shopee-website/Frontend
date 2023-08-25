@@ -24,10 +24,15 @@ const { Search } = Input;
 //   );
 
 //   const onSearch = (value) => console.log(value);
-//   const onChange = (value) => console.log(value);
+
 
 function Header(props) {
-    
+
+      const handleChangeSearch = (e) => {
+        console.log(e.target.value);
+      };
+
+
     const styleHeader = {
         position: `${props.position || 'fixed'}`,
     }
@@ -92,7 +97,7 @@ function Header(props) {
                                     }}
                                 // suffix={suffix}
                                 // onSearch={onSearch}
-                                // onChange={onChange}
+                                onChange={handleChangeSearch}
                             />
                         </Space>
                             {/* <SearchResult   /> */}

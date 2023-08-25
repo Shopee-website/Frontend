@@ -1,3 +1,20 @@
+.home-page_banners_images {
+    width: 1200px;
+    margin: 0 auto;
+    height: 235px;
+    &_main {
+        display: inline-block;
+        width: 800px;
+    }
+    &_sub {
+        width: 400px;
+        display: inline-block;
+        
+        height: 235px;
+    }
+}
+
+
 .home-page_banners_offers_list {
     & ul {
         & li {

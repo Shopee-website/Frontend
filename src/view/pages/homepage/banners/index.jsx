@@ -1,6 +1,8 @@
 import React  from "react";
 import Item from "components/item";
 import Banner from "components/banner";
+import { Carousel } from 'antd';
+
 import './bannerList.scss'
 
 function Banners () {
@@ -8,11 +10,23 @@ function Banners () {
         <>
             <div className="home-page_banners_images">
                 <div className="home-page_banners_images_main">
+                  <Carousel autoplay >
                   <Banner
                     imageURL = "https://cf.shopee.vn/file/vn-50009109-a4d6bd62a56c559201c98825afb6dc49_xxhdpi"
                     width = '796.66px'
                     height = '235.01px'
                   />
+                  <Banner
+                    imageURL = "https://cf.shopee.vn/file/vn-50009109-a4ace3dc6da2d9973c30439f6d606425_xxhdpi"
+                    width = '796.66px'
+                    height = '235.01px'
+                  />
+                  <Banner
+                    imageURL = "https://cf.shopee.vn/file/vn-50009109-c4c5a23170373352866ac8cdaf8e69e3_xxhdpi"
+                    width = '799.8px'
+                    height = '235.01px'
+                  />
+                  </Carousel>
                 </div>
                 <div className="home-page_banners_images_sub">
                   <Banner
@@ -20,6 +34,7 @@ function Banners () {
                       width = '398.34px'
                       height = '115px'
                     />
+                    <div style={{height: '5px'}}></div>
                   <Banner
                     imageURL = "https://cf.shopee.vn/file/vn-50009109-878e47f8bdcd4385bf71c1363a68a43d_xhdpi"
                     width = '398.34px'

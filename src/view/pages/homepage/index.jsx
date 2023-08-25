@@ -20,7 +20,7 @@ function HomePage(){
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [category2, setCategory2] = useState([]);
-  const [pageProduct, setPageProduct] = useState(3)
+  const [pageProduct, setPageProduct] = useState(1)
 
 
   useEffect(()=> {
@@ -84,11 +84,11 @@ function HomePage(){
               <div className="home-page-main-content_recommend">
                 <Recommend products= {products} />
                 <Pagination
-                  showSizeChanger
+                  // showSizeChanger
                   // onShowSizeChange={onShowSizeChange}
                   defaultCurrent={1}
                   onChange={onChangeSelect}
-                  total={500}
+                  total={100}
                 />
               </div>
             </div>

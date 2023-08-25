@@ -72,6 +72,7 @@ function ProductCategory(){
                     categoryId: categoryId,
                 }
                 const productResult =  await productApi.getAllProduct(params);
+                // productResult.originalPrice = productResult.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 setProducts(productResult);
                 
 
@@ -285,7 +286,7 @@ function ProductCategory(){
                                             imageURL={post.images[0]}
                                             name={post.name}
                                             discount ="giảm 25k"
-                                            price={"$"+post.originalPrice}
+                                            price={"$"+post.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                             height = "188px"
                                             width = '187.5px'
                                             sold="7,2k"  

@@ -19,21 +19,6 @@
         justify-content: center;
         box-shadow: 0 0 1px 0 #747373;
 
-       &_images {
-            width: 1200px;
-            height: 235px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 0 auto;
-            
-            &_sub {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-
-            }
-       } 
         &_offers {
             width: 1200px;
             height: 108px;
