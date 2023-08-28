@@ -1,0 +1,222 @@
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding : 0;
+}
+.payment-header {
+    width : 100%;
+    background-color: white;
+    display: flex;
+    padding : 16px 90px;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+}
+.payment-header-line {
+    background-color: #ee4d2d;
+    width : 1px;
+    height : 30px;
+    margin: 0 18px 0 8px;
+}
+.payment-header-logo {
+    width : 160px;
+    margin-bottom: 16px;
+}
+
+.payment-header-payment{
+    font-size: 20px;
+    color :#ee4d2d;
+}
+.payment-content {
+    background-color: #f5f5f5;
+    padding : 12px 70px;
+}
+.payment-address {
+    background-color: white;
+}
+.payment-address-line {
+    height: 3px;
+    width: 100%;
+    background-position-x: -30px;
+    background-size: 116px 3px;
+    background-image: repeating-linear-gradient(45deg,#6fa6d6,#6fa6d6 33px,transparent 0,transparent 41px,#f18d9b 0,#f18d9b 74px,transparent 0,transparent 82px);
+}
+.payment-address-content {
+    padding : 25px;
+}
+.payment-address-header {
+    font-size: 18px;
+    color :#ee4d2d;
+}
+.payment-address-icon {
+    margin-right: 12px;
+}
+.payment-address-body {
+    margin: 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.payment-address-name {
+    font-weight: bold;
+}
+.payment-address-default {
+    background-color: white;
+    border : 1px solid #ee4d2d;
+    padding : 4px ;
+    color :#ee4d2d;
+    font-size: 12px;
+}
+.payment-address-change button, .payment-product-ship-btn{
+    background-color: white;
+    border : none;
+    color : #6fa6d6;
+    font-size: 16px;
+}
+.payment-address-change button:hover, .payment-product-ship-btn:hover{
+    cursor: pointer;
+}
+.payment-product {
+    margin: 16px 0;
+    background-color: white;
+    padding : 28px;
+}
+.payment-product-img {
+    width : 40px;
+    margin: 16px 12px 16px 0;
+}
+.payment-product-table{
+    width : 100%;
+    align-items : center;
+}
+.payment-product-doublecol {
+    width : 55%;
+    font-size: 18px;
+    text-align: left;
+    font-weight: lighter;
+}
+.payment-product-singlecol {
+    width : 15%;
+    font-size: 14px;
+    color : #bbc1d3;
+    font-weight: lighter;
+    text-align: center;
+}
+.payment-number {
+    color : black;
+}
+.payment-product-body {
+    display : flex;
+    align-items : center;
+}
+.payment-product-note {
+    width : 100%;
+    background-color: #fafdff;
+}
+.payment-product-note td {
+    padding : 16px 26px;
+    border: 1px dashed rgba(0,0,0,0.09);
+}
+.payment-product-inp {
+    padding : 8px 16px;
+    margin-left: 16px;
+    width : 80%;
+    border : 1px solid rgba(0,0,0,0.09);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.payment-product-ship {
+    display : flex;
+    justify-content: space-between;
+}
+.payment-product-position {
+    position: relative;
+    left : -50px;
+}
+.payment-product-note .payment-product-total {
+    text-align: right;
+}
+.payment-voucher {
+    background-color: white;
+    margin: 16px 0;
+}
+.payment-voucher-shopee , .payment-shopee-coin {
+    display : flex;
+    justify-content: space-between;
+    padding : 30px;
+    font-size: 18px;
+    color :#ee4d2d;
+}
+.payment-voucher-icon , .payment-coin-icon {
+    margin-right: 16px;
+}
+.payment-coin-icon {
+    color : #ffbc3f;
+}
+.payment-voucher-shopee button {
+    color :#6fa6d6;
+    background-color: white;
+    border : none;
+    font-size: 16px;
+}
+.payment-voucher-shopee button:hover {
+    cursor: pointer;
+}
+.payment-voucher-shopee {
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+}
+.payment-cash {
+    background-color: white;
+    padding : 20px 30px;
+    display: flex;
+    align-items: center;
+}
+.payment-cash button{
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.09);
+    padding : 8px 20px;
+    font-size: 16px;
+    margin-left: 16px;
+}
+.payment-cash button:hover {
+    cursor: pointer;
+    border: 1px solid #ee4d2d;
+    color :#ee4d2d;
+}
+.payment-total {
+    background-color: #fffefb;
+}
+.payment-total-price , .payment-pay {
+    padding : 30px 25px;
+}
+.payment-total-price {
+    position: relative;
+}
+.payment-total-table {
+    position: absolute;
+    right : 50px;
+}
+.payment-total-table td{
+    padding : 8px 12px;
+}
+.payment-pay {
+    display : flex;
+    align-items: center;
+}
+.payment-pay button {
+    background-color: #ee4d2d;
+    border : none;
+    border-radius: 4px;
+    padding : 10px 20px;
+    color : white;
+    font-size: 16px;
+    margin-left: 16px;
+}
+.payment-pay button:hover {
+    cursor: pointer;
+}
+.payment-cash .payment-active {
+    color :#ee4d2d;
+    border : 1px solid #ee4d2d;
+}
