@@ -1,19 +1,25 @@
 import {useEffect, useState } from 'react'
 import './review.scss'
-import axios from 'axios'
 import avatar from 'assets/images/avatar-review.jpg'
 import {Rating} from '@mui/material'
-function Review() {
+import reviewApi from 'api/reviewAPI'
+function Review(props) {
     const [review, setReview] = useState([])
     const [mainReview,setMainReview] = useState([])
     useEffect (()=> {
-        axios.get('http://localhost:8000/api/feedback/get-by-product/3')
-        .then (res => {
-            console.log(res.data.feedback)
-           setReview(res.data.feedback)
-           setMainReview(res.data.feedback)
-        })
-        .catch(err => console.log(err));
+        
+        const fetchFeedback = async () => {
+            try {
+                const res =  await reviewApi.getAllReview(props.data)
+                console.log(res)
+                setReview(res.data.feedback)
+                setMainReview(res.data.feedback)
+            } 
+            catch (err) {
+                console.log(err)
+            }
+    }
+        fetchFeedback()
     }, [])
     // Tính số sao trung bình của sản phẩm hiển thị ra màn hình
     const reviewLength = mainReview.length;
@@ -54,9 +60,10 @@ function Review() {
             <div className='review-box'>
                 <div className='review-general_rating'>
                     <span style = {{marginLeft : '12px', color : '#d1011b', fontSize : '30px'}}>
-                      {totalStar/reviewLength} 
+                      { review.length >= 1 ?   totalStar/reviewLength : 0} 
                       </span> trên 5 <br/><br/> 
-                    <Rating name="rating-read" value = {5} precision={0.5} size = "large" readOnly />
+                    <Rating name="rating-read" value = {review.length >= 1 ? 5 : 0} 
+                    precision={0.5} size = "large" readOnly />
                 </div>
                 <div className='review-list'>
                     <button className='review-btn review-active'

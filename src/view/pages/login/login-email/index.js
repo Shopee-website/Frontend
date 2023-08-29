@@ -1,10 +1,12 @@
 import './login_email.scss'
 import React , {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
 import {Link} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import auth from 'api/auth'
+import useAuth from 'hooks/useAuth'
+
 
 function Login_email() {
     const [email, setEmail] = useState('')
@@ -13,22 +15,35 @@ function Login_email() {
     const [err1, setErr1] = useState(false)
     const navigate = useNavigate()
 
-    
     useEffect(()=> {
-        if (localStorage.getItem('user-infor')){
+        if (localStorage.getItem('jwt')){
             navigate('/homepage')
         }
     }, [])
+
+    const { setToken } = useAuth()
+
+
     function handleSubmit(e){
         e.preventDefault();
         const sendPostRequest = async () => {
             try {
-                const resp = await axios.post('http://localhost:8000/api/auth/login', {
-                    email : email,
-                    password   : password
-                })
-                localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
-                toast.success('Đăng ký thành công, bạn sẽ chuyển sang trang chính', {
+
+                const values = {
+                    email,
+                    password
+                }
+
+                const response = await auth.login(values);
+                // console.log(response);
+                if(response.request.status === 200){
+                    setToken(response.data.token)
+                    // alert(response.data.message)
+                    localStorage.setItem('token',response.data.token)
+                } 
+                
+                
+                toast.success('Đăng nhập thành công, bạn sẽ chuyển sang trang chính', {
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -38,14 +53,12 @@ function Login_email() {
                     progress: undefined,
                     theme: "colored",
                     });
-                setEmail('')
-                setPassword('')
-                setTimeout (function (){
+
+                setTimeout (() => (
                     navigate('/')
-                }, 2000)
+                ), 2000)
             }
             catch (e) {
-                console.log(e.response.request.status)
                 if (e.response.request.status === 404) {
                     setErr(true)
                     setTimeout(function (){
@@ -58,6 +71,7 @@ function Login_email() {
                         setErr1(false)
                     },2000)
                 }
+                // alert(e.response.data.message)
             }
         }
         sendPostRequest()

@@ -4,6 +4,7 @@ import logo from 'assets/images/logo-shopee.png'
 import React from 'react'
 import Footer from '../footer'
 import './registerLayout.scss'
+import { Link } from 'react-router-dom'
 
 
 function registerLayout ({children}){
@@ -11,7 +12,9 @@ function registerLayout ({children}){
         <div>
             <div className='register-header'>
                 <div className='register-header-logo'>
+                    <Link   to={'/homepage'}>
                     <img src = {logo} alt = 'anh logo shopee' className='register-logo-img'/>
+                    </Link>
                     <h2 className = 'register-logo-des'>
                         Đăng ký / Đăng nhập
                     </h2>
