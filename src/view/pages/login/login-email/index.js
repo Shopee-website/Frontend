@@ -6,6 +6,10 @@ import {Link} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
+import auth from 'api/auth'
+import useAuth from 'hooks/useAuth'
+
+
 function Login_email() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,51 +17,70 @@ function Login_email() {
     const [err1, setErr1] = useState(false)
     const navigate = useNavigate()
 
-    
     useEffect(()=> {
         if (localStorage.getItem('user-infor')){
             navigate('/homepage')
         }
     }, [])
+
+    const { setToken } = useAuth()
+
+
     function handleSubmit(e){
         e.preventDefault();
         const sendPostRequest = async () => {
             try {
-                const resp = await axios.post('http://localhost:8000/api/auth/login', {
-                    email : email,
-                    password   : password
-                })
-                localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
-                toast.success('Đăng ký thành công, bạn sẽ chuyển sang trang chính', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
-                setEmail('')
-                setPassword('')
-                setTimeout (function (){
-                    navigate('/')
-                }, 2000)
+
+                const values = {
+                    email,
+                    password
+                }
+
+                const response = await auth.login(values);
+                console.log(response);
+                if(response.request.status === 200){
+                    setToken(response.data.token)
+                    alert(response.data.message)
+                } 
+
+                // const resp = await axios.post('http://localhost:8000/api/auth/login', {
+                //     email : email,
+                //     password   : password
+                // })
+                // console.log(resp);
+                // localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
+                // toast.success('Đăng nhập thành công, bạn sẽ chuyển sang trang chính', {
+                //     position: "top-center",
+                //     autoClose: 5000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                //     theme: "colored",
+                //     });
+                // setEmail('')
+                // setPassword('')
+                // setTimeout (() => (
+                //     navigate('/')
+                // ), 2000)
             }
             catch (e) {
-                console.log(e.response.request.status)
-                if (e.response.request.status === 404) {
-                    setErr(true)
-                    setTimeout(function (){
-                        setErr(false)
-                    },2000)
-                }
-                else if (e.response.request.status === 401){
-                    setErr1(true)
-                    setTimeout(function (){
-                        setErr1(false)
-                    },2000)
-                }
+                
+                console.log(e);
+                // if (e.response.request.status === 404) {
+                //     setErr(true)
+                //     setTimeout(function (){
+                //         setErr(false)
+                //     },2000)
+                // }
+                // else if (e.response.request.status === 401){
+                //     setErr1(true)
+                //     setTimeout(function (){
+                //         setErr1(false)
+                //     },2000)
+                // }
+                alert(e.response.data.message)
             }
         }
         sendPostRequest()
