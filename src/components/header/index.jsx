@@ -40,9 +40,10 @@ function Header(props) {
     }
 
     let user = JSON.parse(localStorage.getItem('user-infor'))
+
     const nagivate = useNavigate()
     function signout (){
-        localStorage.clear('user-infor')
+        localStorage.removeItem( 'token')
         nagivate('/login')
     }
     return (
@@ -63,9 +64,9 @@ function Header(props) {
                             <li><a href=""><QuestionCircleOutlined />Hỗ trợ</a></li>
                             <li><a href=""><GlobalOutlined />Tiếng Việt</a></li>
 
-                            {localStorage.getItem('user-infor') ?
+                            {localStorage.getItem('token') ?
                                 <>
-                                <li>Xin chào {user.email}</li>
+                                <li>Xin chào</li>
                                 <li><a href = "" onClick={signout}>Đăng xuất</a></li>
                                 </>
                                 :

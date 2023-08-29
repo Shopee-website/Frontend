@@ -9,7 +9,7 @@ const categoryApi = {
     },
 
     getAllCategory2(params){
-        const url = '/category';
+        const url = '/api/category';
         return axiosClient2.get(url, {params})
     },
     

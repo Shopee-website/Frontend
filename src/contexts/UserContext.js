@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
             axiosClient.defaults.headers.common[
                 'Authorization'
             ] = `Bearer ${token}`
-
+            // console.log('ao that day : ', token);
             if (token !== localStorage.getItem('token')) {
                 // Get current user's data
                 // auth.getAuthenticatedUser()

@@ -54,6 +54,18 @@
                 height: 2.0625rem;
                 color: #ee4d2d;
             }
+            &_originPrice {
+                font-size: 14px;
+                color : #bdbddf;
+                margin: 6px 4px;
+            }
+            &_line {
+                position: relative;
+                bottom : 14px;
+                background-color: #bdbddf;
+                width : 90px;
+                height : 1px;
+            }
             &_buybtn {
                 width: 5.75rem;
                 height: 2.75rem;

@@ -30,5 +30,7 @@ export const axiosClient2 = axios.create({
 //             return response.data;
 //         }
 //     })
+// axiosClient2.defaults.headers.common[ 'Authorization' ] =  'Bearer ' + localStorage.getItem('jwt');
 
 export default axiosClient;
+

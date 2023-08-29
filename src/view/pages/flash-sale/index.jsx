@@ -5,6 +5,7 @@ import Product from "components/product";
 import productApi from "api/productAPI";
 import { Link } from "react-router-dom";
 import FlashSaleProduct from "./flash-sale-card";
+import { PropertySafetyFilled } from "@ant-design/icons";
 
 function FlashSale(){
     
@@ -16,6 +17,7 @@ function FlashSale(){
           const params = {_limit: 30, _page: 3}
           const productList = await productApi.getAllProduct(params);
           setProducts(productList.data);
+         
       }
       fetchProducts();
 

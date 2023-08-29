@@ -15,7 +15,7 @@ const Login = LoadableComponent(()=> import('view/pages/login/login.js'))
 const Register = LoadableComponent(()=> import('view/pages/register/register.js'))
 const Cart = LoadableComponent(()=> import('view/pages/cart/cart.js'))
 const Admin= LoadableComponent(()=> import('view/pages/admin/admin.js'))
-
+const Payment = LoadableComponent(()=> import('view/pages/payment'));
 
 function AllRoutes(){
     return (
@@ -58,7 +58,11 @@ function AllRoutes(){
                     <Route path="/profile" element={<MyProfile />} />
                     <Route path="/profile/my_profile" element={<MyProfile />} />
                 </Route>
+                <Route 
+                        path="/payment/" 
+                        element={<Payment />}/>
             </Route>
+               
         </Routes>
     )
 

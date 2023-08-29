@@ -3,11 +3,11 @@ import './review.scss'
 import axios from 'axios'
 import avatar from 'assets/images/avatar-review.jpg'
 import {Rating} from '@mui/material'
-function Review() {
+function Review(props) {
     const [review, setReview] = useState([])
     const [mainReview,setMainReview] = useState([])
     useEffect (()=> {
-        axios.get('http://localhost:8000/api/feedback/get-by-product/3')
+        axios.get(`http://localhost:8000/api/feedback/get-by-product/${props.data}`)
         .then (res => {
             console.log(res.data.feedback)
            setReview(res.data.feedback)

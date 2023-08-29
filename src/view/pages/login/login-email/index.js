@@ -1,11 +1,9 @@
 import './login_email.scss'
 import React , {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
 import {Link} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-
 import auth from 'api/auth'
 import useAuth from 'hooks/useAuth'
 
@@ -18,7 +16,7 @@ function Login_email() {
     const navigate = useNavigate()
 
     useEffect(()=> {
-        if (localStorage.getItem('user-infor')){
+        if (localStorage.getItem('jwt')){
             navigate('/homepage')
         }
     }, [])
@@ -37,50 +35,43 @@ function Login_email() {
                 }
 
                 const response = await auth.login(values);
-                console.log(response);
+                // console.log(response);
                 if(response.request.status === 200){
                     setToken(response.data.token)
-                    alert(response.data.message)
+                    // alert(response.data.message)
+                    localStorage.setItem('token',response.data.token)
                 } 
+                
+                
+                toast.success('Đăng nhập thành công, bạn sẽ chuyển sang trang chính', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
 
-                // const resp = await axios.post('http://localhost:8000/api/auth/login', {
-                //     email : email,
-                //     password   : password
-                // })
-                // console.log(resp);
-                // localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
-                // toast.success('Đăng nhập thành công, bạn sẽ chuyển sang trang chính', {
-                //     position: "top-center",
-                //     autoClose: 5000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     progress: undefined,
-                //     theme: "colored",
-                //     });
-                // setEmail('')
-                // setPassword('')
-                // setTimeout (() => (
-                //     navigate('/')
-                // ), 2000)
+                setTimeout (() => (
+                    navigate('/')
+                ), 2000)
             }
             catch (e) {
-                
-                console.log(e);
-                // if (e.response.request.status === 404) {
-                //     setErr(true)
-                //     setTimeout(function (){
-                //         setErr(false)
-                //     },2000)
-                // }
-                // else if (e.response.request.status === 401){
-                //     setErr1(true)
-                //     setTimeout(function (){
-                //         setErr1(false)
-                //     },2000)
-                // }
-                alert(e.response.data.message)
+                if (e.response.request.status === 404) {
+                    setErr(true)
+                    setTimeout(function (){
+                        setErr(false)
+                    },2000)
+                }
+                else if (e.response.request.status === 401){
+                    setErr1(true)
+                    setTimeout(function (){
+                        setErr1(false)
+                    },2000)
+                }
+                // alert(e.response.data.message)
             }
         }
         sendPostRequest()

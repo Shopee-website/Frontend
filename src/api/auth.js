@@ -1,4 +1,4 @@
-import axiosClient from './axiosClient'
+import {axiosClient2 as axiosClient} from './axiosClient'
 
 const auth = {
     login: (credentials) => {
@@ -9,10 +9,10 @@ const auth = {
         const url = '/api/auth/register'
         return axiosClient.post(url, credentials)
     },
-    getAuthenticatedUser: () => {
-        const url = '/api/auth/get-authenticated-user'
-        return axiosClient.get(url)
-    },
+    // getAuthenticatedUser: () => {
+    //     const url = '/api/auth/get-authenticated-user'
+    //     return axiosClient.get(url)
+    // },
     forgotPassword: (credentials) => {
         const url = '/api/auth/forgot-password'
         return axiosClient.post(url, credentials)

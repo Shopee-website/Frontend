@@ -40,7 +40,7 @@ function AdminProduct (){
 
      const arrProducts = product.map((item)=> (
             item.id === editID ? 
-            <EditMember item = {item} product = {product} setProduct = {setProduct}/>
+            <EditProduct item = {item} product = {product} setProduct = {setProduct}/>
             :
             <table className='admin-product-list'>
                 <tr key = {item.id}>
@@ -62,7 +62,7 @@ function AdminProduct (){
     function handleEdit (id){
         setEditID(id)
     }
-    function EditMember({item , product, setProduct}){
+    function EditProduct({item , product, setProduct}){
         function handleTitle(e){
             const title = e.target.value;
             const updatedData = product.map((d)=> 

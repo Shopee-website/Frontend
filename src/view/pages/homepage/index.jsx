@@ -48,7 +48,8 @@ function HomePage(){
 
       const fetchCategory2 = async () => {
         const categoryList2 = await categoryApi.getAllCategory2();
-        setCategory2(categoryList2.rows);  
+        console.log(categoryList2);
+        setCategory2(categoryList2.data.rows);  
     }
       fetchCategory2();
 
