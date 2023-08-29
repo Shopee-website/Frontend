@@ -11,64 +11,106 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import img from '../../../assets/images/product_detail1.jpg'
 import formatPrice from 'components/format-price'
+import cartApi from 'api/cartAPI'
 
 let newArrays;
+let option;
 
 function Cart() {
     const [cart, setCart] = useState([])
 
     useEffect (()=> {
-        const headers = { 'Authorization': 'Bearer ' + localStorage.getItem('jwt') };
-        axios.get('http://localhost:8000/api/cart/user-cart', {headers})
-        .then (res => {
-            console.log(res.data)
-           setCart(res.data.products)
-        })
-        .catch(err => console.log(err));
+        const getCart = async () => {
+            try {
+                const res = await cartApi.getCart();
+                // setCart(res.data.cart)
+                setCart(res.data.cart.filter((item)=> item.deleteAt == null))
+            }
+            catch(err) {
+                console.log(err)
+            }
+        }
+        getCart()
     }, [])
 
     const handleDecrease = (id, quantity) => {
-
         setCart(cart => 
-            cart.map((item)=>
-                id === item.id ? {...item , quantity: item.quantity - (item.quantity > 1 ? 1 : 0), 
-                    total : item.total - item.price
-                } : item
+            cart.map((item)=> {
+                let price_item = item.total_price/item.quantity;
+                return id === item.id ? {...item , quantity: item.quantity - (item.quantity > 1 ? 1 : 0), 
+                    total_price : item.total_price - price_item
+                } : item}
         ))
+        const params = cart.map((item)=>{
+            return id === item.id ? {
+                id : item.id,
+                quantity : item.quantity
+            } : {}
+        })
+        update(params)
     }
     const handleIncrease = (id, quantity) => {
         setCart(cart => 
-            cart.map((item)=>
-                id === item.id ? {...item , quantity: item.quantity + 1,
-                    total : item.total + item.price} : item
+            cart.map((item)=>{
+                let pricee_item = item.total_price/item.quantity
+                return id === item.id ? {...item , quantity: item.quantity + 1,
+                    total_price : item.total_price + pricee_item} : item}
         ))
+        const params = cart.map((item)=>{
+            return id === item.id ? {
+                id : item.id,
+                quantity : item.quantity
+            } : {}
+        })
+        update(params)
     }
 
+    const update = async (params) => {
+        try {
+            await cartApi.updateCart(params)
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+     
 
     function removeProduct(id) {
-        console.log('xoas')
+        console.log('xoa')
         const newCart = cart.filter((item) => item.id != id)
         setCart(newCart)
+        deleteCarts(id)
       }
+    
+    const deleteCarts = async (id)=> {
+        try {
+           const res =  await cartApi.deleteCart(id)
+           console.log(res)
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
 
       const [orderItems , setOrderedItems] = useState([])
     const [totalCost, setTotalCost] = useState(0)
     const handleChange = (item, event) => {
         if (event.target.checked) {
         setOrderedItems((cart) => [...cart, item]);
-        setTotalCost((total) => total + parseInt(item.total));
+        setTotalCost((total) => total + parseInt(item.total_price));
         // add item to orderedItems array
         } else {
         // remove item from orderedItems array
         setOrderedItems((cart) =>
             cart.filter((i) => i.id !== item.id)
         );
-        setTotalCost((total) => total - parseInt(item.total));
+        setTotalCost((total) => total - parseInt(item.total_price));
         }
     }
     
     const navigate = useNavigate()
     function HandleClick(){
+        option = 1;
         setInterval(()=> {
             navigate('/payment')
         }, 3000)
@@ -129,7 +171,7 @@ function Cart() {
                                                         <td className='cart-product-category cart-product-col-single'>
                                                         Loại: Purple,L
                                                         </td>
-                                                        <td className='cart-product-col-single'>{formatPrice(cart.price)}</td>
+                                                        <td className='cart-product-col-single'>{formatPrice(cart.total_price/cart.quantity)}</td>
                                                         <td className='cart-product-col-single cart-product-btn'>
                                                             <button onClick = {()=>handleDecrease(cart.id, cart.quantity)}>-</button>
                                                             <button> {cart.quantity} </button>
@@ -137,7 +179,7 @@ function Cart() {
                                                         </td>
                                                         <td className='cart-product-col-single'
                                                             style = {{color : '#ee4d2d'}}
-                                                        > {formatPrice(cart.total)}</td>
+                                                        > {formatPrice(cart.total_price)}</td>
                                                         <td className='cart-product-col-single cart-product-method'>
                                                             <div>
                                                                 <button type = 'button' onClick = {()=> removeProduct(cart.id)}>Xóa</button>
@@ -178,6 +220,6 @@ function Cart() {
      
 }
 
-export {newArrays}
+export {newArrays, option}
 
 export default Cart;

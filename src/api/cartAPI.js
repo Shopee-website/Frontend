@@ -1,18 +1,21 @@
-import {axiosClient2} from "./axiosClient";
+import {axiosClient2 as axiosClient} from "./axiosClient";
 
 const cartApi = {
-
-    getCartByUserID(userID) {
-        const url = `/cart/${userID}`;
-        return axiosClient2.get(url)
+    postCart(params) {
+        const url = '/api/cart/add-to-cart';
+        return axiosClient.post(url, params)
     },
-    updateCartByUserID(userID){
-        const url = `/cart/update-cart/${userID}`;
-        return axiosClient2.patch(url)
+    getCart : () => {
+        const url = '/api/cart/user-cart';
+        return axiosClient.get(url)
     },
-    deleteCartByUserID(userID){
-        const url = `/cart/delete-cart/${userID}`;
-        return axiosClient2.delete(url)
+    updateCart : (params) => {
+        const url = '/api/cart/update-cart';
+        return axiosClient.patch(url, params)
+    },
+    deleteCart : (cartid) => {
+        const url = `/api/cart/delete-cart-item/${cartid}`;
+        return axiosClient.delete(url)
     }
 };
 export default cartApi;

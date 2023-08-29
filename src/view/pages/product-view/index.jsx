@@ -1,25 +1,25 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
 import Review from './review/review'
 import Header from "components/header";
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import productApi from "api/productAPI";
+import cartApi from "api/cartAPI"
 import Footer from "components/footer";
 import './product_view.scss'
 // import Review from './review.js'
 import img1 from '../../../assets/images/product_detail1.jpg'
 import img2 from '../../../assets/images/product_detail2.jpg'
-import img3 from '../../../assets/images/product_detail3.jpg'
-import img4 from '../../../assets/images/product_detail4.jpg'
 import freeship from '../../../assets/images/freeship.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart, faCableCar, faCartShopping, faCommentsDollar} from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faTelegram, faPinterest } from '@fortawesome/free-brands-svg-icons'
-import ReactDOM from 'react-dom'
 import {Rating} from '@mui/material'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import formatPrice from "components/format-price";
+
+
 
 function ProductInfo () {
     
@@ -28,6 +28,7 @@ function ProductInfo () {
     const [product, setProduct] = useState()
 
     const [picture, setPicture] = useState()
+    const [array, setArray] = useState([])
 
     useLayoutEffect(() => {
         const fetchProductInfo = async () => {
@@ -35,6 +36,8 @@ function ProductInfo () {
                 const productResult =  await productApi.getProductById(productId);
                 setProduct(productResult);
                 setPicture(productResult.images[0])
+                setArray(array.push(productResult))
+            
 
             } catch (error) {
                 console.log(error);
@@ -65,12 +68,11 @@ function ProductInfo () {
         e.preventDefault();
         const requestPost = async () => {
             try {
-                const response = await axios.post('http://localhost:8000/api/cart/add-to-cart', {
+                const response = await cartApi.postCart({
                     product_detail_id : 1,
                     quantity : count
-                },{ headers : {
-                    'Authorization': 'Bearer '+ localStorage.getItem('jwt')
-                }})
+                })
+                console.log(response)
                 toast.success('Thêm vào giỏ hàng thành công', {
                     position: "top-center",
                     autoClose: 5000,
@@ -101,7 +103,7 @@ function ProductInfo () {
         }
         requestPost();
     }
-    
+   
 
     return (
         <div style={{margin: '0', padding: '0', boxSizing: 'border-box'}}>
@@ -323,7 +325,9 @@ function ProductInfo () {
                             />
                             Thêm vào giỏ hàng
                         </button>
-                        <button className='pro_detail-buy'>Mua ngay</button>
+                        <button className='pro_detail-buy'
+                               
+                        >Mua ngay</button>
                     </div>
                 </div>
 

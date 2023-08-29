@@ -11,8 +11,7 @@ import formatPrice from 'components/format-price'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate , Link} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
-import { newArrays } from '../cart/cart'
-
+import { newArrays, option } from '../cart/cart'
 function Payment (){
 
     const [active, setActive] = useState('')
@@ -20,7 +19,8 @@ function Payment (){
     function handleClick (e){
         setActive(e.target.id)
     }
-     const products = newArrays
+     const products = option === 1 ? newArrays : []
+
 
 
     const arrProducts = products.map ((item , index)=> {
@@ -32,18 +32,35 @@ function Payment (){
                                     <div>{item.title}</div>
                                 </td>
                                 <td className='payment-product-singlecol'>Loại: Purple,L</td>
-                                <td className='payment-product-singlecol payment-number'>{formatPrice(item.price)}</td>
+                                <td className='payment-product-singlecol payment-number'>{formatPrice(item.total_price/item.quantity)}</td>
                                 <td className='payment-product-singlecol payment-number'>{item.quantity}</td>
-                                <td className='payment-product-singlecol payment-number'>{formatPrice(item.total)}</td>
+                                <td className='payment-product-singlecol payment-number'>{formatPrice(item.total_price)}</td>
                             </tr>
             </table>
         )
     })
+    const navigate = useNavigate()
 
+    function handleSubmit(e){
+        e.preventDefault();
+        toast.success('Mua hàng thành công', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+        setTimeout(()=> {
+            navigate('/')
+        },3000)
+    }
 
 
     const totalCost = products.reduce((acc, item )=> {
-        const total = acc + item.total
+        const total = acc + item.total_price
         return total
     }, 0)
     return (
@@ -175,12 +192,11 @@ function Payment (){
                         <div className='payment-pay'>
                             <p>Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo 
                                 <span style = {{color : 'blue'}}> Điều khoản của Shopee</span>
-                            </p>
-                            <form>
-                            <Link to = '/' >
-                            <button type='button'>Thanh toán</button>
-                            </Link>
-                            </form>
+                            </p>     
+                            <ToastContainer/>                    
+                            <button
+                                onClick = {handleSubmit}
+                            >Mua hàng</button>
                         </div>
                     </div>
             </div>

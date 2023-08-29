@@ -1,7 +1,8 @@
 import '../admin.scss'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
-
+import adminproductApi from 'api/adminproductAPI'
+import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -21,6 +22,20 @@ function AdminProduct (){
         })
         .catch(err => console.log(err));
     }, [])
+    // useEffect(()=> {
+    //     const getALL = async ()=> {
+    //         try {
+    //             const res = await adminproductApi.getAllAdminProduct();
+    //             console.log(res);
+    //             setProduct(res.data.rows)
+    //         }
+    //         catch(err) {
+    //             console.log(err);
+    //         }
+    //     }
+    //     getALL()
+    // })
+
 
     function removeProduct(id) {
         const newProducts = product.filter((item)=> item.id !== id);

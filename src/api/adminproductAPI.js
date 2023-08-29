@@ -1,22 +1,22 @@
-import {axiosClient2} from "./axiosClient";
+import {axiosClient2 as axiosClient} from "./axiosClient";
 
 const adminproductApi = {
 
-    getAllAdminProduct(params){
-        const url = '/product';
-        return axiosClient2.get(url)
+    getAllAdminProduct(){
+        const url = '/api/product';
+        return axiosClient.get(url)
     },
     updateAdminProduct(productID){
-        const url = `/product/${productID}`;
-        return axiosClient2.patch(url);
+        const url = `/api/product/${productID}`;
+        return axiosClient.patch(url);
     },
     deleteAdminProduct(productID){
-        const url = `/product/${productID}`;
-        return axiosClient2.delete(url);
+        const url = `/api/product/${productID}`;
+        return axiosClient.delete(url);
     },
     addAdminProduct(params){
-        const url = '/product';
-        return axiosClient2.post(url,{params});
+        const url = '/api/product';
+        return axiosClient.post(url,params);
     }
 };
 export default adminproductApi;

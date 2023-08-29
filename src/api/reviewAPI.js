@@ -1,10 +1,10 @@
-import {axiosClient2} from "./axiosClient";
+import {axiosClient2 as axiosClient} from "./axiosClient";
 
 const reviewApi = {
 
     getAllReview(productID){
-        const url = `feedback/get-by-product/${productID}`;
-        return axiosClient2.get(url)
+        const url = `/api/feedback/get-by-product/${productID}`;
+        return axiosClient.get(url)
     }
     // updateReview(productID){
     //     const url = `/product/${productID}`;
