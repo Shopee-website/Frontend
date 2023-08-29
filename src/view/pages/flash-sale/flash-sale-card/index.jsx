@@ -8,7 +8,6 @@ function FlashSaleProduct (props) {
         height: `${props.height || "280px"}`,
         width: `${props.width || "280px"}`,
     };
-
     return (
         <>
             <div className="product-sale-wrapper">
@@ -25,6 +24,8 @@ function FlashSaleProduct (props) {
                         </div>
                         <div className="product-sale-content_buy">
                             <div className='product-sale-content_buy_price'>
+                                <p className='product-sale-content_buy_originPrice'>đ {props.price + 0.3 * props.price} </p>
+                                <div className='product-sale-content_buy_line'></div>
                                 <p>{props.price}</p>
                             </div>
                             <div className='product-sale-content_buy_buybtn'>

@@ -2,7 +2,7 @@ import React from "react";
 import './product.scss'
 
 function Product(props){
-
+   
     const productStyle = {
         backgroundImage: `URL(${props.imageURL})`,
         backgroundSize: 'contain',

@@ -1,20 +1,51 @@
 
 import './payment.scss'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import shopee_logo from 'assets/images/logo-shopee.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocation, faQuestion, faIdCard, faCoins} from '@fortawesome/free-solid-svg-icons'
 import productImage from 'assets/images/product_detail1.jpg'
 import Footer from 'components/footer'
-
-
+import axios from 'axios'
+import formatPrice from 'components/format-price'
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate , Link} from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
+import { newArrays } from '../cart/cart'
 
 function Payment (){
 
     const [active, setActive] = useState('')
+    // const [products, setProducts] = useState([])
     function handleClick (e){
         setActive(e.target.id)
     }
+     const products = newArrays
+
+
+    const arrProducts = products.map ((item , index)=> {
+        return (
+            <table className='payment-product-table'>
+                 <tr>
+                                <td className = 'payment-product-body'>
+                                    <img src = {productImage} alt = 'anh ao' className='payment-product-img'/>
+                                    <div>{item.title}</div>
+                                </td>
+                                <td className='payment-product-singlecol'>Loại: Purple,L</td>
+                                <td className='payment-product-singlecol payment-number'>{formatPrice(item.price)}</td>
+                                <td className='payment-product-singlecol payment-number'>{item.quantity}</td>
+                                <td className='payment-product-singlecol payment-number'>{formatPrice(item.total)}</td>
+                            </tr>
+            </table>
+        )
+    })
+
+
+
+    const totalCost = products.reduce((acc, item )=> {
+        const total = acc + item.total
+        return total
+    }, 0)
     return (
         <div className='payment-wrap'>
             <div className='payment-header'>
@@ -54,27 +85,8 @@ function Payment (){
                                 <th className='payment-product-singlecol'>Số lượng</th>
                                 <th className='payment-product-singlecol'>Thành tiền</th>
                             </tr>
-                            <tr>
-                                <td className = 'payment-product-body'>
-                                    <img src = {productImage} alt = 'anh ao' className='payment-product-img'/>
-                                    <div>Áo sơ mi tay dài màu trơn phong cách Hàn Quốc</div>
-                                </td>
-                                <td className='payment-product-singlecol'>Loại: Purple,L</td>
-                                <td className='payment-product-singlecol payment-number'>₫ 190.000</td>
-                                <td className='payment-product-singlecol payment-number'>1</td>
-                                <td className='payment-product-singlecol payment-number'>₫190.000</td>
-                            </tr>
-                            <tr>
-                                <td className = 'payment-product-body'>
-                                    <img src = {productImage} alt = 'anh ao' className='payment-product-img'/>
-                                    <div>Áo sơ mi tay dài màu trơn phong cách Hàn Quốc</div>
-                                </td>
-                                <td className='payment-product-singlecol'>Loại: Purple,L</td>
-                                <td className='payment-product-singlecol payment-number'>₫ 190.000</td>
-                                <td className='payment-product-singlecol payment-number'>1</td>
-                                <td className='payment-product-singlecol payment-number'>₫190.000</td>
-                            </tr>
                         </table>
+                        {arrProducts}
                     </div>
                         <table className='payment-product-note'>
                             <tr>
@@ -101,7 +113,7 @@ function Payment (){
                             </tr>
                             <tr>
                                 <td colSpan={2} className='payment-product-total'>Tổng số tiền : 
-                                    <span style = {{color : '#ee4d2d', fontSize : '20px',marginLeft : '16px'}}>205.000đ</span>
+                                    <span style = {{color : '#ee4d2d', fontSize : '20px',marginLeft : '16px'}}>{formatPrice(totalCost + 15000)}</span>
                                 </td>
                             </tr>
                         </table>
@@ -148,7 +160,7 @@ function Payment (){
                             <table className='payment-total-table'>
                                 <tr>
                                     <td>Tổng tiền hàng</td>
-                                    <td style={{color : '#888888'}}>190.000đ</td>
+                                    <td style={{color : '#888888'}}>{formatPrice(totalCost)}</td>
                                 </tr>
                                 <tr>
                                     <td>Phí vận chuyển</td>
@@ -156,7 +168,7 @@ function Payment (){
                                 </tr>
                                 <tr>
                                     <td>Tổng thanh toán</td>
-                                    <td style = {{fontSize: '20px', color : '#ee4d2d'}}>205.000đ</td>
+                                    <td style = {{fontSize: '20px', color : '#ee4d2d'}}>{formatPrice(totalCost + 15000)}</td>
                                 </tr>
                             </table>
                         </div>
@@ -164,7 +176,11 @@ function Payment (){
                             <p>Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo 
                                 <span style = {{color : 'blue'}}> Điều khoản của Shopee</span>
                             </p>
-                            <button>Thanh toán</button>
+                            <form>
+                            <Link to = '/' >
+                            <button type='button'>Thanh toán</button>
+                            </Link>
+                            </form>
                         </div>
                     </div>
             </div>

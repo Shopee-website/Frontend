@@ -10,6 +10,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import "~antd/dist/antd.css";
 import { Alert, Space } from 'antd';
+import registerApi from 'api/registerAPI';
+import loginApi from 'api/loginAPI';
 function Register (){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -18,7 +20,7 @@ function Register (){
     const [err, setErr] = useState([false, false, false])
 
     useEffect(()=> {
-        if (localStorage.getItem('user-infor')){
+        if (localStorage.getItem('jwt')){
             navigate('/homepage')
         }
     }, [])
@@ -27,14 +29,13 @@ function Register (){
         e.preventDefault();
         const sendPostRequest = async () => {
             try {
-                const resp = await axios.post('http://localhost:8000/api/auth/register', {
-                    
-                    email : email,
-                    password : password,
-                    password2 : password2
+                const resp = await axios.post('http://localhost:8000/api/auth/register',{
+                    email: email,
+                    password: password,
+                    password2: password2,
                 })
                 {   
-                    localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
+                    console.log(resp)
                     toast.success('Đăng ký thành công, bạn sẽ chuyển sang trang chính', {
                         position: "top-center",
                         autoClose: 5000,
@@ -47,7 +48,7 @@ function Register (){
                         });
                 }
                 setTimeout(function() {
-                    navigate('/')
+                    navigate('/login')
                 },2000)
                 setEmail('')
                 setPassword('')

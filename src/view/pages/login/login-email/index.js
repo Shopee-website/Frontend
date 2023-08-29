@@ -1,10 +1,11 @@
 import './login_email.scss'
 import React , {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
 import {Link} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import loginApi from 'api/loginAPI';
 
 function Login_email() {
     const [email, setEmail] = useState('')
@@ -15,7 +16,7 @@ function Login_email() {
 
     
     useEffect(()=> {
-        if (localStorage.getItem('user-infor')){
+        if (localStorage.getItem('jwt')){
             navigate('/homepage')
         }
     }, [])
@@ -23,11 +24,12 @@ function Login_email() {
         e.preventDefault();
         const sendPostRequest = async () => {
             try {
-                const resp = await axios.post('http://localhost:8000/api/auth/login', {
+                const resp = await axios.post('http://localhost:8000/api/auth/login',{
                     email : email,
-                    password   : password
+                    password : password
                 })
-                localStorage.setItem('user-infor', JSON.stringify({email : email, password : password}))
+                console.log(resp)
+                localStorage.setItem('jwt', resp.data.token)
                 toast.success('Đăng ký thành công, bạn sẽ chuyển sang trang chính', {
                     position: "top-center",
                     autoClose: 5000,

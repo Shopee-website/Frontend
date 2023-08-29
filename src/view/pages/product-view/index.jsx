@@ -19,6 +19,7 @@ import {Rating} from '@mui/material'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import formatPrice from "components/format-price";
 
 function ProductInfo () {
     
@@ -31,7 +32,6 @@ function ProductInfo () {
             try {
                 const productResult =  await productApi.getProductById(productId);
                 setProduct(productResult);
-                console.log(productResult)
 
             } catch (error) {
                 console.log(error);
@@ -63,12 +63,11 @@ function ProductInfo () {
         const requestPost = async () => {
             try {
                 const response = await axios.post('http://localhost:8000/api/cart/add-to-cart', {
-                    user_id : 3,
-                    product_detail_id : 3,
+                    product_detail_id : 1,
                     quantity : count
-                    
-
-                })
+                },{ headers : {
+                    'Authorization': 'Bearer '+ localStorage.getItem('jwt')
+                }})
                 toast.success('Thêm vào giỏ hàng thành công', {
                     position: "top-center",
                     autoClose: 5000,
@@ -99,10 +98,9 @@ function ProductInfo () {
         }
         requestPost();
     }
-
+    
 
     return (
-       
         <div style={{margin: '0', padding: '0', boxSizing: 'border-box'}}>
             <Header position = "relative"/>
             {product&&
@@ -111,7 +109,7 @@ function ProductInfo () {
                 <div className='pro_detail-container'>
             <div className='pro_detail-content'>
                 <div className='pro_detail-image'>
-                    <img src = {picture} alt = 'anh dai dien' className='pro_detail-main-img' />
+                    <img src = {picture}  className='pro_detail-main-img' />
                     <div className='pro_detail-img_list'>
                         <img src = {product.images[1]} alt = 'anh ao'  className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1])}/>
                         <img src = {product.images[2]} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2])}/>
@@ -173,7 +171,9 @@ function ProductInfo () {
                         <div className='pro_detail-price_detail'>
 
                             <span className='pro_detail-realprice'>
-                                <sup style={{textDecoration : 'underline'}}>đ</sup>{product.salePrice}</span> 
+                            {   
+                                formatPrice(product.salePrice)
+                                }</span> 
                             <span className='pro_detail-sale'>{product.promotionPercent}% giảm</span>
                         </div>
                         <div className='pro_detail-price-about'>
@@ -386,7 +386,7 @@ function ProductInfo () {
                 </div>
 
             </div>
-            {<Review/>}
+            {<Review data = {productId}/>}
         </div>
                            
             </div>}
