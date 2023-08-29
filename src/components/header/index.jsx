@@ -13,6 +13,8 @@ import './index.scss';
 import { Input, Space } from 'antd';
 import SearchResult from "./search-result";
 import { LogoShopeeIcon } from "components/icon";
+import useAuth from 'hooks/useAuth'
+import auth from "api/auth";
 const { Search } = Input;
 
 const suffix = (
@@ -29,21 +31,26 @@ const suffix = (
 
 function Header(props) {
 
-   
+//    const { user } = useAuth();
+    const user = localStorage.getItem('token') 
+
       const handleChangeSearch = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
       };
 
 
     const styleHeader = {
         position: `${props.position || 'fixed'}`,
     }
-
-    let user = JSON.parse(localStorage.getItem('user-infor'))
+    
 
     const nagivate = useNavigate()
+
     function signout (){
-        localStorage.removeItem( 'token')
+        // localStorage.removeItem('token')
+        localStorage.setItem('token', null)
+        localStorage.setItem('user', null)
+        // localStorage.removeItem('user')
         nagivate('/login')
     }
     return (
@@ -64,15 +71,15 @@ function Header(props) {
                             <li><a href=""><QuestionCircleOutlined />Hỗ trợ</a></li>
                             <li><a href=""><GlobalOutlined />Tiếng Việt</a></li>
 
-                            {localStorage.getItem('token') ?
+                            {localStorage.getItem('token') !== 'null' ?
                                 <>
-                                <li>Xin chào</li>
+                                <li>Xin chào, {user.name}</li>
                                 <li><a href = "" onClick={signout}>Đăng xuất</a></li>
                                 </>
                                 :
                                 <>
-                                    <li><Link to = "/register">Đăng ký</Link></li>
-                                    <li><Link to = "/login">Đăng nhập</Link></li>
+                                    <li><Link to = "/register/">Đăng ký</Link></li>
+                                    <li><Link to = "/login/">Đăng nhập</Link></li>
                                 </>
                             }
                         </ul>

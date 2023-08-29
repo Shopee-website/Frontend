@@ -1,20 +1,17 @@
-import axiosClient from 'api/axiosClient'
+import {axiosClient2 as axiosClient} from 'api/axiosClient'
 import { createContext, useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import auth from 'api/auth'
-
+import userInfoAPI from 'api/userInfoAPI'
 const UserContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'))
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-    const [collapsed, setCollapsed] = useState(
-        localStorage.getItem('collapsed') === 'true',
-    )
 
     const providerValue = useMemo(
-        () => ({ token, setToken, user, setUser, collapsed, setCollapsed }),
-        [token, setToken, user, setUser, collapsed, setCollapsed],
+        () => ({ token, setToken, user, setUser}),
+        [token, setToken, user, setUser],
     )
 
     const navigate = useNavigate()
@@ -25,22 +22,21 @@ export const AuthProvider = ({ children }) => {
             axiosClient.defaults.headers.common[
                 'Authorization'
             ] = `Bearer ${token}`
-            // console.log('ao that day : ', token);
-            if (token !== localStorage.getItem('token')) {
-                // Get current user's data
-                // auth.getAuthenticatedUser()
-                //     .then((response) => {
-                //         setUser(response.data)
-                //         localStorage.setItem('token', token)
-                //         localStorage.setItem(
-                //             'user',
-                //             JSON.stringify(response.data),
-                //         )
-                //     })
-                //     .catch((error) => {
-                //         console.log(error)
-                //     })
-            }
+
+            // console.log(axiosClient.defaults);
+            userInfoAPI.getInfo()
+                .then ((response)=> {
+                    console.log(response);
+                    setUser(response.data.profile)
+                    localStorage.setItem(
+                        'user',
+                        JSON.stringify(response.data.profile),
+                    )
+                })
+                .catch((error) => {
+                                console.log(error)
+                            })
+
         } else {
             // User logout
             setUser('null')

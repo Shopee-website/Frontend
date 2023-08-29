@@ -8,9 +8,15 @@ import axios from 'axios'
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import auth from 'api/auth';
+import useAuth from 'hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
 // import "~antd/dist/antd.css";
 import { Alert, Space } from 'antd';
+
+
+
+
+
 function Register (){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -18,14 +24,18 @@ function Register (){
     const navigate = useNavigate();
     const [err, setErr] = useState([false, false, false])
 
-    useEffect(()=> {
-        if (localStorage.getItem('jwt')){
-            navigate('/homepage')
-        }
-    }, [])
+    // useEffect(()=> {
+    //     if (localStorage.getItem('token')){
+    //         navigate('/homepage')
+    //     }
+    // }, [])
+    const {setToken } = useAuth();
 
     function handleValidation(e){
+
+    
         e.preventDefault();
+
         const sendPostRequest = async () => {
             try {
                 
@@ -42,7 +52,7 @@ function Register (){
                 if(response.request.status === 200){
                    
                  // alert(response.data.message)
-                    
+                setToken(response.data.token);   
                 localStorage.setItem('token',response.data.token)
 
                 
@@ -59,7 +69,7 @@ function Register (){
                     });
                 
                 setTimeout(function() {
-                    navigate('/login')
+                    navigate('/homepage')
                 },2000)
 
                 // setEmail('')
