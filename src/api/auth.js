@@ -1,4 +1,4 @@
-import {axiosClient2 as axiosClient} from './axiosClient'
+import axiosClient from './axiosClient'
 
 const auth = {
     login: (credentials) => {

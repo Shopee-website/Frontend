@@ -5,16 +5,12 @@ import useAuth from 'hooks/useAuth'
 const AdminRoute = () => {
     const { user } = useAuth()
 
-    if (user !== 'null') {
+    if (user.isAdmin) {
 
-       return  user.isAdmin ? (
-                 <Outlet />
-        ) : (
-             <Navigate to="/homepage" />
-        )
+       return <Outlet />
         
     } else {
-        return <Navigate to="/login" />
+        return <Navigate to="/homepage" />
     }
 }
 

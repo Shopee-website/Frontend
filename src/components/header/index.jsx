@@ -31,12 +31,11 @@ const suffix = (
 
 function Header(props) {
 
-//    const { user } = useAuth();
-    const user = localStorage.getItem('token') 
 
-      const handleChangeSearch = (e) => {
+    const { user } = useAuth();
+    const handleChangeSearch = (e) => {
         // console.log(e.target.value);
-      };
+    };
 
 
     const styleHeader = {
@@ -67,13 +66,24 @@ function Header(props) {
                     </div>
                     <div className="header-shop_navbar_support">
                         <ul className="header-shop_navbar_support_list">
-                            <li><a href=""><NotificationOutlined />Thông báo</a></li>
-                            <li><a href=""><QuestionCircleOutlined />Hỗ trợ</a></li>
-                            <li><a href=""><GlobalOutlined />Tiếng Việt</a></li>
+                            <li><a href=""><NotificationOutlined /> Thông báo</a></li>
+                            <li><a href=""><QuestionCircleOutlined /> Hỗ trợ</a></li>
+                            <li><a href=""><GlobalOutlined /> Tiếng Việt</a></li>
 
                             {localStorage.getItem('token') !== 'null' ?
                                 <>
-                                <li>Xin chào, {user.name}</li>
+                                <li>
+                                   {user.name ? <div className="user-wrapper">
+                                        <div className="user-avatar">
+                                            <img src={user.avatar_url || 'http://localhost:8000/images/avatars/default-avatar.png'} />
+                                        </div>
+                                        <div className="user-name">{user.name}</div>
+                                    </div>
+                                    :
+                                    'Xin chào'
+                                    }
+                                    
+                                </li>
                                 <li><a href = "" onClick={signout}>Đăng xuất</a></li>
                                 </>
                                 :

@@ -34,10 +34,16 @@ function ProductInfo () {
         const fetchProductInfo = async () => {
             try {
                 const productResult =  await productApi.getProductById(productId);
+<<<<<<< HEAD
                 setProduct(productResult);
                 setPicture(productResult.images[0])
                 setArray(array.push(productResult))
             
+=======
+                setProduct(productResult.data);
+                console.log(productResult);
+                setPicture(productResult.images[0].image)
+>>>>>>> 2ece8d8d8917f044c795e043047871c4cd868650
 
             } catch (error) {
                 console.log(error);
@@ -45,10 +51,6 @@ function ProductInfo () {
         }
         fetchProductInfo();
     }, [productId])
-
-    
-    
-    
 
 
     const [like , setLike] = useState(false)

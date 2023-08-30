@@ -4,6 +4,7 @@ import Product from "components/product";
 import { Link } from "react-router-dom";
 function Recommend (props){
   const products = props.products;
+//   console.log(products);
     return (
         <div className="recommend-wrapper">
             <div className="recommend-title">
@@ -14,18 +15,18 @@ function Recommend (props){
             </div>
             <div className="recommend-products">
                 <ul>
-                  {products.map(post => {
+                  { products.map(post => {
                           return (
-                          <Link key = {post.id} to={`/product-view/${post.name.replace(/ /g, '-')}/${post.id}`}>
+                          <Link key = {post.id} to={`/product-view/${post.product_name.replace(/ /g, '-')}/${post.id}`}>
                             <li>
-                              <Product 
-                                    imageURL={post.images[0]}
-                                    name={post.name}
+                           <Product 
+                                    imageURL={post.images && post.images.length > 0 && post.images[0].image || 'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lj0uezovoi6k2b_tn'}
+                                    name={post.product_name}
                                     discount ="giảm 25k"
-                                    price={"$"+post.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                    price={"$"+post.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                     height = "188px"
                                     width = '187.5px'
-                                    sold="7,2k"  
+                                    sold={post.quan_sold}  
                                 />
                             </li>
                               

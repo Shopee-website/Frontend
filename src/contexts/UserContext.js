@@ -1,4 +1,4 @@
-import {axiosClient2 as axiosClient} from 'api/axiosClient'
+import axiosClient from 'api/axiosClient'
 import { createContext, useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import auth from 'api/auth'
@@ -26,11 +26,10 @@ export const AuthProvider = ({ children }) => {
             // console.log(axiosClient.defaults);
             userInfoAPI.getInfo()
                 .then ((response)=> {
-                    console.log(response);
                     setUser(response.data.profile)
                     localStorage.setItem(
                         'user',
-                        JSON.stringify(response.data.profile),
+                        JSON.stringify( response.data.profile),
                     )
                 })
                 .catch((error) => {

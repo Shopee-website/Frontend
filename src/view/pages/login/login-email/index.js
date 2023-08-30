@@ -15,14 +15,7 @@ function Login_email() {
     const [err1, setErr1] = useState(false)
     const navigate = useNavigate()
 
-    useEffect(()=> {
-        if (localStorage.getItem('jwt')){
-            navigate('/homepage')
-        }
-    }, [])
-
     const { setToken } = useAuth()
-
 
     function handleSubmit(e){
         e.preventDefault();

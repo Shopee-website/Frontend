@@ -5,6 +5,7 @@ import { faUser, faMoneyBill, faList, faDiamond, faHouse } from '@fortawesome/fr
 import {useState, useEffect} from 'react'
 import AdminProduct from './product'
 import User from './user'
+import { Link } from 'react-router-dom'
 
 function Admin() {
 
@@ -14,7 +15,10 @@ function Admin() {
         <div className='admin-container'>
             <div className='admin-header'>
                 <div>
-                    <img src = {shopee} alt = 'anh shopee' className='admin-logo-img'/>
+                    <Link to={'/homepage'}>
+                        <img src = {shopee} alt = 'anh shopee' className='admin-logo-img'/>
+                    </Link>
+                    
                 </div>
                 <div style={{fontSize : '20px'}}>
                     Admin 
