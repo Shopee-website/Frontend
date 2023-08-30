@@ -68,37 +68,33 @@ function ProductCategory(){
 
         const fetchCategoryInfo = async () => {
             try {
-                const params = {
-                    categoryId: categoryId,
-                }
-                const productResult =  await productApi.getAllProduct(params);
-                // productResult.originalPrice = productResult.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                setProducts(productResult);
-                
+                const productResult =  await productApi.getProductByCategoryId(categoryId);
+                setProducts(productResult.data.rows);
 
             } catch (error) {
                 console.log(error);
             }
         }
         fetchCategoryInfo();
+        console.log(products);
     },[])
 
   
 
     const sortByPrice = () => {
-        const sortedData = [...products]; // Create a shallow copy of the data array
-        sortedData.sort((a, b) => a.originalPrice - b.originalPrice);
+        const sortedData = [...products]; 
+        sortedData.sort((a, b) => a.price - b.price);
         setProducts(sortedData);
       };
     
       const sortByPrice2 = () => {
-        const sortedData = [...products]; // Create a shallow copy of the data array
-        sortedData.sort((a, b) => b.originalPrice - a.originalPrice);
+        const sortedData = [...products]; 
+        sortedData.sort((a, b) => b.price - a.price);
         setProducts(sortedData);
       };
 
       const sortByCreate = () => {
-        const sortedData = [...products]; // Create a shallow copy of the data array
+        const sortedData = [...products]; 
         sortedData.sort((a, b) => b.createdAt - a.createdAt);
         setProducts(sortedData);
       };
@@ -270,7 +266,7 @@ function ProductCategory(){
                                 },
                                 {
                                 value: 'max',
-                                label: 'Giá : Caoo Đến Thấp',
+                                label: 'Giá : Cao Đến Thấp',
                                 },
                             ]}
                             />
@@ -280,34 +276,28 @@ function ProductCategory(){
                         <ul>
                         {products.map(post => {
                             return (
-                                <Link key = {post.id} to={`/product-view/${post.name.replace(/ /g, '-')}/${post.id}`}>
+                                <Link key = {post.id} to={`/product-view/${post.product_name.replace(/ /g, '-')}/${post.id}`}>
                                     <li>
                                         <Product 
-                                            imageURL={post.images[0]}
-                                            name={post.name}
+                                            imageURL={post.images && post.images.length > 0 && post.images[0].image || 'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lj0uezovoi6k2b_tn'}
+                                            name={post.product_name}
                                             discount ="giảm 25k"
-                                            price={"$"+post.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                            price={"$"+post.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                             height = "188px"
                                             width = '187.5px'
-                                            sold="7,2k"  
+                                            sold={post.quan_sold}  
                                         />
                                     </li>
                                  </Link>
                                  )
                             })
                         }
+
                         </ul>
                         
                     </div>
                 </div>
             </div>
-
-
-
-
-
-            
-
         </div>
     )
 }

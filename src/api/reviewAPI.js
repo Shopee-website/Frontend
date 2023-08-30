@@ -1,22 +1,22 @@
-import {axiosClient2} from "./axiosClient";
+import axiosClient from "./axiosClient";
 
 const reviewApi = {
 
     getAllReview(productID){
-        const url = `feedback/get-by-product/${productID}`;
-        return axiosClient2.get(url)
+        const url = `/api/feedback/get-by-product/${productID}`;
+        return axiosClient.get(url)
     }
     // updateReview(productID){
     //     const url = `/product/${productID}`;
-    //     return axiosClient2.patch(url);
+    //     return axiosClient.patch(url);
     // },
     // deleteAdminProduct(productID){
     //     const url = `/product/${productID}`;
-    //     return axiosClient2.delete(url);
+    //     return axiosClient.delete(url);
     // },
     // addAdminProduct(params){
     //     const url = '/product';
-    //     return axiosClient2.post(url,{params});
+    //     return axiosClient.post(url,{params});
     // }
 };
 export default reviewApi;

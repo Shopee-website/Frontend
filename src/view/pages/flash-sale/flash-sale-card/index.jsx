@@ -1,5 +1,6 @@
 import './flashSaleItem.scss'
 function FlashSaleProduct (props) {
+    
     const productStyle = {
         backgroundImage: `URL(${props.imageURL})`,
         backgroundSize: 'contain',

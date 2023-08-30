@@ -30,6 +30,7 @@ html, body {
                 &_list {
                     display: flex;
                     flex-direction: row;
+                    align-items: center;
                     list-style: none !important;
                     li, a {
                         font-size: 0.8rem;
@@ -91,7 +92,23 @@ html, body {
                 } 
             }
         }
+}
 
+.user{
+    &-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 7px;
+        align-items: center;
+    }
+    &-avatar {
+        & img {
+            height: 25px;
+            border-radius: 50%;
+        }
+    }
+    &-name {
+        font-size: 14px;
+    }
     
-
 }
