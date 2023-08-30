@@ -9,7 +9,7 @@ const userApi = {
     // },
 
     getAllUser(params){
-        const url = '/admin/all-user';
+        const url = 'api/admin/all-user';
         return axiosClient2.get(url, {params})
     },
     
