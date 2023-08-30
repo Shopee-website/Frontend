@@ -4,7 +4,7 @@ import axiosClient from "./axiosClient";
 const reviewApi = {
 
     getAllReview(productID){
-        const url = `feedback/get-by-product/${productID}`;
+        const url = `/api/feedback/get-by-product/${productID}`;
         return axiosClient.get(url)
     }
     // updateReview(productID){

@@ -19,10 +19,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import formatPrice from "components/format-price";
 
-
+let productBuy ;
+let select ;
 
 function ProductInfo () {
-    
+    const navigate = useNavigate()
     const  {productId}  = useParams();
     
     const [product, setProduct] = useState()
@@ -34,22 +35,16 @@ function ProductInfo () {
         const fetchProductInfo = async () => {
             try {
                 const productResult =  await productApi.getProductById(productId);
-<<<<<<< HEAD
-                setProduct(productResult);
-                setPicture(productResult.images[0])
-                setArray(array.push(productResult))
-            
-=======
                 setProduct(productResult.data);
-                console.log(productResult);
-                setPicture(productResult.images[0].image)
->>>>>>> 2ece8d8d8917f044c795e043047871c4cd868650
+                setPicture(productResult.data.images[0].image)
 
             } catch (error) {
                 console.log(error);
             }
         }
         fetchProductInfo();
+        productBuy = {};
+        select = 0;
     }, [productId])
 
 
@@ -71,7 +66,7 @@ function ProductInfo () {
         const requestPost = async () => {
             try {
                 const response = await cartApi.postCart({
-                    product_detail_id : 1,
+                    product_detail_id : parseInt(productId),
                     quantity : count
                 })
                 console.log(response)
@@ -105,7 +100,6 @@ function ProductInfo () {
         }
         requestPost();
     }
-   
 
     return (
         <div style={{margin: '0', padding: '0', boxSizing: 'border-box'}}>
@@ -118,11 +112,11 @@ function ProductInfo () {
                 <div className='pro_detail-image'>
                     <img src = {picture}  className='pro_detail-main-img' />
                     <div className='pro_detail-img_list'>
-                        <img src = {product.images[1]} alt = 'anh ao'  className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1])}/>
-                        <img src = {product.images[2]} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2])}/>
-                        <img src = {product.images[2]} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2])}/>
-                        <img src = {product.images[1]} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1])}/>
-                        <img src = {product.images[1]} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1])}/>
+                        <img src = {product.images[1].image} alt = 'anh ao'  className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
+                        <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/>
+                        <img src = {product.images[3].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[3].image)}/>
+                        <img src = {product.images[1].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
+                        <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/>
                     </div>
                     <div className='pro_detail-share'>
                         <div className='pro_detail-social'>
@@ -139,20 +133,20 @@ function ProductInfo () {
                                 style = {{color : like  ? '#ff424f' : 'pink'}}
                                 onClick={()=> setLike(!like)}
                             />
-                          Đã thích (2.9K)
+                          Đã thích ({product.likes})
                         </div>
                     </div>
                 </div>
                 <div className='pro_detail-body'>
                     <h3 className='pro_detail-header'>
                         <span className = 'pro_detail-des'>Yêu thích</span>
-                            {product.name}
+                            {product.product_name}
                     </h3>
                     <div className='pro_detail-rating'>
                         <div className='pro_detail-left'>
 
                             <div className='pro_detail-star'>
-                            <span style = {{color : '#ee4d2d', textDecoration : 'underline', marginRight: '6px', fontSize : '18px'}}>4.7</span>
+                            <span style = {{color : '#ee4d2d', textDecoration : 'underline', marginRight: '6px', fontSize : '18px'}}>{product.star}</span>
                             <Rating name="rating-read" defaultValue={5} precision={0.5} size = "small" readOnly />
                             </div>
                             <div className='pro_detail-lines'>
@@ -166,7 +160,7 @@ function ProductInfo () {
 
                             </div>
                             <div className='pro_detail-sold'>
-                                    <span>6k</span> 
+                                    <span>{product.quan_sold}</span> 
                                     <span style = {{color :'#767676', fontSize : '14px', marginLeft : '4px'}}>Đã bán</span>
                             </div>
                         </div>
@@ -179,9 +173,9 @@ function ProductInfo () {
 
                             <span className='pro_detail-realprice'>
                             {   
-                                formatPrice(product.salePrice)
+                                formatPrice(product.saleprice)
                                 }</span> 
-                            <span className='pro_detail-sale'>{product.promotionPercent}% giảm</span>
+                            <span className='pro_detail-sale'>40% giảm</span>
                         </div>
                         <div className='pro_detail-price-about'>
                             <div style={{display : 'flex', alignItems : 'center'}}>
@@ -328,7 +322,6 @@ function ProductInfo () {
                             Thêm vào giỏ hàng
                         </button>
                         <button className='pro_detail-buy'
-                               
                         >Mua ngay</button>
                     </div>
                 </div>
@@ -366,7 +359,7 @@ function ProductInfo () {
                     </div>
                     <div className='pro_detail-para'>
                         <p>
-                            {product.shortDescription}
+                            {product.description}
                         </p>
 
 
@@ -405,5 +398,5 @@ function ProductInfo () {
         </div>
     )
 }
-
+export {productBuy, select}
 export default ProductInfo;

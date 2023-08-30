@@ -7,8 +7,6 @@ import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 
 
 function AdminProduct (){
-
-    
     const [product, setProduct] = useState([])
     
     const [editID, setEditID] = useState(-1)
@@ -22,35 +20,11 @@ function AdminProduct (){
         })
         .catch(err => console.log(err));
     }, [])
-    // useEffect(()=> {
-    //     const getALL = async ()=> {
-    //         try {
-    //             const res = await adminproductApi.getAllAdminProduct();
-    //             console.log(res);
-    //             setProduct(res.data.rows)
-    //         }
-    //         catch(err) {
-    //             console.log(err);
-    //         }
-    //     }
-    //     getALL()
-    // })
 
 
     function removeProduct(id) {
         const newProducts = product.filter((item)=> item.id !== id);
         setProduct(newProducts)
-        // const deleteProducts = async (id) => {
-        //     try {
-        //         let res = await axios.delete("https://fakestoreapi.com/products", {
-        //             data: { id }
-        //         });
-        //         console.log("Product was deleted",res);
-        //     } catch(err) {
-        //         console.log("there was an error", err)
-        //     }
-        // }
-        // deleteProducts()
     }
 
      const arrProducts = product.map((item)=> (

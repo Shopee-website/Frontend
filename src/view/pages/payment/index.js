@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate , Link} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import { newArrays, option } from '../cart/cart'
+import billAPI from 'api/billApi'
 function Payment (){
 
     const [active, setActive] = useState('')
@@ -19,8 +20,7 @@ function Payment (){
     function handleClick (e){
         setActive(e.target.id)
     }
-     const products = option === 1 ? newArrays : []
-
+    const products = option === 1 ? newArrays : []
 
 
     const arrProducts = products.map ((item , index)=> {
@@ -29,7 +29,7 @@ function Payment (){
                  <tr>
                                 <td className = 'payment-product-body'>
                                     <img src = {productImage} alt = 'anh ao' className='payment-product-img'/>
-                                    <div>{item.title}</div>
+                                    <div>ÁO THUN TRƠN ĐEN TRẮNG BASIC NAM NỮ CỔ TRÒN BAO MỊN</div>
                                 </td>
                                 <td className='payment-product-singlecol'>Loại: Purple,L</td>
                                 <td className='payment-product-singlecol payment-number'>{formatPrice(item.total_price/item.quantity)}</td>
@@ -43,6 +43,25 @@ function Payment (){
 
     function handleSubmit(e){
         e.preventDefault();
+        const postBill = async () => {
+            try {
+                const res = await billAPI.postBill({
+                    product_money : totalCost,
+                    details : products.map((item)=> {
+                        return {
+                            quantity : item.quantity,
+                            product_detail_id : item.product_detail_id,
+                            total_price : item.total_price
+                        }
+                    }) 
+                })
+                console.log(res)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        postBill();
         toast.success('Mua hàng thành công', {
             position: "top-center",
             autoClose: 5000,
@@ -54,7 +73,7 @@ function Payment (){
             theme: "colored",
             });
         setTimeout(()=> {
-            navigate('/')
+            navigate('/homepage')
         },3000)
     }
 

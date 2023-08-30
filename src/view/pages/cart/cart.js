@@ -24,13 +24,16 @@ function Cart() {
             try {
                 const res = await cartApi.getCart();
                 // setCart(res.data.cart)
-                setCart(res.data.cart.filter((item)=> item.deleteAt == null))
+                console.log(res.data.cart)
+                setCart(res.data.cart.filter ((item)=> item.deletedAt === null))
             }
             catch(err) {
                 console.log(err)
             }
         }
         getCart()
+        option = 0;
+        newArrays = []
     }, [])
 
     const handleDecrease = (id, quantity) => {
@@ -47,7 +50,7 @@ function Cart() {
                 quantity : item.quantity
             } : {}
         })
-        update(params)
+        // update(params)
     }
     const handleIncrease = (id, quantity) => {
         setCart(cart => 
@@ -62,7 +65,7 @@ function Cart() {
                 quantity : item.quantity
             } : {}
         })
-        update(params)
+        // update(params)
     }
 
     const update = async (params) => {
