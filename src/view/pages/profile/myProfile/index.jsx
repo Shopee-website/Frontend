@@ -1,15 +1,29 @@
-import React, { useState } from "react";
-import "./MyProfile.scss";
-import { Button, Checkbox, Form, Input, DatePicker } from "antd";
+import React, { useState, useEffect } from "react";
+import "./myProfile.scss";
+import { Button, Form, Input, DatePicker } from "antd";
 import { Radio } from "antd";
 
+import userApi from "api/userApi";
+
 export const MyProfile = () => {
-  const [value, setValue] = useState("male");
+  const [value, setValue] = useState("Male");
+  const [profile, setProfile] = useState("");
+
+  useEffect(() => {
+    userApi
+      .getUserProfile()
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        setProfile(data.profile);
+      });
+  }, []);
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+
   return (
     <div className="my_profile__content">
       <div className="my_profile__content__header">
@@ -35,37 +49,36 @@ export const MyProfile = () => {
             autoComplete="off"
           >
             <Form.Item label="Tên" name="name" defaultValue="phu2k3">
-              <Input />
+              <Input defaultValue={profile && profile.name} />
             </Form.Item>
-
             <Form.Item label="Email" name="email">
               <Input
                 type="password"
-                placeholder="phu2k3@gmail.com"
+                placeholder="Your email"
                 outline="none"
+                defaultValue={profile && profile.email}
               />
             </Form.Item>
-
             <Form.Item label="Số điện thoại" name="telephone">
-              <Input outline="none" value={"012345678"} />
+              <Input
+                outline="none"
+                defaultValue={profile && profile.telephone}
+              />
             </Form.Item>
-
             <Form.Item label="Địa chỉ" name="address">
-              <Input type="password" value={"Dong anh"} />
+              <Input type="text" defaulValue={profile && profile.address} />
             </Form.Item>
 
             <Form.Item label="Giới tính" name="gender">
               <Radio.Group onChange={onChange} value={value}>
-                <Radio value={"male"}>male</Radio>
-                <Radio value={"female"}>female</Radio>
-                <Radio value={"other"}>other</Radio>
+                <Radio value={"Male"}>Male</Radio>
+                <Radio value={"Female"}>Female</Radio>
+                <Radio value={"Other"}>Other</Radio>
               </Radio.Group>
             </Form.Item>
-
             <Form.Item label="Ngày sinh" name="birthday">
-              <DatePicker />
+              <DatePicker defaultValue={profile && profile.birthday} />
             </Form.Item>
-
             <Form.Item
               wrapperCol={{
                 offset: 8,
@@ -86,7 +99,7 @@ export const MyProfile = () => {
         <div className="my_profile__content__body__right">
           <div className="my_profile__content__body__right__wrapper">
             <div className="my_profile__content__body__right__img">
-              <img src="	https://down-vn.img.susercontent.com/file/vn-11134226-7r98o-lkq0ckyjl3tc90" />
+              <img src={profile.avatar_url} alt="avatar" />
             </div>
             <button>Chọn ảnh</button>
           </div>

@@ -1,25 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-import "./Profile.scss";
-import { MyProfile } from "./myProfile";
+import "./profile.scss";
+import userApi from "api/userApi";
 
 function Profile() {
+  const [profile, setProfile] = useState("");
   const location = useLocation();
 
+  useEffect(() => {
+    userApi
+      .getUserProfile()
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        setProfile(data.profile);
+      });
+  }, []);
+
+  console.log(profile);
   return (
     <div className="profile__main">
       <div className="profile__layout">
         <div className="profile__navbar">
           <div className="profile__navbar__header">
             <div className="profile__navbar__header__avatar">
-              <img src="https://down-vn.img.susercontent.com/file/vn-11134226-7r98o-lkq0ckyjl3tc90_tn" />
+              <img src={profile.avatar_url} alt="avatar" />
             </div>
             <div className="profile__navbar__header__infor">
-              <div className="profile__navbar__header__infor__name">ducphu</div>
+              <div className="profile__navbar__header__infor__name">
+                {profile && profile.name}
+              </div>
               <div className="profile__navbar__header__infor__edit">
                 <FontAwesomeIcon icon={faPen} />
                 <span>Sửa hồ sơ</span>
@@ -41,11 +56,9 @@ function Profile() {
                 <div className="profile__navbar__body__item__icon"></div>
                 <div className="profile__navbar__body__text">
                   <Link
-                    to="/profile/my_profile"
+                    to="/profile/my-profile"
                     style={{
-                      color: location.pathname.includes(
-                        "/profile" || "/profile/my_profile"
-                      )
+                      color: location.pathname.includes("/profile/my-profile")
                         ? "red"
                         : "black",
                     }}
@@ -57,7 +70,16 @@ function Profile() {
               <li className="profile__navbar__body__item">
                 <div className="profile__navbar__body__item__icon"></div>
                 <div className="profile__navbar__body__text">
-                  <span>Ngân hàng</span>
+                  <Link
+                    to="/profile/my-order"
+                    style={{
+                      color: location.pathname.includes("/profile/my-order")
+                        ? "red"
+                        : "black",
+                    }}
+                  >
+                    <span>Đơn hàng</span>
+                  </Link>
                 </div>
               </li>
               <li className="profile__navbar__body__item">
