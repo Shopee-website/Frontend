@@ -14,9 +14,8 @@ function FlashSale(){
 
   useEffect(()=> {
       const fetchProducts = async () => {
-          const params = {_limit: 30, _page: 3}
-          const productList = await productApi.getAllProduct(params);
-          setProducts(productList.data);
+          const productList = await productApi.getAllProduct();
+          setProducts(productList.data.rows);
          
       }
       fetchProducts();
@@ -42,11 +41,10 @@ function FlashSale(){
                           return (
                           <Link key = {post.id} to={`/product-view/${post.id}`}>
                             <li>
-                                {console.log(post)}
                             <FlashSaleProduct
-                                imageURL = {post.images[0]}
-                                name = {post.name}
-                                price = {'$' + post.salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                imageURL = { post.images && post.images.length > 0 && post.images[0].image || ''}
+                                name = {post.product_name}
+                                price = { post.Saleprice && '$' + post.Saleprice || '0đ'}
                             />
                             </li>
                               

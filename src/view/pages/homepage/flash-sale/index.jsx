@@ -22,17 +22,17 @@ function FlashSaleList (props) {
                   </Col>
                 </Row>
                 <Row>
-                      {products.slice(15,21).map(post => {
+                      {products.slice(5,11).map(post => {
                           return (
                             <Col  key = {post.id} span={4} className="home-page-main-content_flash-sale_product" >
                               <Link to={'/flash-sale'}>
                                 <Item
-                                  imageURL={post.images[0]}
+                                  imageURL={post.images && post.images[0].image || ''}
                                   width='170px'
                                   height='170px'
                                 />
                                 <div className='flash-sale_product_info'>
-                                  <div className='flash-sale_product_info_price'><p>{"$"+post.originalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p></div>
+                                  <div className='flash-sale_product_info_price'><p>{"$"+post.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p></div>
                                   <div className='flash-sale_product_info_sold'>
                                     <div className='flash-sale_product_info_sold_status'>Đang bán chạy</div>
                                     <div className='flash-sale_product_info_sold_visual' style={{borderRadius:' 8px 0px 0px 8px'}}></div>

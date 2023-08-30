@@ -1,4 +1,4 @@
-import { axiosClient2 } from "./axiosClient";
+import axiosClient from "./axiosClient";
 
 const userApi = {
   // getAllCategory(params){
@@ -7,8 +7,8 @@ const userApi = {
   // },
 
   getAllUser(params) {
-    const url = "/admin/all-user";
-    return axiosClient2.get(url, { params });
+    const url = "api/admin/all-user";
+    return axiosClient.get(url, { params });
   },
 
   // getCategoryByID(categoryID){

@@ -29,6 +29,7 @@ function AllRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to={"/homepage"} />} />
+
       <Route element={<GuestRoute />}>
         <Route
           path="/login/"
@@ -65,7 +66,6 @@ function AllRoutes() {
         />
 
         <Route path="/cart/" element={<Cart />} />
-        <Route path="/admin/" element={<Admin />} />
         <Route path="/profile" element={<MainLayout component={Profile} />}>
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/profile/my-profile" element={<MyProfile />} />
@@ -73,31 +73,29 @@ function AllRoutes() {
         </Route>
         <Route path="/payment/" element={<Payment />} />
       </Route>
-      {/*             
-            <Route
-                element={<AdminRoute  />}
-            >
-                <Route 
-                    path="/homepage" 
-                    element={<MainLayout component={HomePage} />}/>
-                <Route 
-                    path="/product-view/:name/:productId" 
-                    element={<ProductView />} />
-                <Route 
-                    path="/category-view/:name/:categoryId" 
-                    element={<MainLayout component={CategoryView} />}/>
-                <Route 
-                    path="/flash-sale/" 
-                    element={<MainLayout component={FlashSale} />}/>
-                <Route 
-                    path="/admin/" 
-                    element={<Admin />}/>    
-                <Route path="/profile" element={<MainLayout component={Profile} />}>
-                    <Route path="/profile" element={<MyProfile />} />
-                    <Route path="/profile/my_profile" element={<MyProfile />} />
-                </Route>
 
-            </Route> */}
+      <Route element={<AdminRoute />}>
+        <Route path="/admin/" element={<Admin />} />
+
+        <Route path="/homepage" element={<MainLayout component={HomePage} />} />
+        <Route
+          path="/product-view/:name/:productId"
+          element={<ProductView />}
+        />
+        <Route
+          path="/category-view/:name/:categoryId"
+          element={<MainLayout component={CategoryView} />}
+        />
+        <Route
+          path="/flash-sale/"
+          element={<MainLayout component={FlashSale} />}
+        />
+
+        <Route path="/profile" element={<MainLayout component={Profile} />}>
+          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/profile/my_profile" element={<MyProfile />} />
+        </Route>
+      </Route>
     </Routes>
   );
 }
