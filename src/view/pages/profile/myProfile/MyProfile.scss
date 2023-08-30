@@ -82,3 +82,36 @@
     
     }
 }
+
+.input__flex {
+    padding-left: 30px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    label {
+        width: 125px;
+
+    }
+
+    input {
+        margin-left: 10px;
+    }
+
+}
+
+.input__flex__date {
+    display: flex;
+    padding-left: 30px;
+    margin-bottom: 30px;
+
+    label {
+        width: 100px;
+    }
+
+    div {
+        margin-left: 10px;
+    }
+
+}
