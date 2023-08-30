@@ -15,9 +15,5 @@ const userApi = {
   //     const url = `/categories/${categoryID}`;
   //     return axiosClient.get(url)
   // },
-  getUserProfile() {
-    const url = "/user/profile";
-    return axiosClient2.get(url);
-  },
 };
 export default userApi;

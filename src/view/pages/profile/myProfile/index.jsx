@@ -3,15 +3,15 @@ import "./myProfile.scss";
 import { Button, Form, Input, DatePicker } from "antd";
 import { Radio } from "antd";
 
-import userApi from "api/userApi";
+import userInfoAPI from "api/userInfoAPI";
 
 export const MyProfile = () => {
   const [value, setValue] = useState("Male");
   const [profile, setProfile] = useState("");
 
   useEffect(() => {
-    userApi
-      .getUserProfile()
+    userInfoAPI
+      .getInfo()
       .then((res) => {
         return res.data;
       })
@@ -23,7 +23,6 @@ export const MyProfile = () => {
   const onChange = (e) => {
     setValue(e.target.value);
   };
-
   return (
     <div className="my_profile__content">
       <div className="my_profile__content__header">
@@ -48,12 +47,11 @@ export const MyProfile = () => {
             }}
             autoComplete="off"
           >
-            <Form.Item label="Tên" name="name" defaultValue="phu2k3">
+            <Form.Item label="Tên" name="name">
               <Input defaultValue={profile && profile.name} />
             </Form.Item>
             <Form.Item label="Email" name="email">
               <Input
-                type="password"
                 placeholder="Your email"
                 outline="none"
                 defaultValue={profile && profile.email}
@@ -66,11 +64,14 @@ export const MyProfile = () => {
               />
             </Form.Item>
             <Form.Item label="Địa chỉ" name="address">
-              <Input type="text" defaulValue={profile && profile.address} />
+              <Input type="text" defaultValue={profile && profile.address} />
             </Form.Item>
 
             <Form.Item label="Giới tính" name="gender">
-              <Radio.Group onChange={onChange} value={value}>
+              <Radio.Group
+                defaultValue={profile && profile.gender}
+                onChange={onChange}
+              >
                 <Radio value={"Male"}>Male</Radio>
                 <Radio value={"Female"}>Female</Radio>
                 <Radio value={"Other"}>Other</Radio>
@@ -99,7 +100,10 @@ export const MyProfile = () => {
         <div className="my_profile__content__body__right">
           <div className="my_profile__content__body__right__wrapper">
             <div className="my_profile__content__body__right__img">
-              <img src={profile.avatar_url} alt="avatar" />
+              <img
+                src="https://down-vn.img.susercontent.com/file/vn-11134226-7r98o-lkq0ckyjl3tc90_tn"
+                alt="avatar"
+              />
             </div>
             <button>Chọn ảnh</button>
           </div>

@@ -5,15 +5,15 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./profile.scss";
-import userApi from "api/userApi";
+import userInfoAPI from "api/userInfoAPI";
 
 function Profile() {
   const [profile, setProfile] = useState("");
   const location = useLocation();
 
   useEffect(() => {
-    userApi
-      .getUserProfile()
+    userInfoAPI
+      .getInfo()
       .then((res) => {
         return res.data;
       })
@@ -22,14 +22,16 @@ function Profile() {
       });
   }, []);
 
-  console.log(profile);
   return (
     <div className="profile__main">
       <div className="profile__layout">
         <div className="profile__navbar">
           <div className="profile__navbar__header">
             <div className="profile__navbar__header__avatar">
-              <img src={profile.avatar_url} alt="avatar" />
+              <img
+                src="https://down-vn.img.susercontent.com/file/vn-11134226-7r98o-lkq0ckyjl3tc90_tn"
+                alt="avatar"
+              />
             </div>
             <div className="profile__navbar__header__infor">
               <div className="profile__navbar__header__infor__name">
