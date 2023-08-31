@@ -9,12 +9,12 @@ function Banners () {
     return (
         <>
             <div className="home-page_banners_images">
-                <div className="home-page_banners_images_main">
+                <div className="home-page_banners_images_main" style={{margin: '0'}}>
                   <Carousel autoplay >
                   <Banner
                     imageURL = "https://cf.shopee.vn/file/vn-50009109-a4d6bd62a56c559201c98825afb6dc49_xxhdpi"
-                    width = '796.66px'
-                    height = '235.01px'
+                    width = '16/9 * 235 + 1'
+                    height = '235px'
                   />
                   <Banner
                     imageURL = "https://cf.shopee.vn/file/vn-50009109-a4ace3dc6da2d9973c30439f6d606425_xxhdpi"

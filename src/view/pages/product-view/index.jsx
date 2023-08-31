@@ -173,7 +173,7 @@ function ProductInfo () {
 
                             <span className='pro_detail-realprice'>
                             {   
-                                formatPrice(product.saleprice)
+                                formatPrice(product.price)
                                 }</span> 
                             <span className='pro_detail-sale'>40% giảm</span>
                         </div>

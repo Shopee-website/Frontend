@@ -25,9 +25,9 @@ function FlashSaleProduct (props) {
                         </div>
                         <div className="product-sale-content_buy">
                             <div className='product-sale-content_buy_price'>
-                                <p className='product-sale-content_buy_originPrice'>đ {props.price + 0.3 * props.price} </p>
+                                <p className='product-sale-content_buy_originPrice'>đ {props.price} </p>
                                 <div className='product-sale-content_buy_line'></div>
-                                <p>{props.price}</p>
+                                <p>{props.saleprice}</p>
                             </div>
                             <div className='product-sale-content_buy_buybtn'>
                                 Mua ngay

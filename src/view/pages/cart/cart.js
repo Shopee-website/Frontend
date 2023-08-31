@@ -1,7 +1,7 @@
 
 import Footer from '../../../components/footer'
 import './cart.scss'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import shopeeLogo from '../../../assets/images/logo-shopee.png'
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -112,11 +112,12 @@ function Cart() {
     }
     
     const navigate = useNavigate()
+
     function HandleClick(){
         option = 1;
-        setInterval(()=> {
+        setTimeout(()=> {
             navigate('/payment')
-        }, 3000)
+        }, 500)
 
     }
 
@@ -125,7 +126,9 @@ function Cart() {
         <div className = 'cart-container'>
             <div className = 'cart-header'>
                 <div className='cart-header-logo'>
+                <Link to={'/homepage'} >
                     <img src = {shopeeLogo} alt = 'anh logo shopee' className='cart-header-logo_img'/>
+                </Link>
                     <div className='cart-header-line'></div>
                     <div className='cart-header-title'>GIỎ HÀNG</div>
                 </div>  

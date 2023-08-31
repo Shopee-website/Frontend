@@ -24,7 +24,7 @@ function Item (props){
         <div className="item-wrapper">
             <div className="item-image" style={itemStyle}></div>
             <div className="item-name" style={textStyle} >
-                <p style={textColor} className="item-name_text">{props.itemName}</p>
+                {props.itemName !== '' && <p style={textColor} className="item-name_text">{props.itemName}</p>}
             </div>
         </div>
     );

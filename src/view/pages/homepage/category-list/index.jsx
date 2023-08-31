@@ -22,7 +22,7 @@ function CategoryList (props) {
                                     itemName={info.name} 
                                     width='88px'
                                     height='84px'
-                                    textSize = '14pt'
+                                    textSize = '14px'
                                     textHeight = '40px'
                                     textWidth = '110px'
                                   />

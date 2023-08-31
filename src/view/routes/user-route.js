@@ -5,14 +5,13 @@ import useAuth from 'hooks/useAuth'
 const AuthenticatedRoute = () => {
     const { user } = useAuth()
 
-    if (user !== 'null') {
+    if (user !== 'null' && user.isAdmin === false ) {
         return <Outlet />
-        // return rest.acceptedRoles.includes(user.role) ? (
-        //     <Outlet />
-        // ) : (
-        //     <Navigate to="/404" />
-        // )
     } else {
+
+        if(user.isAdmin) {
+        return <Navigate to={'/admin'} />
+        }
         return <Navigate to="/login" />
     }
 }

@@ -12,16 +12,15 @@ function FlashSale(){
   const [products, setProducts] = useState([]);
  
 
-  useEffect(()=> {
+    useEffect(()=> {
       const fetchProducts = async () => {
           const productList = await productApi.getAllProduct();
           setProducts(productList.data.rows);
-         
       }
       fetchProducts();
 
 
-  }, [])
+    }, [])
     return (
         <div className="flash-sale-wrapper">
             <div className="flash-sale_banner">
@@ -44,7 +43,8 @@ function FlashSale(){
                             <FlashSaleProduct
                                 imageURL = { post.images && post.images.length > 0 && post.images[0].image || ''}
                                 name = {post.product_name}
-                                price = { post.Saleprice && '$' + post.Saleprice || '0đ'}
+                                saleprice = { post.salePrice && '$' + post.salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") || '0đ'}
+                                price = {post.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                             />
                             </li>
                               
