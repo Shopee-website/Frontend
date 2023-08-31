@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import {
     FacebookOutlined, 
@@ -14,7 +14,7 @@ import { Input, Space } from 'antd';
 import SearchResult from "./search-result";
 import { LogoShopeeIcon } from "components/icon";
 import useAuth from 'hooks/useAuth'
-import auth from "api/auth";
+import productApi from "api/productAPI";
 const { Search } = Input;
 
 const suffix = (
@@ -26,17 +26,37 @@ const suffix = (
     />
   );
 
-//   const onSearch = (value) => console.log(value);
-
 
 function Header(props) {
 
+    const [results, setResults] = useState([]);
+    const [search, setSearch] = useState();
 
-    const { user } = useAuth();
+
     const handleChangeSearch = (e) => {
-        // console.log(e.target.value);
+        setSearch(e.target.value);
+        console.log(e.target.value);
     };
 
+
+    useEffect(()=> {
+        const fetchProducts = async () => {
+        const params = {
+            txt_search: search
+        }
+        const resultList = await productApi.getAllProduct(params);
+        setResults(resultList.data.rows);
+        console.log(resultList.data.rows);
+    }
+       fetchProducts();
+
+    }, [search])
+
+
+  
+
+    const { user } = useAuth();
+    
 
     const styleHeader = {
         position: `${props.position || 'fixed'}`,
@@ -46,10 +66,8 @@ function Header(props) {
     const nagivate = useNavigate()
 
     function signout (){
-        // localStorage.removeItem('token')
         localStorage.setItem('token', null)
         localStorage.setItem('user', null)
-        // localStorage.removeItem('user')
         nagivate('/login')
     }
     return (
@@ -119,9 +137,10 @@ function Header(props) {
                                 suffix={suffix}
                                 // onSearch={onSearch}
                                 onChange={handleChangeSearch}
+                                value={search}
                             />
                         </Space>
-                            {/* <SearchResult   /> */}
+                            {search && results && results.length > 0 && <SearchResult result = {results}  />}
                         </div>
                         <div className="header-shop_main_search_recommend">
                             <ul>
