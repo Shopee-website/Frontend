@@ -11,15 +11,15 @@
 }
 .product{
     
-    &-image {
-        &_offer{
+    // &-image {
+    //     &_offer{
 
-        }
-        &_sticky {
+    //     }
+    //     &_sticky {
 
-        }
+    //     }
 
-    }
+    // }
     &-title {
         display: flex;
         flex-direction: column;
@@ -28,9 +28,9 @@
         padding: 8px;
         &_name {
             height: 26px;
-            color: #353232;
+            color: #474343;
             overflow: hidden;
-            font-size: 10pt;
+            font-size: 13px;
             line-height: 1;
         }
         &_discount {

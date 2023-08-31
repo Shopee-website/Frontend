@@ -4,17 +4,10 @@ import useAuth from 'hooks/useAuth'
 
 
 const GuestRoute = () => {
-    const { user, token } = useAuth()
 
-    if (user !== 'null' && token !== 'null') {
-
-        // user.isAdmin ? 
-        // <Navigate to={'/admin'} /> 
-        // :
-        <Navigate to={'/homepage'} />
-    }
-
-    return <Outlet />
+    const { user } = useAuth();
+    
+    return <Outlet /> 
 }
 
 GuestRoute.defaultProps = {

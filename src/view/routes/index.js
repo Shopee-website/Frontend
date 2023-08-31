@@ -79,24 +79,10 @@ function AllRoutes(){
             <Route
                 element={<AdminRoute  />}
             >
-                
                 <Route 
                     path="/admin/" 
                     element={<Admin />}/>   
                     
-                <Route 
-                    path="/homepage" 
-                    element={<MainLayout component={HomePage} />}/>
-                <Route 
-                    path="/product-view/:name/:productId" 
-                    element={<ProductView />} />
-                <Route 
-                    path="/category-view/:name/:categoryId" 
-                    element={<MainLayout component={CategoryView} />}/>
-                <Route 
-                    path="/flash-sale/" 
-                    element={<MainLayout component={FlashSale} />}/>
-                 
                 <Route path="/profile" element={<MainLayout component={Profile} />}>
                     <Route path="/profile" element={<MyProfile />} />
                     <Route path="/profile/my_profile" element={<MyProfile />} />

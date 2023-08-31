@@ -282,7 +282,7 @@ function ProductCategory(){
                                             imageURL={post.images && post.images.length > 0 && post.images[0].image || 'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lj0uezovoi6k2b_tn'}
                                             name={post.product_name}
                                             discount ="giảm 25k"
-                                            price={"$"+post.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                            price={"$"+post.price}
                                             height = "188px"
                                             width = '187.5px'
                                             sold={post.quan_sold}  

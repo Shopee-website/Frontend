@@ -42,19 +42,20 @@ function Payment (){
     const navigate = useNavigate()
 
     function handleSubmit(e){
-        e.preventDefault();
+        // e.preventDefault();
+        const bill = {
+            product_money : totalCost,
+            details : products.map((item)=> {
+                return {
+                    quantity : item.quantity,
+                    product_detail_id : item.product_detail_id,
+                    total_price : item.total_price
+                }
+            }) 
+        }
         const postBill = async () => {
             try {
-                const res = await billAPI.postBill({
-                    product_money : totalCost,
-                    details : products.map((item)=> {
-                        return {
-                            quantity : item.quantity,
-                            product_detail_id : item.product_detail_id,
-                            total_price : item.total_price
-                        }
-                    }) 
-                })
+                const res = await billAPI.postBill(bill)
                 console.log(res)
             }
             catch (err) {
@@ -85,7 +86,9 @@ function Payment (){
     return (
         <div className='payment-wrap'>
             <div className='payment-header'>
+                <Link to={'/homepage'} >
                 <img className='payment-header-logo' src = {shopee_logo} alt = 'logo'/>
+                </Link>
                 <div className='payment-header-line'></div>
                 <div className='payment-header-payment'>Thanh toán</div>
             </div>
