@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react'
 import shopee_logo from 'assets/images/logo-shopee.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocation, faQuestion, faIdCard, faCoins} from '@fortawesome/free-solid-svg-icons'
-import productImage from 'assets/images/product_detail1.jpg'
+// import productImage from 'assets/images/product_detail1.jpg'
 import Footer from 'components/footer'
 import axios from 'axios'
 import formatPrice from 'components/format-price'
@@ -21,15 +21,15 @@ function Payment (){
         setActive(e.target.id)
     }
     const products = option === 1 ? newArrays : []
-
+    // console.log(products)
 
     const arrProducts = products.map ((item , index)=> {
         return (
             <table className='payment-product-table'>
                  <tr>
                                 <td className = 'payment-product-body'>
-                                    <img src = {productImage} alt = 'anh ao' className='payment-product-img'/>
-                                    <div>ÁO THUN TRƠN ĐEN TRẮNG BASIC NAM NỮ CỔ TRÒN BAO MỊN</div>
+                                    <img src = {item.ProductDetail.Product.ProductImages[0].image} alt = 'anh ao' className='payment-product-img'/>
+                                    <div>{item.ProductDetail.Product.product_name}</div>
                                 </td>
                                 <td className='payment-product-singlecol'>Loại: Purple,L</td>
                                 <td className='payment-product-singlecol payment-number'>{formatPrice(item.total_price/item.quantity)}</td>

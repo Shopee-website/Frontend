@@ -24,7 +24,7 @@ function Cart() {
             try {
                 const res = await cartApi.getCart();
                 // setCart(res.data.cart)
-                console.log(res.data.cart)
+                // console.log(res.data.cart)
                 setCart(res.data.cart.filter ((item)=> item.deletedAt === null))
             }
             catch(err) {
@@ -167,8 +167,8 @@ function Cart() {
                                                         <td className='cart-product-col-special'>
                                                             <div className='cart-product-des'>
                                                                 <input type='checkbox' id = {cart.id} name = {cart.id}  className = 'cart-product-checkbox' onChange={event => handleChange(cart, event)}  />
-                                                                <img src = {img} alt= 'anh' className='cart-product-img'/>
-                                                                <h4 className='cart-product-header'>{cart.title}</h4>
+                                                                <img src = {cart.ProductDetail.Product.ProductImages[0].image} alt= 'anh' className='cart-product-img'/>
+                                                                <h4 className='cart-product-header'>{cart.ProductDetail.Product.product_name}</h4>
                                                             </div>
                                                         </td>
                                                         <td className='cart-product-category cart-product-col-single'>
