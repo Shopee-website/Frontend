@@ -13,6 +13,7 @@ import { useNavigate , Link} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import { newArrays, option } from '../cart/cart'
 import billAPI from 'api/billApi'
+import cartApi from 'api/cartAPI'
 function Payment (){
 
     const [active, setActive] = useState('')
@@ -63,6 +64,18 @@ function Payment (){
             }
         }
         postBill();
+        const deleteCart = async (id) =>{
+            try {
+                const res = await cartApi.deleteCart(id)
+                console.log(res)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        products.map((item) => {
+            deleteCart(item.id)
+        })
         toast.success('Mua hàng thành công', {
             position: "top-center",
             autoClose: 5000,
