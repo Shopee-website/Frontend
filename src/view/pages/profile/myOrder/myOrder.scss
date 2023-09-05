@@ -1,0 +1,111 @@
+$primary-color: #ff5722;
+$background-color: #f5f5f5;
+$border-color: #ddd;
+$text-color: #333;
+$footer-bg: #333;
+$footer-text-color: white;
+
+.my__order {
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  
+  .VYJdTQ {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    overflow: hidden;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #fff;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    justify-content: space-between;
+    padding: 0 15px 15px 0px;
+    font-size: 14px;
+
+    a {
+      flex: 1;
+      display: flex; /* Add display flex to center-align content */
+      align-items: center; /* Center-align vertically */
+      justify-content: center; /* Center-align horizontally */
+      padding: 10px 0;
+      text-decoration: none;
+      color: $text-color;
+      transition: color 0.3s;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+
+  .product {
+    display: flex;
+    align-items: flex-start; 
+    border: 1px solid #ddd;
+    padding: 10px 10px 20px 10px ;
+    background-color: white;
+  
+    .product__image {
+        flex: none; /* To prevent image from stretching */
+        margin-right: 10px;
+    }
+    
+    .product__image img {
+        width: 100px; /* Adjust as needed */
+        height: 100px; /* Adjust as needed */
+        object-fit: cover;
+    }
+    
+    .product__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Add space between items */
+        flex: 1; /* To fill the remaining space */
+
+        .product__status {
+            font-size: 15px;
+            padding: 5px 10px 0 0;
+            color: #ff5722;
+            align-self: flex-end;
+        }
+
+        .product__name {
+            padding: 15px 0 10px 0;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .product__category {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.7; /* Set the opacity for a faded effect */
+        }
+        .product__detail {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.7; /* Set the opacity for a faded effect */
+        }
+
+        .product__price {
+        font-size: 20px;
+        padding: 15px 10px 0 0;
+        color: #ff5722;
+        align-self: flex-end;
+        }
+    }
+  }
+  .no__product {
+    text-align: center;
+    font-size: 18px;
+    color: $text-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: #fff;
+  }
+}

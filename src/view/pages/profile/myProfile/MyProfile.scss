@@ -1,7 +1,7 @@
 .my_profile__content__header {
     height: 80px;
     border-bottom: 0.0625rem solid #efefef;
-    padding: 20px 0;
+    padding: 20px 0 0 20px;
 
     h1 {
         margin: 0;
@@ -49,10 +49,13 @@
             .my_profile__content__body__right__img {
                 border-radius: 50rem;
                 margin: 20px 0;
+                width: 150px;
+                height: 150px;
 
-    
                 img {
                     border-radius: 50rem;
+                    width: 100%;
+                    height: 100%;
                 }
     
             }
@@ -81,4 +84,37 @@
         }
     
     }
+}
+
+.input__flex {
+    padding-left: 30px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    label {
+        width: 125px;
+
+    }
+
+    input {
+        margin-left: 10px;
+    }
+
+}
+
+.input__flex__date {
+    display: flex;
+    padding-left: 30px;
+    margin-bottom: 30px;
+
+    label {
+        width: 100px;
+    }
+
+    div {
+        margin-left: 10px;
+    }
+
 }
