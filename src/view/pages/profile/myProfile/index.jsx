@@ -1,13 +1,29 @@
-import React, { useState } from "react";
-import "./MyProfile.scss";
-import { Button, Checkbox, Form, Input, DatePicker } from "antd";
+import React, { useState, useEffect } from "react";
+import "./myProfile.scss";
+import { Button, Form, Input, DatePicker } from "antd";
 import { Radio } from "antd";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import userInfoAPI from "api/userInfoAPI";
+dayjs.extend(customParseFormat);
+const dateFormat = "YYYY-MM-DD";
 
 export const MyProfile = () => {
-  const [value, setValue] = useState("male");
+  const [value, setValue] = useState("Male");
+  const [profile, setProfile] = useState("");
+
+  useEffect(() => {
+    userInfoAPI
+      .getInfo()
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        setProfile(data.profile);
+      });
+  }, []);
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
   return (
@@ -34,38 +50,92 @@ export const MyProfile = () => {
             }}
             autoComplete="off"
           >
-            <Form.Item label="Tên" name="name" defaultValue="phu2k3">
-              <Input />
-            </Form.Item>
-
-            <Form.Item label="Email" name="email">
+            {/* <Form.Item label="Tên" name="name"> */}
+            <div className="input__flex">
+              <label>Tên</label>
               <Input
-                type="password"
-                placeholder="phu2k3@gmail.com"
-                outline="none"
+                value={profile.name}
+                onChange={(e) => {
+                  setProfile((prev) => ({
+                    ...prev,
+                    name: e.target.value,
+                  }));
+                }}
               />
-            </Form.Item>
+            </div>
+            {/* </Form.Item> */}
+            <div className="input__flex">
+              <label>Email</label>
+              <Input
+                value={profile.email}
+                onChange={(e) => {
+                  setProfile((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }));
+                }}
+              />
+            </div>
 
-            <Form.Item label="Số điện thoại" name="telephone">
-              <Input outline="none" value={"012345678"} />
-            </Form.Item>
+            <div className="input__flex">
+              <label>Số điện thoại</label>
+              <Input
+                value={profile.telephone}
+                onChange={(e) => {
+                  setProfile((prev) => ({
+                    ...prev,
+                    telephone: e.target.value,
+                  }));
+                }}
+              />
+            </div>
 
-            <Form.Item label="Địa chỉ" name="address">
-              <Input type="password" value={"Dong anh"} />
-            </Form.Item>
+            <div className="input__flex">
+              <label>Địa chỉ</label>
+              <Input
+                value={profile.address}
+                onChange={(e) => {
+                  setProfile((prev) => ({
+                    ...prev,
+                    address: e.target.value,
+                  }));
+                }}
+              />
+            </div>
 
-            <Form.Item label="Giới tính" name="gender">
-              <Radio.Group onChange={onChange} value={value}>
-                <Radio value={"male"}>male</Radio>
-                <Radio value={"female"}>female</Radio>
-                <Radio value={"other"}>other</Radio>
+            <div className="input__flex">
+              <label>Gioi tinh</label>
+              <Radio.Group
+                value={profile.gender}
+                onChange={(e) => {
+                  setProfile((prev) => ({
+                    ...prev,
+                    gender: e.target.value,
+                  }));
+                }}
+                style={{ display: "flex" }}
+              >
+                <Radio value={"Male"}>Male</Radio>
+                <Radio value={"Female"}>Female</Radio>
+                <Radio value={"Other"}>Other</Radio>
               </Radio.Group>
-            </Form.Item>
+            </div>
 
-            <Form.Item label="Ngày sinh" name="birthday">
-              <DatePicker />
-            </Form.Item>
-
+            <div className="input__flex__date">
+              <label>Ngay sinh</label>
+              <DatePicker
+                value={dayjs(
+                  profile && profile.birthday.slice(0, 10),
+                  dateFormat
+                )}
+                onChange={(_, date) => {
+                  setProfile((prev) => ({
+                    ...prev,
+                    birthday: date,
+                  }));
+                }}
+              />
+            </div>
             <Form.Item
               wrapperCol={{
                 offset: 8,
@@ -86,7 +156,7 @@ export const MyProfile = () => {
         <div className="my_profile__content__body__right">
           <div className="my_profile__content__body__right__wrapper">
             <div className="my_profile__content__body__right__img">
-              <img src="	https://down-vn.img.susercontent.com/file/vn-11134226-7r98o-lkq0ckyjl3tc90" />
+              <img src={profile && profile.avatar_url} alt="avatar" />
             </div>
             <button>Chọn ảnh</button>
           </div>
