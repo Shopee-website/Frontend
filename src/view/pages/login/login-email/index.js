@@ -28,14 +28,10 @@ function Login_email() {
                 }
 
                 const response = await auth.login(values);
-                // console.log(response);
                 if(response.request.status === 200){
                     setToken(response.data.token)
-                    // alert(response.data.message)
                     localStorage.setItem('token',response.data.token)
                 } 
-                
-                
                 toast.success('Đăng nhập thành công, bạn sẽ chuyển sang trang chính', {
                     position: "top-center",
                     autoClose: 5000,
@@ -84,8 +80,10 @@ function Login_email() {
                         onChange = {(e)=>setEmail(e.target.value)}
                         autoComplete = "off"s
                         />
-
-                        { err && <p style = {{color : 'red', fontSize: '14px'}}>Email không tồn tại</p>}
+                        <div style={{height: '30px', display: 'flex', alignItems: 'center', marginLeft: '10px'}}>
+                             { err && <p style = {{color : 'red', fontSize: '14px'}}>Email không tồn tại</p>}
+                        </div>
+                       
 
                         <input type="password" name='password' placeholder='Mật khẩu' 
                         className='login-form-input' 
@@ -96,8 +94,10 @@ function Login_email() {
 
                         />
 
-                        {err1 && <p style = {{color : 'red', fontSize: '14px'}}>Mật khẩu sai</p>}
-
+                        <div style={{height: '30px', display: 'flex', alignItems: 'center', marginLeft: '10px'}}>
+                             {err1 && <p style = {{color : 'red', fontSize: '14px'}}>Mật khẩu sai</p>}
+                        </div>
+                        
                         <button className='login-form-btn'
                         >
                             ĐĂNG NHẬP

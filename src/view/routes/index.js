@@ -5,8 +5,9 @@ import LoadableComponent from "components/loadable-component";
 import RegisterLayout from "components/registerLayout/registerLayout";
 import { MyProfile} from "view/pages/profile/myProfile";
 import GuestRoute from "./guest-route";
-import AuthenticatedRoute from './user-route'
+import UserRoute from './user-route'
 import AdminRoute from "./admin-route";
+import PublicRoute from "./public-route";
 
 const Profile = LoadableComponent(() => import("view/pages/profile"));
 const HomePage = LoadableComponent(()=> import('view/pages/homepage'))
@@ -26,8 +27,11 @@ function AllRoutes(){
         <Routes>
             <Route path="/" element={<Navigate to={"/homepage"}/>}/>
             
-            <Route element={<GuestRoute />}>
-            <Route 
+            <Route element={<PublicRoute />}>
+                <Route 
+                    path="/homepage" 
+                    element={<MainLayout component={HomePage} />}/>
+                     <Route 
                     path="/login/" 
                     element={
                         <RegisterLayout>
@@ -41,18 +45,30 @@ function AllRoutes(){
                             <Register/>
                         </RegisterLayout>
                     }/>
+            </Route>
+
+            <Route element={<GuestRoute />}>
                 <Route 
-                    path="/homepage" 
-                    element={<MainLayout component={HomePage} />}/>
+                    path="/login/" 
+                    element={
+                        <RegisterLayout>
+                            <Login/>
+                        </RegisterLayout>
+                    }/>
+                <Route 
+                    path="/register/" 
+                    element={
+                        <RegisterLayout>
+                            <Register/>
+                        </RegisterLayout>
+                    }/>
+                
             </Route>
 
 
             <Route
-                element={<AuthenticatedRoute  />}
+                element={<UserRoute  />}
             >
-                <Route 
-                    path="/homepage" 
-                    element={<MainLayout component={HomePage} />}/>
                 <Route 
                     path="/product-view/:name/:productId" 
                     element={<ProductView />} />
@@ -62,7 +78,6 @@ function AllRoutes(){
                 <Route 
                     path="/flash-sale/" 
                     element={<MainLayout component={FlashSale} />}/>
-              
                 <Route 
                     path="/cart/" 
                     element={<Cart />}/>
@@ -82,12 +97,6 @@ function AllRoutes(){
                 <Route 
                     path="/admin/" 
                     element={<Admin />}/>   
-                    
-                <Route path="/profile" element={<MainLayout component={Profile} />}>
-                    <Route path="/profile" element={<MyProfile />} />
-                    <Route path="/profile/my_profile" element={<MyProfile />} />
-                </Route>
-
             </Route>
            
                
