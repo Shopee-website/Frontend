@@ -1,8 +1,10 @@
-import '../admin.scss'
+import './index.scss'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import formatPrice from 'components/format-price'
 import adminproductApi from 'api/adminproductAPI'
 import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
+import { useDropzone } from 'react-dropzone';
 
 
 
@@ -11,30 +13,79 @@ function AdminProduct (){
     
     const [editID, setEditID] = useState(-1)
     const [title, setTitle]= useState('')
-    const [category, setCategory]= useState('')
+    const [price, setPrice] = useState(0)
+    const [show, setShow] = useState(false)
+    // Handle File
+    const [files, setFiles] = useState([]);
 
+  const onDrop = acceptedFiles => {
+    setFiles([...files, ...acceptedFiles]);
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+    // Handle paging
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = product.slice(indexOfFirstItem, indexOfLastItem);
+  
+    // Tạo các nút phân trang
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(product.length / itemsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+  
+    // Xử lý thay đổi trang
+    const handlePageChange = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
+  
+    /// GET API
     useEffect (()=> {
-        axios.get('https://fakestoreapi.com/products')
-        .then (res => {
-        setProduct(res.data)
-        })
-        .catch(err => console.log(err));
+
+        const getAllProduct = async () =>{
+            try {
+                const res = await adminproductApi.getAllAdminProduct()
+                console.log(res.data.rows)
+                setProduct(res.data.rows.filter((item) => item.deletedAt === null))
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        getAllProduct()
     }, [])
 
+    ///  Remove a product from the list
 
     function removeProduct(id) {
         const newProducts = product.filter((item)=> item.id !== id);
         setProduct(newProducts)
+        const deleteProduct = async (id) => {
+            try {
+
+                const res = await adminproductApi.deleteAdminProduct(id);
+                console.log(res);
+            }
+            catch (err){
+                console.log(err);
+            }
+        }
+        deleteProduct(id);
     }
 
-     const arrProducts = product.map((item)=> (
+    // render the product 
+
+     const arrProducts = currentItems.map((item)=> (
             item.id === editID ? 
             <EditProduct item = {item} product = {product} setProduct = {setProduct}/>
             :
             <table className='admin-product-list'>
                 <tr key = {item.id}>
-                    <td className='admin-product-name'>{item.title}</td>
-                    <td className='admin-product-des'>{item.category}</td>
+                    <td className='admin-product-name'>{item.product_name}</td>
+                    <td className='admin-product-des'>{formatPrice(item.price)}</td>
                     <td className='admin-product-update'>
                         <button className='admin-product-btn'
                         onClick={()=>handleEdit(item.id)}
@@ -42,11 +93,15 @@ function AdminProduct (){
                         >Sửa</button>
                     </td>
                     <td className='admin-product-delete'>
-                        <button type='button' className='admin-product-btn' onClick={()=>removeProduct(item.id)}>Xóa</button>
+                        <button type='button' className='admin-product-btn' 
+                        onClick={()=>removeProduct(item.id)}
+                        >Xóa</button>
                     </td>
                 </tr>
             </table>
         ))
+
+        /// Update the product
 
     function handleEdit (id){
         setEditID(id)
@@ -55,14 +110,14 @@ function AdminProduct (){
         function handleTitle(e){
             const title = e.target.value;
             const updatedData = product.map((d)=> 
-                d.id === item.id ? {...d, title : title } : d
+                d.id === item.id ? {...d, product_name : title } : d
             )
             setProduct(updatedData)
         }
-        function handleCategory(e){
-            const category = e.target.value;
+        function handlePrice(e){
+            const price = e.target.value;
             const updatedData = product.map((d)=> 
-                d.id === item.id ? {...d, category: category } : d
+                d.id === item.id ? {...d, price : price } : d
             )
             setProduct(updatedData)
         }
@@ -73,15 +128,15 @@ function AdminProduct (){
                     <td className='admin-product-name'>
                         <input type = 'text'  name = 'title'
                         className='admin-product-update-inp'
-                        value = {item.title} 
+                        value = {item.product_name} 
                         onChange = {handleTitle}                     
                         />
                     </td>
                     <td className='admin-product-des'>
-                        <input type = 'text'   name = 'category'  
+                        <input type = 'text'   name = 'price'  
                          className='admin-product-update-inp'
-                        value = {item.category}    
-                        onChange = {handleCategory}  
+                        value = {item.price}    
+                        onChange = {handlePrice}  
                         />
                     </td>
                     <td className='admin-product-update'>
@@ -98,52 +153,97 @@ function AdminProduct (){
     }
     function handleValues(e){
         e.preventDefault();
+        const title =  e.target.elements.title.value;
+        const price =  e.target.elements.price.value;
+        const id = product.length + 1;
+        const newProduct = {
+            id : id,
+            product_name : title,
+            price : parseInt(price)
+        }
+        console.log(newProduct);
+        
         setTitle('')
-       setCategory('')
-       const title =  e.target.elements.title.value;
-       const category =  e.target.elements.category.value;
-       const id = product.length + 1;
-       const newProduct = {
-        id : id,
-        title : title,
-        category : category
-       }
+        setPrice(0)
        setProduct(prev => prev.concat(newProduct))
     }
 
     function handleUpdate (event){
         event.preventDefault();
         const title = event.target.elements.title.value
-        const category = event.target.elements.category.value
+        const price = event.target.elements.price.value
         const updatedData = product.map(d => 
-            d.id === editID ? {...d, title : title,  category : category} :d    
+            d.id === editID ? {...d, product_name : title,  price : price} :d    
         )
+        const update = async (id) => {
+            try {
+                const res = await adminproductApi.updateAdminProduct(id);
+                console.log(res)
+            }
+            catch (err){
+                console.log(err)
+            }
+        }
+        update(editID)
         setEditID(-1)
         setProduct(updatedData)
-
     }
    
-
+    // add a product
+    function handleAdd(e) {
+        e.preventDefault();
+        setShow(!show)
+    }
     
 
+    
     return (
         <div className='admin-product-wrap'>
                             <div className='admin-product-add'>
-                                <form onSubmit={handleValues}>
-                                    <input type = 'text' placeholder = 'Nhập tên sản phẩm' 
-                                    className='admin-product-add-name' name = 'title'
-                                    onChange={(e)=>setTitle(e.target.value)}
-                                    value = {title}
-                                    />
-                                    <input type = 'text' placeholder = 'Nhập mô tả' name = 'category'
-                                    className='admin-product-add-des'
-                                    value = {category}
-                                    onChange={(e)=>setCategory(e.target.value)}
-                                    />
-                                    <button className='admin-product-add-btn'>Thêm</button>
+                                <button className='admin-product-add-button' 
+                                onClick={handleAdd}
+                                >Thêm sản phẩm</button>
+                                <form 
+                                onSubmit={handleValues}
+                                >
+                                    {show ?
+                                        <>
+                                        <label for = "title" className='admin-product-label'>Nhập tên sản phẩm</label>
+                                        <input type = 'text' placeholder = 'Nhập tên sản phẩm' 
+                                        className='admin-product-add-name' name = 'title'
+                                        onChange={(e)=>setTitle(e.target.value)}
+                                        value = {title}
+                                        />
+                                        <label for = "price" className='admin-product-label'>Nhập số tiền</label>
+                                        <input type='number' placeholder='Nhập số tiền (đơn vị đđ)' name = 'price'
+                                        className='admin-product-add-price'
+                                        onChange={(e)=>setPrice(e.target.value)}
+                                        value = {price}
+                                        /><br/>
+                                        <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''}`}>
+                                            <input {...getInputProps()} />
+                                            {isDragActive ? (
+                                            <p>Kéo và thả các tệp tin vào đây ...</p>
+                                            ) : (
+                                            <p>Kéo và thả hoặc nhấp để chọn các tệp tin</p>
+                                            )}
+                                            <ul>
+                                            {files.map((file, index) => (
+                                                <li key={index}>{file.name}</li>
+                                            ))}
+                                            </ul>
+                                        </div>
+                                        <br/>
+                                        <button className='admin-product-add-btn'
+                                        >Thêm</button>
+                                        </> : <div></div>
+                                    }
+                                    
                                 </form> 
                         </div>
-                        <form onSubmit={handleUpdate}>
+                        <form 
+                        onSubmit={handleUpdate}
+                        >
 
                             <table className='admin-product-list'>
                             <tr>
@@ -155,6 +255,15 @@ function AdminProduct (){
                             </table>
                             {arrProducts}
                         </form>
+                        <ul className='admin-product-pagination'>
+                            {pageNumbers.map((pageNumber) => (
+                            <li key={pageNumber} className='admin-product-pagination-list'>
+                                <button onClick={() => handlePageChange(pageNumber)}
+                                    className='admin-product-pagination-btn'
+                                >{pageNumber}</button>
+                            </li>
+                            ))}
+                        </ul>
 
                         </div>
     )

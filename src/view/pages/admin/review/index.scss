@@ -1,0 +1,35 @@
+.admin-review-header {
+    font-size: 20px;
+    font-weight: lighter;
+    color : #ee4d2d;
+}
+
+.admin-review-table {
+    width : 100%;
+    margin: 16px;
+}
+.admin-review-table td, th {
+    padding : 8px;
+    border: 1px solid rgba(0,0,0,0.04)
+}
+.admin-review-table th {
+    font-size: 18px;
+    font-weight: lighter;
+}
+.admin-review-table td {
+    font-size: 15px;
+    color : #888;
+}
+.admin-review-product_name {
+    width : 40%;
+}
+.admin-review-user-name {
+    width : 20%;
+}
+.admin-review-star {
+    width : 20%;
+    text-align: center;
+}
+.admin-review-content {
+    width : 20%;
+}
