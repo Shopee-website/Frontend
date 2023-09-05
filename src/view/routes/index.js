@@ -18,6 +18,7 @@ const Login = LoadableComponent(()=> import('view/pages/login/login.js'))
 const Register = LoadableComponent(()=> import('view/pages/register/register.js'))
 const Cart = LoadableComponent(()=> import('view/pages/cart/cart.js'))
 const Admin= LoadableComponent(()=> import('view/pages/admin/admin.js'))
+const Admin2= LoadableComponent(()=> import('view/pages/admin'))
 const Payment = LoadableComponent(()=> import('view/pages/payment'));
 
 
@@ -97,6 +98,9 @@ function AllRoutes(){
                 <Route 
                     path="/admin/" 
                     element={<Admin />}/>   
+                <Route 
+                    path="/admin2/" 
+                    element={<Admin2 />}/>   
             </Route>
            
                
