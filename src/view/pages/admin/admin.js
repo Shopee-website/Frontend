@@ -6,7 +6,7 @@ import {useState, useEffect} from 'react'
 import AdminProduct from './product'
 import User from './user'
 import { Link } from 'react-router-dom'
-
+import AdminReview from './review'
 function Admin() {
 
     const [show, setShow] = useState(1);
@@ -73,7 +73,7 @@ function Admin() {
                         <User/>
                     </div>
                     <div className= {show === 4 ? 'admin-review active' : 'admin-review'}>
-                        
+                        <AdminReview/>
                     </div>
                     <div className= {show === 5 ? 'admin-money active' : 'admin-money'}>
                        
