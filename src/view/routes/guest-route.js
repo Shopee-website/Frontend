@@ -4,14 +4,14 @@ import useAuth from 'hooks/useAuth'
 
 
 const GuestRoute = () => {
+    const {user} = useAuth();
 
-    const { user } = useAuth();
-    
-    return <Outlet /> 
-}
+    if(user === 'null') {
+        return <Outlet />
 
-GuestRoute.defaultProps = {
-    location: {},
+    } else {
+            return <Navigate to={'/homepage'} />
+    }
 }
 
 export default GuestRoute

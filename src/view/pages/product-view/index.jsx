@@ -23,6 +23,10 @@ let productBuy ;
 let select ;
 
 function ProductInfo () {
+    useEffect(()=> {
+        window.scrollTo(0,0)
+    }, [])
+
     const navigate = useNavigate()
     const  {productId}  = useParams();
     

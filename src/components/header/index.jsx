@@ -102,6 +102,7 @@ function Header(props) {
                                     }
                                     
                                 </li>
+                               { user.isAdmin && <li><Link to={'/admin'}><a href="/">Admin Page</a></Link></li>}
                                 <li><a href = "" onClick={signout}>Đăng xuất</a></li>
                                 </>
                                 :
