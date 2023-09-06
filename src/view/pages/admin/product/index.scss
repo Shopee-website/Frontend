@@ -43,7 +43,7 @@
 .admin-product-btn:hover {
     cursor: pointer;
 }
-.admin-product-add-name , .admin-product-add-des, .admin-product-add-image, .admin-product-add-price {
+.admin-product-add-name , .admin-product-add-des, .admin-product-add-image, .admin-product-add-price, .admin-product-add-quantity {
     padding : 6px 16px;
     min-width: 30%;
 }
@@ -51,10 +51,10 @@
     border : none;
     background-color:  rgb(235, 124, 143);
     color : white;
-    padding : 12px 20px;
+    padding : 8px 16px;
     border-radius: 6px;
     font-size: 16px;
-    margin-top: 16px;
+    margin-top: 10px;
 }
 .admin-product-add-btn:hover, .admin-product-load:hover{
     cursor: pointer;
@@ -71,9 +71,9 @@
     border : none;
     background-color:  rgb(235, 124, 143);
     color : white;
-    padding : 12px 20px;
+    padding : 10px 16px;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 15px;
 }
 .admin-product-load {
     padding : 8px 20px;
@@ -112,4 +112,17 @@
 }
 .admin-product-add-image {
     margin-top: 12px;
+}
+.admin-product-img-des {
+    margin: 12px;
+    font-size: 15px;
+}
+.admin-product-img-list {
+    list-style: none;
+    font-size: 14px;
+    margin-left: 12px;
+}
+.admin-product-img-item {
+    color : #0084ff;
+    margin: 4px;
 }
