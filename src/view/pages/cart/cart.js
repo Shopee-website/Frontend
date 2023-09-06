@@ -165,6 +165,7 @@ function Cart() {
                     <div className = 'cart-product-item'>
                         { cart && 
                             cart.map((cart)=> {
+                               
                                 return <div className='cart-product-wrap'>
                                    <table>
                                                     <tr>
@@ -176,7 +177,7 @@ function Cart() {
                                                             </div>
                                                         </td>
                                                         <td className='cart-product-category cart-product-col-single'>
-                                                        Loại: Purple,L
+                                                        Phân loại : {cart.ProductDetail.color}, {cart.ProductDetail.size}
                                                         </td>
                                                         <td className='cart-product-col-single'>{formatPrice(cart.total_price/cart.quantity)}</td>
                                                         <td className='cart-product-col-single cart-product-btn'>
