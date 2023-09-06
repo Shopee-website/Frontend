@@ -17,7 +17,7 @@ const adminproductApi = {
     },
     addAdminProduct(params){
         const url = '/api/product';
-        return axiosClient.post(url,{params});
+        return axiosClient.post(url,params);
     }
 };
 export default adminproductApi;

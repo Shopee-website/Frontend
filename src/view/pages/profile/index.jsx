@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-import "./profile.scss";
+import "./Profile.scss";
 import userInfoAPI from "api/userInfoAPI";
 
 function Profile() {

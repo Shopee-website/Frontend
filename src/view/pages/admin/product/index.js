@@ -14,6 +14,7 @@ function AdminProduct (){
     const [editID, setEditID] = useState(-1)
     const [title, setTitle]= useState('')
     const [price, setPrice] = useState(0)
+    const [quantity, setQuantity] = useState(0)
     const [show, setShow] = useState(false)
     // Handle File
     const [files, setFiles] = useState([]);
@@ -48,7 +49,6 @@ function AdminProduct (){
         const getAllProduct = async () =>{
             try {
                 const res = await adminproductApi.getAllAdminProduct()
-                console.log(res.data.rows)
                 setProduct(res.data.rows.filter((item) => item.deletedAt === null))
             }
             catch (err) {
@@ -155,16 +155,48 @@ function AdminProduct (){
         e.preventDefault();
         const title =  e.target.elements.title.value;
         const price =  e.target.elements.price.value;
+        const quantity = e.target.elements.quantity.value;
         const id = product.length + 1;
         const newProduct = {
             id : id,
             product_name : title,
-            price : parseInt(price)
+            price : parseInt(price),
+            quantity : parseInt(quantity)
         }
-        console.log(newProduct);
-        
+        const formData = new FormData();
+        files.forEach(file => {
+            formData.append('image', file);
+        });
+        const addProduct = async (params) => {
+            try {
+                const res = await adminproductApi.addAdminProduct(params);
+                console.log(res);
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+        addProduct({
+            product_name : title,
+            price : parseInt(price),
+            details : [
+                {
+                    color : "white",
+                    quantity : parseInt(quantity)
+                }
+            ],
+            images : formData
+        }, 
+        {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
         setTitle('')
         setPrice(0)
+        setQuantity(0)
+        setFiles([])
        setProduct(prev => prev.concat(newProduct))
     }
 
@@ -210,12 +242,18 @@ function AdminProduct (){
                                         <>
                                         <label for = "title" className='admin-product-label'>Nhập tên sản phẩm</label>
                                         <input type = 'text' placeholder = 'Nhập tên sản phẩm' 
-                                        className='admin-product-add-name' name = 'title'
+                                        className='admin-product-add-name' name = 'title' id = "title"
                                         onChange={(e)=>setTitle(e.target.value)}
                                         value = {title}
                                         />
+                                        <label for = "quantity" className='admin-product-label'>Nhập số lượng sản phẩm</label>
+                                        <input type = "text" className='admin-product-add-quantity' name = "quantity"  
+                                        id = "quantity" value = {quantity} placeholder = "Nhập số lượng" 
+                                        onChange={(e)=>setQuantity(e.target.value)}
+                                        />
                                         <label for = "price" className='admin-product-label'>Nhập số tiền</label>
                                         <input type='number' placeholder='Nhập số tiền (đơn vị đđ)' name = 'price'
+                                        id = "price"
                                         className='admin-product-add-price'
                                         onChange={(e)=>setPrice(e.target.value)}
                                         value = {price}
@@ -223,17 +261,18 @@ function AdminProduct (){
                                         <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''}`}>
                                             <input {...getInputProps()} />
                                             {isDragActive ? (
-                                            <p>Kéo và thả các tệp tin vào đây ...</p>
+                                            <p className='admin-product-img-des'>Kéo và thả các tệp tin vào đây ...</p>
                                             ) : (
-                                            <p>Kéo và thả hoặc nhấp để chọn các tệp tin</p>
+                                            <p className='admin-product-img-des'>Kéo và thả hoặc nhấp để chọn các tệp tin</p>
                                             )}
-                                            <ul>
+                                            <ul className='admin-product-img-list'>
                                             {files.map((file, index) => (
-                                                <li key={index}>{file.name}</li>
+                                                <li key={index}
+                                                    className='admin-product-img-item'
+                                                >{file.name}</li>
                                             ))}
                                             </ul>
                                         </div>
-                                        <br/>
                                         <button className='admin-product-add-btn'
                                         >Thêm</button>
                                         </> : <div></div>
