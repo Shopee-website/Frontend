@@ -47,7 +47,7 @@ export const MyOrder = () => {
   return (
     <div className="my__order">
       <section className="VYJdTQ" aria-role="tablist">
-        {orderStatuses.map((status, index) => (
+        {orderStatuses && orderStatuses.map((status, index) => (
           <a key={index} title={status}>
             <span className="_20hgQK">{status}</span>
           </a>
@@ -57,7 +57,8 @@ export const MyOrder = () => {
         <p className="no__product">Không có đơn hàng nào.</p>
       ) : (
         listOrders.map((item) =>
-          item.BillDetails.map((item_detail) => (
+       
+        item.BillDetails && item.BillDetails.map((item_detail) => (
             <div className="product">
               <div className="product__image">
                 <img
