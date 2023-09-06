@@ -89,7 +89,7 @@ function Cart() {
     const deleteCarts = async (id)=> {
         try {
            const res =  await cartApi.deleteCart(id)
-           console.log(res)
+           
         }
         catch(err) {
             console.log(err)
@@ -122,9 +122,6 @@ function Cart() {
 
     }
 
-    const getInfoProduct = (productId) => {
-        
-    }
     newArrays = orderItems;
     return ( 
         <div className = 'cart-container'>

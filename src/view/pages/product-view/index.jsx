@@ -6,15 +6,13 @@ import productApi from "api/productAPI";
 import cartApi from "api/cartAPI"
 import Footer from "components/footer";
 import './product_view.scss'
-// import Review from './review.js'
 import img1 from '../../../assets/images/product_detail1.jpg'
 import img2 from '../../../assets/images/product_detail2.jpg'
 import freeship from '../../../assets/images/freeship.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart, faCableCar, faCartShopping, faCommentsDollar} from '@fortawesome/free-solid-svg-icons'
-import { faFacebook, faInstagram, faTelegram, faPinterest } from '@fortawesome/free-brands-svg-icons'
+import {faInstagram, faTelegram, faPinterest } from '@fortawesome/free-brands-svg-icons'
 import {Rating} from '@mui/material'
-import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import formatPrice from "components/format-price";
@@ -30,16 +28,30 @@ function ProductInfo () {
     const navigate = useNavigate()
     const  {productId}  = useParams();
     
+    const [sizes, setSizes] = useState([]);
+    const [colors, setColors] = useState([]);
+    const [quantity, setQuantity] = useState();
+    const [addProduct, setAddProduct] = useState(true)
     const [product, setProduct] = useState()
-
     const [picture, setPicture] = useState()
     const [array, setArray] = useState([])
+    const [like , setLike] = useState(false)
+    const [active , setActive] = useState('')
+    const [count, setCount] = useState(1)
+    const [active1, setActive1] = useState('')
+    
+
 
     useLayoutEffect(() => {
         const fetchProductInfo = async () => {
             try {
                 const productResult =  await productApi.getProductById(productId);
                 setProduct(productResult.data);
+                const color = [...new Set(productResult.data.details.map(item => item.color))];
+                setColors(color);
+                const size = [...new Set(productResult.data.details.map(item => item.size))];
+                setSizes(size);
+
                 setPicture(productResult.data.images[0].image)
 
             } catch (error) {
@@ -47,33 +59,65 @@ function ProductInfo () {
             }
         }
         fetchProductInfo();
+       
         productBuy = {};
         select = 0;
     }, [productId])
 
 
-    const [like , setLike] = useState(false)
-    const [active , setActive] = useState('')
-    const [count, setCount] = useState(1)
     const handleClick = (e)=> {
-        setActive(e.target.id)
+        setActive(e.target.value)
     }
     const handleClick1 = (e)=> {
-        setActive1(e.target.id)
+        setActive1(e.target.value)
     }
 
 
-    const [active1, setActive1] = useState('')
+    const checkquan = () => {
+        if(active && active1){
+            if(quantity) {
+                return (
+                    `còn ${quantity} sản phẩm`
+                )
+            } else return 'sản phẩm đã hết'
+        } else {
+
+            return 'vui lòng chọn thông tin sản phẩm'
+        }
+    }
+
     
+    
+    useEffect(() => {
+        const buyProduct = () => {
+            const selectedItem = product && product.details.find(item => item.color === active && item.size === active1);
+            if(selectedItem && +selectedItem.quan_in_stock !== 0){
+                setQuantity(selectedItem.quan_in_stock);
+                setAddProduct(false)
+            }else {
+                setAddProduct(true)
+            }
+        }
+        buyProduct();
+    }, [active, active1])
+   
+
     function handleSubmit(e) {
         e.preventDefault();
+
+        
         const requestPost = async () => {
             try {
+                const details = {
+                    color: active,
+                    size: active1
+                }
+                const product_detail = await productApi.getProductDetail(productId, details)
                 const response = await cartApi.postCart({
-                    product_detail_id : parseInt(productId),
+                    product_detail_id : product_detail.data.productDetailId,
                     quantity : count
                 })
-                console.log(response)
+                console.log(response);
                 toast.success('Thêm vào giỏ hàng thành công', {
                     position: "top-center",
                     autoClose: 2000,
@@ -122,11 +166,7 @@ function ProductInfo () {
                         })
                         
                         }
-                        {/* <img src = {product.images[1].image} alt = 'anh ao'  className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
-                        <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/>
-                        <img src = {product.images[3].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[3].image)}/>
-                        <img src = {product.images[1].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
-                        <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/> */}
+                        
                     </div>
                     <div className='pro_detail-share'>
                         <div className='pro_detail-social'>
@@ -275,36 +315,38 @@ function ProductInfo () {
                         <tr className='pro_detail-column'>
                             <td className = 'pro_detail-td'>Màu</td>
                             <td className='pro_detail-column-btn'>
-                                <button className={active === '1' ? 'pro_detail-active' : undefined}
-                                id = {'1'}
-                                key = {1}
-                                onClick = {handleClick}
-                                >trắng</button>
-                                <button className={active === '2' ? 'pro_detail-active' : undefined}
-                                id = {'2'}
-                                key = {2}
-                                onClick = {handleClick}
-                                >đen</button>
-                                <button className={active === '3' ? 'pro_detail-active' : undefined}
-                                id = {'3'}
-                                key = {3}
-                                onClick = {handleClick}
-                                >nâu</button>
-                                <button className={active === '4' ? 'pro_detail-active' : undefined}
-                                id = {'4'}
-                                key = {4}
-                                onClick = {handleClick}
-                                >xanh</button>
+
+                                {colors && colors.map((color, index) => {
+                                    
+                                    return (
+                                        <button className={active === color ? 'pro_detail-active' : undefined}
+                                        value = {color}
+                                        key = {index}
+                                        onClick = {handleClick}
+                                        >{color}</button>
+                                    )
+
+                                })}
+                                
                             </td>
                         </tr>
                         <tr className='pro_detail-column'>
                             <td className = 'pro_detail-td'>Size</td>
                             <td className='pro_detail-column-btn'>
-                                <button
-                                    id = {'1'}
-                                    onClick={handleClick1}
-                                    className = {active1 === '1' ? 'pro_detail-active' : undefined}
-                                >freesize</button></td>
+                            
+                                  {sizes && sizes.map((size, index) => {
+                                    
+                                    return (
+                                        <button className={active1 === size ? 'pro_detail-active' : undefined}
+                                        value = {size}
+                                        key = {index}
+                                        onClick = {handleClick1}
+                                        >{size}</button>
+                                    )
+
+                                })}
+                              
+                            </td>
                         </tr>
                         <tr className='pro_detail-column'>
                             <td className='pro_detail-td'>Số lượng</td>
@@ -317,21 +359,25 @@ function ProductInfo () {
                                 onClick = {()=>setCount(count+1)}
                                 >+</button> 
                                 <span style= {{color : '#767676',  marginLeft : '12px'}}>
-                                    10000 sản phẩm có sẵn</span>
+                                 {checkquan()}
+                                </span>
                             </td>
                         </tr>
                     </table>
                     <ToastContainer/>
                     <div className='pro_detail-btn'>
-                        <button className='pro_detail-cart-btn'
+                        <button className={addProduct ? 'disable' : 'pro_detail-cart-btn'}
+                        
                         onClick={handleSubmit}
+                        disabled = {addProduct}
                         >
                             <FontAwesomeIcon icon = {faCartShopping}
                                 style = {{marginRight : '12px'}}
                             />
                             Thêm vào giỏ hàng
                         </button>
-                        <button className='pro_detail-buy'
+                        <button className={addProduct ? 'disable' : 'pro_detail-buy'}
+                            disabled = {addProduct}
                         >Mua ngay</button>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Pagination } from "antd";
+import { Pagination } from "antd";
 import { useEffect } from "react";
 import "./myOrder.scss";
 import billAPI from "api/billApi";
@@ -93,7 +93,8 @@ export const MyOrder = () => {
   );
 };
 
-/* <Pagination
+{
+  /* <Pagination
 total={totalOrders} //listOrders.length: tong so order cua user do
 current={page}
 showTotal={(total, range) => {
@@ -104,3 +105,4 @@ pageSize={limit}
 defaultPageSize={20}
 defaultCurrent={1}
 /> */
+}
