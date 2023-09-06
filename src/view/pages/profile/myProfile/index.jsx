@@ -26,6 +26,7 @@ export const MyProfile = () => {
   const onChange = (e) => {
     setValue(e.target.value);
   };
+  const defaultBirthday = "2000-01-01";
   return (
     <div className="my_profile__content">
       <div className="my_profile__content__header">
@@ -125,7 +126,10 @@ export const MyProfile = () => {
               <label>Ngay sinh</label>
               <DatePicker
                 value={dayjs(
-                  profile && profile.birthday.slice(0, 10),
+                  profile &&
+                    (profile.birthday
+                      ? profile.birthday.slice(0, 10)
+                      : defaultBirthday),
                   dateFormat
                 )}
                 onChange={(_, date) => {
