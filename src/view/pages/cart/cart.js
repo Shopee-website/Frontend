@@ -12,19 +12,19 @@ import {useState, useEffect} from 'react'
 import img from '../../../assets/images/product_detail1.jpg'
 import formatPrice from 'components/format-price'
 import cartApi from 'api/cartAPI'
+import productApi from 'api/productAPI'
 
 let newArrays;
 let option;
 
 function Cart() {
+
     const [cart, setCart] = useState([])
 
     useEffect (()=> {
         const getCart = async () => {
             try {
                 const res = await cartApi.getCart();
-                // setCart(res.data.cart)
-                // console.log(res.data.cart)
                 setCart(res.data.cart.filter ((item)=> item.deletedAt === null))
             }
             catch(err) {
@@ -36,6 +36,7 @@ function Cart() {
         newArrays = []
     }, [])
 
+    
     const handleDecrease = (id, quantity) => {
         setCart(cart => 
             cart.map((item)=> {
@@ -121,6 +122,9 @@ function Cart() {
 
     }
 
+    const getInfoProduct = (productId) => {
+        
+    }
     newArrays = orderItems;
     return ( 
         <div className = 'cart-container'>

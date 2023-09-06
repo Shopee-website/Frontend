@@ -18,7 +18,7 @@ function Recommend (props){
                 <ul>
                   { products.map(post => {
                           return (
-                          <Link key = {post.id} to={`/product-view/${post.product_name.replace(/ /g, '-')}/${post.id}`}>
+                          <Link key = {post.id} to={`/product-view/${post.product_name.replace(/[\s/]/g, '-')}/${post.id}`}>
                             <li>
                            <Product 
                                     imageURL={post.images && post.images.length > 0 && post.images[0].image || 'https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lj0uezovoi6k2b_tn'}

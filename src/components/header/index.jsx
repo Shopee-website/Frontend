@@ -35,7 +35,7 @@ function Header(props) {
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
-        console.log(e.target.value);
+     
     };
 
 
@@ -46,7 +46,7 @@ function Header(props) {
         }
         const resultList = await productApi.getAllProduct(params);
         setResults(resultList.data.rows);
-        console.log(resultList.data.rows);
+        
     }
        fetchProducts();
 

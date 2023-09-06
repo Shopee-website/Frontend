@@ -76,7 +76,7 @@ function ProductInfo () {
                 console.log(response)
                 toast.success('Thêm vào giỏ hàng thành công', {
                     position: "top-center",
-                    autoClose: 5000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -116,11 +116,17 @@ function ProductInfo () {
                 <div className='pro_detail-image'>
                     <img src = {picture}  className='pro_detail-main-img' />
                     <div className='pro_detail-img_list'>
-                        <img src = {product.images[1].image} alt = 'anh ao'  className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
+
+                        {product.images && product.images.slice(0,5).map((img, index)=> {
+                          return  <img src={img.image} alt='product' className='pro_detail-img-item' onMouseOver={()=>setPicture(img.image)} />
+                        })
+                        
+                        }
+                        {/* <img src = {product.images[1].image} alt = 'anh ao'  className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
                         <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/>
                         <img src = {product.images[3].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[3].image)}/>
                         <img src = {product.images[1].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[1].image)}/>
-                        <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/>
+                        <img src = {product.images[2].image} alt = 'anh ao' className='pro_detail-img-item' onMouseOver={()=>setPicture(product.images[2].image)}/> */}
                     </div>
                     <div className='pro_detail-share'>
                         <div className='pro_detail-social'>

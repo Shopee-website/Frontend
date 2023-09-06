@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./myProfile.scss";
+import "./MyProfile.scss";
 import { Button, Form, Input, DatePicker } from "antd";
 import { Radio } from "antd";
 import dayjs from "dayjs";
