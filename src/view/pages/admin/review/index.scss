@@ -24,12 +24,31 @@
     width : 40%;
 }
 .admin-review-user-name {
-    width : 20%;
+    width : 10%;
 }
 .admin-review-star {
-    width : 20%;
+    width : 10%;
     text-align: center;
 }
 .admin-review-content {
-    width : 20%;
+    width : 40%;
+}
+.admin-review-btn {
+    margin: 24px 0 24px 20px;
+}
+.admin-review-star-btn {
+    padding : 6px 12px;
+    font-size: 15px;
+    border : 1px solid rgba(0,0,0,0.3);
+    border-radius: 6px;
+    background-color: white;
+    color : black;
+    min-width: 100px;
+    margin: 0 12px;
+
+}
+.admin-review-star-btn:hover {
+    color : #ee4d2d;
+    border : 1px solid #ee4d2d;
+    cursor: pointer;
 }
