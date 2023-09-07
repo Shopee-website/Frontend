@@ -6,7 +6,6 @@ import productApi from "api/productAPI";
 import cartApi from "api/cartAPI"
 import Footer from "components/footer";
 import './product_view.scss'
-// import Review from './review.js'
 import img1 from '../../../assets/images/product_detail1.jpg'
 import img2 from '../../../assets/images/product_detail2.jpg'
 import freeship from '../../../assets/images/freeship.png'
@@ -14,7 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart, faCableCar, faCartShopping, faCommentsDollar} from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faTelegram, faPinterest } from '@fortawesome/free-brands-svg-icons'
 import {Rating} from '@mui/material'
-import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import formatPrice from "components/format-price";
@@ -34,11 +32,13 @@ function ProductInfo () {
 
     const [picture, setPicture] = useState()
     const [array, setArray] = useState([])
+    const [love, setLove] = useState(0)
 
     useLayoutEffect(() => {
         const fetchProductInfo = async () => {
             try {
                 const productResult =  await productApi.getProductById(productId);
+                setLove(productResult.data.likes)
                 setProduct(productResult.data);
                 setPicture(productResult.data.images[0].image)
 
@@ -104,6 +104,29 @@ function ProductInfo () {
         }
         requestPost();
     }
+    // handle love product 
+    function handleLove(id){
+        if (like) setLove(love -1 )
+        else setLove(love + 1);
+        setLike(!like)
+        function handleTotal(like){
+            if (like) return (love - 1)
+            else return (love + 1)
+        }
+        const totalLike = handleTotal(like)
+        const updateProduct = async (id, params) => {
+            try {
+                const res = await productApi.updateProductById(id, params)
+                console.log(res)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        updateProduct(id, {
+            likes : totalLike
+        })
+    }
 
     return (
         <div style={{margin: '0', padding: '0', boxSizing: 'border-box'}}>
@@ -135,9 +158,9 @@ function ProductInfo () {
                         <div className='pro_detail-like'>
                             <FontAwesomeIcon  icon = {faHeart} className= 'pro-detail-heart'
                                 style = {{color : like  ? '#ff424f' : 'pink'}}
-                                onClick={()=> setLike(!like)}
+                                onClick={() => handleLove(product.id)}
                             />
-                          Đã thích ({product.likes})
+                          Đã thích ({love})
                         </div>
                     </div>
                 </div>
@@ -151,7 +174,7 @@ function ProductInfo () {
 
                             <div className='pro_detail-star'>
                             <span style = {{color : '#ee4d2d', textDecoration : 'underline', marginRight: '6px', fontSize : '18px'}}>{product.star}</span>
-                            <Rating name="rating-read" defaultValue={5} precision={0.5} size = "small" readOnly />
+                            <Rating name="rating-read" defaultValue={Math.round(product.star)} precision={0.5} size = "small" readOnly />
                             </div>
                             <div className='pro_detail-lines'>
 

@@ -1,14 +1,14 @@
 import './index.scss'
 import {useState, useEffect} from 'react'
-import axios from 'axios'
 import formatPrice from 'components/format-price'
 import adminproductApi from 'api/adminproductAPI'
-import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 import { useDropzone } from 'react-dropzone';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function AdminProduct (){
+    const navigate = useNavigate()
     const [product, setProduct] = useState([])
     
     const [editID, setEditID] = useState(-1)
@@ -75,6 +75,11 @@ function AdminProduct (){
         }
         deleteProduct(id);
     }
+    // handle navigate when click to see more about product
+
+    function handleNagivate(id, name){
+        navigate(`/product-view/${name}/${id}`)
+    }
 
     // render the product 
 
@@ -86,6 +91,11 @@ function AdminProduct (){
                 <tr key = {item.id}>
                     <td className='admin-product-name'>{item.product_name}</td>
                     <td className='admin-product-des'>{formatPrice(item.price)}</td>
+                    <td className='admin-product-detail'>
+                        <button type = 'button' className='admin-product-see-detail'
+                            onClick = {()=> handleNagivate(item.id, item.product_name)}
+                        >Xem chi tiết</button>
+                    </td>
                     <td className='admin-product-update'>
                         <button className='admin-product-btn'
                         onClick={()=>handleEdit(item.id)}
@@ -138,6 +148,9 @@ function AdminProduct (){
                         value = {item.price}    
                         onChange = {handlePrice}  
                         />
+                    </td>
+                    <td className='admin-product-detail'>
+                        <button className='admin-product-see'>Xem chi tiết</button>
                     </td>
                     <td className='admin-product-update'>
                         <button className='admin-product-btn'
@@ -207,9 +220,9 @@ function AdminProduct (){
         const updatedData = product.map(d => 
             d.id === editID ? {...d, product_name : title,  price : price} :d    
         )
-        const update = async (id) => {
+        const update = async (id, params) => {
             try {
-                const res = await adminproductApi.updateAdminProduct(id);
+                const res = await adminproductApi.updateAdminProduct(id, params);
                 console.log(res)
             }
             catch (err){
@@ -261,9 +274,9 @@ function AdminProduct (){
                                         <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''}`}>
                                             <input {...getInputProps()} />
                                             {isDragActive ? (
-                                            <p className='admin-product-img-des'>Kéo và thả các tệp tin vào đây ...</p>
+                                            <p className='admin-product-img-des'>Tải lên hình ảnh sản phẩm</p>
                                             ) : (
-                                            <p className='admin-product-img-des'>Kéo và thả hoặc nhấp để chọn các tệp tin</p>
+                                            <p className='admin-product-img-des'>Tải lên hình ảnh sản phẩm</p>
                                             )}
                                             <ul className='admin-product-img-list'>
                                             {files.map((file, index) => (
@@ -287,7 +300,8 @@ function AdminProduct (){
                             <table className='admin-product-list'>
                             <tr>
                             <th className='admin-product-name'>Tên sản phẩm</th>
-                            <th className='admin-product-des'>Mô tả</th>
+                            <th className='admin-product-des'>Giá</th>
+                            <th className='admin-product-detail'>Chi tiết</th>
                             <th className='admin-product-update'>Sửa</th>
                             <th className='admin-product-delete'>Xóa</th>
                             </tr>

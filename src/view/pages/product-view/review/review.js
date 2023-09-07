@@ -11,7 +11,6 @@ function Review(props) {
         const fetchFeedback = async () => {
             try {
                 const res =  await reviewApi.getAllReview(props.data)
-                console.log(res)
                 setReview(res.data.feedback)
                 setMainReview(res.data.feedback)
             } 

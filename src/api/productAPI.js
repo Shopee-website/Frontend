@@ -15,6 +15,9 @@ const productApi = {
         const url = `/api/product/${id}`;
         return axiosClient.get(url)
     },
-
+    updateProductById(id, params){
+        const url = `/api/product/${id}`
+        return axiosClient.patch(url, params) 
+    }
 };
 export default productApi;
