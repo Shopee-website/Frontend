@@ -117,7 +117,6 @@ function ProductInfo () {
                     product_detail_id : product_detail.data.productDetailId,
                     quantity : count
                 })
-                console.log(response);
                 toast.success('Thêm vào giỏ hàng thành công', {
                     position: "top-center",
                     autoClose: 2000,

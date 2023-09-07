@@ -80,7 +80,7 @@ function Payment (){
         })
         toast.success('Mua hàng thành công', {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -90,7 +90,7 @@ function Payment (){
             });
         setTimeout(()=> {
             navigate('/homepage')
-        },3000)
+        },2000)
     }
 
 
@@ -98,6 +98,7 @@ function Payment (){
         const total = acc + item.total_price
         return total
     }, 0)
+
     return (
         <div className='payment-wrap'>
             <div className='payment-header'>

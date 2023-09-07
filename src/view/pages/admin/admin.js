@@ -7,6 +7,8 @@ import AdminProduct from './product'
 import User from './user'
 import { Link } from 'react-router-dom'
 import AdminReview from './review'
+import Transport from './transport'
+
 function Admin() {
 
     const [show, setShow] = useState(1);
@@ -91,8 +93,8 @@ function Admin() {
                     <div className= {show === 5 ? 'admin-money active' : 'hide-page'}>
                        
                     </div>
-                    <div className= {show === 6 ? 'admin-money active' : 'hide-page'}>
-                       
+                    <div className= {show === 6 ? 'admin-transfer active' : 'hide-page'}>
+                       <Transport />
                     </div>
                     <div className= {show === 7 ? 'admin-money active' : 'hide-page'}>
                        

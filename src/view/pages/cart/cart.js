@@ -12,7 +12,6 @@ import {useState, useEffect} from 'react'
 import img from '../../../assets/images/product_detail1.jpg'
 import formatPrice from 'components/format-price'
 import cartApi from 'api/cartAPI'
-import productApi from 'api/productAPI'
 
 let newArrays;
 let option;
@@ -25,6 +24,7 @@ function Cart() {
         const getCart = async () => {
             try {
                 const res = await cartApi.getCart();
+                // console.log(res.data);
                 setCart(res.data.cart.filter ((item)=> item.deletedAt === null))
             }
             catch(err) {
@@ -80,7 +80,7 @@ function Cart() {
      
 
     function removeProduct(id) {
-        console.log('xoa')
+        // console.log('xoa')
         const newCart = cart.filter((item) => item.id != id)
         setCart(newCart)
         deleteCarts(id)
@@ -96,8 +96,9 @@ function Cart() {
         }
     }
 
-      const [orderItems , setOrderedItems] = useState([])
+    const [orderItems , setOrderedItems] = useState([])
     const [totalCost, setTotalCost] = useState(0)
+
     const handleChange = (item, event) => {
         if (event.target.checked) {
         setOrderedItems((cart) => [...cart, item]);
@@ -165,7 +166,7 @@ function Cart() {
                     <div className = 'cart-product-item'>
                         { cart && 
                             cart.map((cart)=> {
-                               
+                            
                                 return <div className='cart-product-wrap'>
                                    <table>
                                                     <tr>
