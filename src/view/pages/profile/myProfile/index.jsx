@@ -5,13 +5,36 @@ import { Radio } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import userInfoAPI from "api/userInfoAPI";
+import axiosClient from "../../../../api/axiosClient";
+
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
 
 export const MyProfile = () => {
   const [value, setValue] = useState("Male");
   const [profile, setProfile] = useState("");
+  const [image, setImage] = useState("");
 
+  const handleImage = (e) => {
+    console.log(e.target.files);
+    setImage(e.target.files[0]);
+  };
+
+  const handleApi = () => {
+    const formData = new FormData();
+    formData.append("images", image);
+    console.log(formData.getAll("images"));
+    axiosClient
+      .patch("/api/user/update-ava", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        alert(res.data.message);
+      });
+  };
   useEffect(() => {
     userInfoAPI
       .getInfo()
@@ -162,7 +185,10 @@ export const MyProfile = () => {
             <div className="my_profile__content__body__right__img">
               <img src={profile && profile.avatar_url} alt="avatar" />
             </div>
-            <button>Chọn ảnh</button>
+            <input type="file" name="file" onChange={handleImage} />
+            <div className="my_profile_button">
+              <button onClick={handleApi}>Submit</button>
+            </div>
           </div>
         </div>
       </div>

@@ -59,24 +59,27 @@
                 }
     
             }
-            button {
-                outline: 0;
-                background: #fff;
-                color: #555;
-                border: 1px solid rgba(0,0,0,.09);
-                box-shadow: 0 1px 1px 0 rgba(0,0,0,.03);
-                position: relative;
-                overflow: visible;
-                height: 40px;
-                padding: 0 20px;
-                min-width: 70px;
-                max-width: 220px;
-                display: inline-flex;
-                line-height: 40px;
-
-                &:hover {
-                    background: rgba(0,0,0,.02);
-                    cursor: pointer;
+            .my_profile_button{
+                button {
+                    margin-top: 20px;
+                    outline: 0;
+                    background: #fff;
+                    color: #555;
+                    border: 1px solid rgba(0,0,0,.09);
+                    box-shadow: 0 1px 1px 0 rgba(0,0,0,.03);
+                    position: relative;
+                    overflow: visible;
+                    height: 40px;
+                    padding: 0 20px;
+                    min-width: 70px;
+                    max-width: 220px;
+                    display: inline-flex;
+                    line-height: 40px;
+    
+                    &:hover {
+                        background: rgba(0,0,0,.02);
+                        cursor: pointer;
+                    }
                 }
             }
 

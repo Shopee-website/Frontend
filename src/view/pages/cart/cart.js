@@ -81,7 +81,7 @@ function Cart() {
 
     function removeProduct(id) {
         // console.log('xoa')
-        const newCart = cart.filter((item) => item.id != id)
+        const newCart = cart.filter((item) => item.id !== id)
         setCart(newCart)
         deleteCarts(id)
       }
