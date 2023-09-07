@@ -13,7 +13,7 @@ html, body {
     transition: transform .2s cubic-bezier(.4,0,.2,1);
     // position: static;
     width: 100%;
-    z-index: 100;
+    z-index: 200;
 
 }
 
@@ -26,12 +26,13 @@ html, body {
             flex-direction: row;
             justify-content: space-between;
             height: 2.25rem;
+            align-items: center;
             &_contact, &_support {
                 &_list {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                    list-style: none !important;
+                    list-style: none;
                     li, a {
                         font-size: 0.8rem;
                         padding: 4px;

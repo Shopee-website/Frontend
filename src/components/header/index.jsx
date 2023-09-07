@@ -35,7 +35,7 @@ function Header(props) {
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
-        console.log(e.target.value);
+     
     };
 
 
@@ -46,7 +46,7 @@ function Header(props) {
         }
         const resultList = await productApi.getAllProduct(params);
         setResults(resultList.data.rows);
-        console.log(resultList.data.rows);
+        
     }
        fetchProducts();
 
@@ -91,12 +91,14 @@ function Header(props) {
                             {localStorage.getItem('token') !== 'null' ?
                                 <>
                                 <li>
-                                   {user.name ? <div className="user-wrapper">
+                                   {user.name ? <Link to={'/profile'} >
+                                    <div className="user-wrapper">
                                         <div className="user-avatar">
                                             <img src={user.avatar_url || 'http://localhost:8000/images/avatars/default-avatar.png'} />
                                         </div>
                                         <div className="user-name">{user.name}</div>
                                     </div>
+                                   </Link>
                                     :
                                     'Xin chào'
                                     }

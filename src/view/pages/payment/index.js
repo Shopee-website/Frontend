@@ -4,9 +4,7 @@ import {useEffect, useState} from 'react'
 import shopee_logo from 'assets/images/logo-shopee.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocation, faQuestion, faIdCard, faCoins} from '@fortawesome/free-solid-svg-icons'
-// import productImage from 'assets/images/product_detail1.jpg'
 import Footer from 'components/footer'
-import axios from 'axios'
 import formatPrice from 'components/format-price'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate , Link} from 'react-router-dom'
@@ -14,7 +12,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { newArrays, option } from '../cart/cart'
 import billAPI from 'api/billApi'
 import cartApi from 'api/cartAPI'
+import useAuth from 'hooks/useAuth'
+
 function Payment (){
+    const {user} = useAuth();
 
     const [active, setActive] = useState('')
     // const [products, setProducts] = useState([])
@@ -22,9 +23,9 @@ function Payment (){
         setActive(e.target.id)
     }
     const products = option === 1 ? newArrays : []
-    // console.log(products)
 
     const arrProducts = products.map ((item , index)=> {
+        console.log(products);
         return (
             <table className='payment-product-table'>
                  <tr>
@@ -64,10 +65,11 @@ function Payment (){
             }
         }
         postBill();
+
         const deleteCart = async (id) =>{
             try {
                 const res = await cartApi.deleteCart(id)
-                console.log(res)
+                // console.log(res)
             }
             catch (err) {
                 console.log(err)
@@ -78,7 +80,7 @@ function Payment (){
         })
         toast.success('Mua hàng thành công', {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -88,7 +90,7 @@ function Payment (){
             });
         setTimeout(()=> {
             navigate('/homepage')
-        },3000)
+        },2000)
     }
 
 
@@ -96,6 +98,7 @@ function Payment (){
         const total = acc + item.total_price
         return total
     }, 0)
+
     return (
         <div className='payment-wrap'>
             <div className='payment-header'>
@@ -115,10 +118,10 @@ function Payment (){
                             </div>
                             <div className='payment-address-body'>
                                 <div className='payment-address-name'>
-                                    Nguyễn Thị Thùy Dung (0382175198)
+                                   {user && `${'Tên khách hàng : ' + user.name} ,(${'Số Điện Thoại : ' + user.telephone})`}
                                 </div>
                                 <div className='payment-address-add'>
-                                7 Tạ Quang Bửu, Phường Bách Khoa, Quận Hai Bà Trưng, Hà Nội
+                                {user && `${'Địa Chỉ '+ user.address}`}
                                 </div>
                                 <div className='payment-address-default'>
                                     Mặc định

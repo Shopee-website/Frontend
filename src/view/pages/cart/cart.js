@@ -17,14 +17,14 @@ let newArrays;
 let option;
 
 function Cart() {
+
     const [cart, setCart] = useState([])
 
     useEffect (()=> {
         const getCart = async () => {
             try {
                 const res = await cartApi.getCart();
-                // setCart(res.data.cart)
-                // console.log(res.data.cart)
+                // console.log(res.data);
                 setCart(res.data.cart.filter ((item)=> item.deletedAt === null))
             }
             catch(err) {
@@ -36,6 +36,7 @@ function Cart() {
         newArrays = []
     }, [])
 
+    
     const handleDecrease = (id, quantity) => {
         setCart(cart => 
             cart.map((item)=> {
@@ -79,7 +80,7 @@ function Cart() {
      
 
     function removeProduct(id) {
-        console.log('xoa')
+        // console.log('xoa')
         const newCart = cart.filter((item) => item.id != id)
         setCart(newCart)
         deleteCarts(id)
@@ -88,15 +89,16 @@ function Cart() {
     const deleteCarts = async (id)=> {
         try {
            const res =  await cartApi.deleteCart(id)
-           console.log(res)
+           
         }
         catch(err) {
             console.log(err)
         }
     }
 
-      const [orderItems , setOrderedItems] = useState([])
+    const [orderItems , setOrderedItems] = useState([])
     const [totalCost, setTotalCost] = useState(0)
+
     const handleChange = (item, event) => {
         if (event.target.checked) {
         setOrderedItems((cart) => [...cart, item]);
@@ -164,6 +166,7 @@ function Cart() {
                     <div className = 'cart-product-item'>
                         { cart && 
                             cart.map((cart)=> {
+                            
                                 return <div className='cart-product-wrap'>
                                    <table>
                                                     <tr>
@@ -175,7 +178,7 @@ function Cart() {
                                                             </div>
                                                         </td>
                                                         <td className='cart-product-category cart-product-col-single'>
-                                                        Loại: Purple,L
+                                                        Phân loại : {cart.ProductDetail.color}, {cart.ProductDetail.size}
                                                         </td>
                                                         <td className='cart-product-col-single'>{formatPrice(cart.total_price/cart.quantity)}</td>
                                                         <td className='cart-product-col-single cart-product-btn'>

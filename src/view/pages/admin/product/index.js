@@ -180,6 +180,7 @@ function AdminProduct (){
         files.forEach(file => {
             formData.append('image', file);
         });
+        
         const addProduct = async (params) => {
             try {
                 const res = await adminproductApi.addAdminProduct(params);
