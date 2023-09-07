@@ -20,18 +20,23 @@
     width : 10%;
 }
 .admin-product-list .admin-product-update {
-    width : 20%;
+    width : 10%;
     text-align: center;
 }
 .admin-product-list .admin-product-delete {
+    width : 10%;
+    text-align: center;
+}
+.admin-product-list .admin-product-detail {
     width : 20%;
     text-align: center;
 }
+
 .admin-product-btn {
     border: none;
     border-radius: 15px;
-    padding : 8px 25px;
-    font-size: 16px;
+    padding : 6px 12px;
+    font-size: 14px;
     color : white;
 }
 .admin-product-update button {
@@ -45,15 +50,17 @@
 }
 .admin-product-add-name , .admin-product-add-des, .admin-product-add-image, .admin-product-add-price, .admin-product-add-quantity {
     padding : 6px 16px;
-    min-width: 30%;
+    width : 40%;
+    border : 1px solid rgba(0,0,0,0.3);
+    font-size: 15px;
 }
 .admin-product-add-btn {
     border : none;
     background-color:  rgb(235, 124, 143);
     color : white;
-    padding : 8px 16px;
+    padding : 6px 16px;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 15px;
     margin-top: 10px;
 }
 .admin-product-add-btn:hover, .admin-product-load:hover{
@@ -71,9 +78,12 @@
     border : none;
     background-color:  rgb(235, 124, 143);
     color : white;
-    padding : 10px 16px;
+    padding : 6px 16px;
     border-radius: 6px;
     font-size: 15px;
+}
+.admin-product-add-button:hover {
+    cursor: pointer;
 }
 .admin-product-load {
     padding : 8px 20px;
@@ -125,4 +135,15 @@
 .admin-product-img-item {
     color : #0084ff;
     margin: 4px;
+}
+.admin-product-see-detail, .admin-product-see {
+    background-color: #D9C1E0;
+    color : white;
+    border: none;
+    border-radius: 15px;
+    padding : 6px 16px;
+    font-size: 16px;
+}
+.admin-product-see-detail:hover, .admin-product-see:hover {
+    cursor: pointer;
 }

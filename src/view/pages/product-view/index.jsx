@@ -35,6 +35,7 @@ function ProductInfo () {
     const [product, setProduct] = useState()
     const [picture, setPicture] = useState()
     const [array, setArray] = useState([])
+    const [love, setLove] = useState(0)
     const [like , setLike] = useState(false)
     const [active , setActive] = useState('')
     const [count, setCount] = useState(1)
@@ -46,6 +47,7 @@ function ProductInfo () {
         const fetchProductInfo = async () => {
             try {
                 const productResult =  await productApi.getProductById(productId);
+                setLove(productResult.data.likes)
                 setProduct(productResult.data);
                 const color = [...new Set(productResult.data.details.map(item => item.color))];
                 setColors(color);
@@ -147,7 +149,29 @@ function ProductInfo () {
         }
         requestPost();
     }
-    console.log(product);
+    // handle love product 
+    function handleLove(id){
+        if (like) setLove(love -1 )
+        else setLove(love + 1);
+        setLike(!like)
+        function handleTotal(like){
+            if (like) return (love - 1)
+            else return (love + 1)
+        }
+        const totalLike = handleTotal(like)
+        const updateProduct = async (id, params) => {
+            try {
+                const res = await productApi.updateProductById(id, params)
+                console.log(res)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        updateProduct(id, {
+            likes : totalLike
+        })
+    }
 
     const checkprice = () => {
         if(product.discount === 0 ){
@@ -202,9 +226,9 @@ function ProductInfo () {
                         <div className='pro_detail-like'>
                             <FontAwesomeIcon  icon = {faHeart} className= 'pro-detail-heart'
                                 style = {{color : like  ? '#ff424f' : 'pink'}}
-                                onClick={()=> setLike(!like)}
+                                onClick={() => handleLove(product.id)}
                             />
-                          Đã thích ({product.likes})
+                          Đã thích ({love})
                         </div>
                     </div>
                 </div>
@@ -218,7 +242,7 @@ function ProductInfo () {
 
                             <div className='pro_detail-star'>
                             <span style = {{color : '#ee4d2d', textDecoration : 'underline', marginRight: '6px', fontSize : '18px'}}>{product.star}</span>
-                            <Rating name="rating-read" defaultValue={5} precision={0.5} size = "small" readOnly />
+                            <Rating name="rating-read" defaultValue={Math.round(product.star)} precision={0.5} size = "small" readOnly />
                             </div>
                             <div className='pro_detail-lines'>
 

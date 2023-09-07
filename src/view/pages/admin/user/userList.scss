@@ -13,10 +13,92 @@
         height: 60px;
         align-items: center;
         padding-left: 20px;
+        display: flex;
+        justify-content: space-between;
         & p {
             font-size: 16pt;
             color: #ee4d2d;
         }
         
     }
+}
+.admin-user-wrap {
+    display: flex;
+    padding : 12px 0;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+.admin-user-image {
+    width : 30px;
+    height : 30px;
+    border-radius: 50%;
+}
+.admin-user-sideleft , .admin-user-sideright {
+    display: flex;
+    align-items: center;
+}
+.admin-user-name , .admin-user-email {
+    padding : 4px 12px;
+    font-size: 15px;
+    border : 1px solid rgba(0,0,0,0.3);
+    margin: 0 8px;
+}
+.admin-user-update , .admin-user-remove, .admin-user-add, .admin-user-add-btn {
+    padding : 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border : 1px solid #d9d9d9;
+    background-color: white;
+    margin-right: 8px;
+    min-width: 56px;
+}
+.admin-user-role {
+    margin-right: 28px;
+}
+.admin-user-update:hover , .admin-user-remove:hover, .admin-user-add:hover, .admin-user-add-btn:hover {
+    cursor: pointer;
+}
+.admin-user-add, .admin-user-add-btn {
+    background-color: #ee4d2d;
+    color : white;
+}
+.admin-user-label {
+    font-size: 14px;
+}
+.admin-user-input {
+    padding : 6px 12px;
+    border : 1px solid rgba(0,0,0,0.3);
+    border-radius: 5px;
+    font-size: 14px;
+    width : 40%;
+    margin: 8px 0;
+}
+.admin-user-add-btn {
+    margin: 12px 0 24px;
+}       
+.admin-user-form-add {
+    margin-left: 24px;
+}
+.admin-user-search{
+    padding : 6px 20px;
+    width : 50%;
+    border : 1px solid rgba(0,0,0,0.3); 
+    margin-left: 24px;
+    font-size: 15px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.admin-user-search-btn {
+    padding : 7px 20px;
+    border : none;
+    background-color: #ee4d2d;
+    color : white;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 15px;
+}
+.admin-user-search-btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
