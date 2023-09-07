@@ -22,7 +22,7 @@ function User(props) {
     useEffect (() => {
     const fetchUser = async () => {
         const userList = await userApi.getAllUser();
-        console.log(userList.data.users)
+        // console.log(userList.data.users)
         setUsers(userList.data.users);
         setInitLoading(false);
         setData(userList.data.users);

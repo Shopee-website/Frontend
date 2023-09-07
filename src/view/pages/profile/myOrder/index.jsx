@@ -43,7 +43,7 @@ export const MyOrder = () => {
     };
     getBill();
   }, []);
-
+  
   return (
     <div className="my__order">
       <section className="VYJdTQ" aria-role="tablist">
@@ -67,7 +67,8 @@ export const MyOrder = () => {
                 />
               </div>
               <div className="product__info">
-                <span className="product__status">{item.book_status}</span>
+                {/* <span className="product__status">{item.book_status}</span> */}
+                <span className="product__status">{item.ship_status}</span>
                 <p className="product__name">
                   {item_detail.ProductDetail.Product.product_name}
                 </p>
