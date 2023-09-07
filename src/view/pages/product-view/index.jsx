@@ -147,7 +147,29 @@ function ProductInfo () {
         }
         requestPost();
     }
+    console.log(product);
 
+    const checkprice = () => {
+        if(product.discount === 0 ){
+            return <span className='pro_detail-realprice'>
+            {formatPrice(product.salePrice) }</span> 
+        } 
+        else {
+            return (
+                <>
+                    <span className='pro_detail-originprice'>
+                        { formatPrice(product.price)}
+                    </span>
+                    <span className='pro_detail-realprice'>
+                        {formatPrice(product.salePrice) }
+                    </span> 
+                </>
+                
+            )
+        }
+    
+    }
+    
     return (
         <div style={{margin: '0', padding: '0', boxSizing: 'border-box'}}>
             <Header position = "relative"/>
@@ -220,10 +242,7 @@ function ProductInfo () {
                     <div className='pro_detail-price'>
                         <div className='pro_detail-price_detail'>
 
-                            <span className='pro_detail-realprice'>
-                            {   
-                                formatPrice(product.price)
-                                }</span> 
+                            {checkprice()}
                             <span className='pro_detail-sale'>40% giảm</span>
                         </div>
                         <div className='pro_detail-price-about'>

@@ -8,6 +8,7 @@ import User from './user'
 import { Link } from 'react-router-dom'
 import AdminReview from './review'
 import Transport from './transport'
+import Dashboard from './dashboard'
 
 function Admin() {
 
@@ -76,10 +77,7 @@ function Admin() {
                 <div className='admin-content'>
                     
                     <div className= {show === 1 ? 'admin-main-web active' : 'admin-main-web'}>
-                        <div className='admin-main-header'>Trang chủ web admin</div>
-                        <div>
-                            
-                        </div>
+                        <Dashboard />
                     </div>
                     <div className= {show === 2 ? 'admin-product active' : 'hide-page'}>
                         <AdminProduct/>

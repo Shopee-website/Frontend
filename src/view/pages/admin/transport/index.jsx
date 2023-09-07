@@ -1,22 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './transport.scss'
 import billAPI from 'api/billApi';
 import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Badge, Dropdown, Space, Table, Select } from 'antd';
 import expandedRowRender from './product-trans';
+import userApi from 'api/userApi';
 
 const Transport = () => {
-
+  const [bills, setBills] = useState([]);
     
     useEffect(()=> {
         const getAllBill = async () => {
-            const response = await billAPI.getBill();
-            console.log(response.data);
+            const response = await billAPI.getAllBill();
+            setBills(response.data.rows)
+            console.log(response.data.rows);
         }
         getAllBill();
 
     }, [])
+    
 
     const handleChangeSelect = (value) => {
     
@@ -79,9 +82,35 @@ const Transport = () => {
         },
       ];
 
+      // const [data, setData] = useState([]);
+
+      // const [user, setUser] = useState();
+
+      
+
+      // useEffect(()=> {
+      //   bills && bills.map((bill)=> {
+
+      //     const userInfo = async () => {
+      //       const res = await userApi.getUserByID(bill.user_id);
+      //       console.log(bill);
+
+      //       data.push ({
+      //         key: bill.id,
+      //         name: res.data.profile.name,
+      //         phone_number: res.data.profile.telephone,
+      //         createdAt: bill.createdAt
+      //       })
+      //     }
+      //     userInfo();
+
+      //   })
+      // }, [bills])
+
+
       const data = [];
 
-
+      
       for (let i = 0; i < 15; ++i) {
         data.push({
           key: i.toString(),
@@ -90,7 +119,6 @@ const Transport = () => {
           createdAt: '2023-12-24 23:12:00',
         });
       }
-
 
     return (
         <div className='transport-wrapper'>
