@@ -4,7 +4,7 @@ import formatPrice from 'components/format-price'
 import adminproductApi from 'api/adminproductAPI'
 import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
-
+import FormData from 'form-data'
 
 
 function AdminProduct (){
@@ -164,6 +164,8 @@ function AdminProduct (){
             </table>
         )
     }
+
+    // handle add product
     function handleValues(e){
         e.preventDefault();
         const title =  e.target.elements.title.value;
@@ -176,9 +178,10 @@ function AdminProduct (){
             price : parseInt(price),
             quantity : parseInt(quantity)
         }
+        // handle image
         const formData = new FormData();
         files.forEach(file => {
-            formData.append('image', file);
+            formData.set('image', file);
         });
         
         const addProduct = async (params) => {
@@ -199,7 +202,7 @@ function AdminProduct (){
                     quantity : parseInt(quantity)
                 }
             ],
-            images : formData
+            formData
         }, 
         {
             headers: {
