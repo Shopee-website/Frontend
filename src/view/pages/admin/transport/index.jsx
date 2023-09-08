@@ -8,7 +8,7 @@ import expandedRowRender from './product-trans';
 import userApi from 'api/userApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faNotesMedical, faFilter} from '@fortawesome/free-solid-svg-icons';
-
+import moment from 'moment/moment';
 const Transport = () => {
   const [bills, setBills] = useState([]);
     
@@ -63,13 +63,13 @@ const Transport = () => {
               </thead>
               <tbody>
                 {bills && bills.map((bill) => {
-                  // console.log(bill.id);
+                  console.log(bill);
                   return (
                     <tr>
 
-                      <td>{bill.user_id}</td>
-                      <td>{bill.total_price}</td>
-                      <td>{bill.createdAt}</td>
+                      <td>{bill.User.name}</td>
+                      <td>{bill.User.telephone}</td>
+                      <td>{moment(bill.createdAt).format('HH:mm:ss DD/MM/YYYY')}</td>
                       <td>{bill.transport_method}</td>
                       <td>  
                         <select defaultValue={bill.ship_status} id={bill.id} onChange={handleChangeSelect}>
