@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import userInfoAPI from "api/userInfoAPI";
 import axiosClient from "../../../../api/axiosClient";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 dayjs.extend(customParseFormat);
 const dateFormat = "YYYY-MM-DD";
@@ -32,7 +34,21 @@ export const MyProfile = () => {
       })
       .then((res) => {
         console.log(res);
-        alert(res.data.message);
+        // alert(res.data.message);
+        toast.success(res.data.message, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+          setTimeout(function() {
+            window.location.reload();
+
+          }, 3000)
       });
   };
   useEffect(() => {
@@ -192,6 +208,7 @@ export const MyProfile = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

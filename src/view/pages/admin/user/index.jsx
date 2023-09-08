@@ -38,6 +38,18 @@ function User(props) {
     function removeUser(id) {
       const newUsers = list.filter((item)=> item.id !== id);
       setList(newUsers)
+      // const deleteUser = async (params) => {
+      //   try {
+      //     const res = userApi.deleteUser(params)
+      //     console.log(res)
+      //   }
+      //   catch (err) {
+      //     console.log(err)
+      //   }
+      // }
+      // deleteUser({
+      //   id : id
+      // })
   }
     // Edit user
 

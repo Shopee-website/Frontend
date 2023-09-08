@@ -104,15 +104,15 @@
     display: inline-block;
 }
 .admin-product-pagination-btn {
-    padding : 8px 16px;
+    padding : 6px 12px;
     border : none;
     margin: 10px;
-    font-size: 16px;
-    background-color: rgba(0,0,0,0.1);
+    font-size: 15px;
+    background-color: white;
+    border : 1px solid rgba(0,0,0,0.3);
     border-radius: 4px;
 }
 .admin-product-pagination-btn:hover {
-    background-color: rgba(0,0,0,0.3);
     cursor: pointer;
 }
 .admin-product-label {
@@ -146,4 +146,8 @@
 }
 .admin-product-see-detail:hover, .admin-product-see:hover {
     cursor: pointer;
+}
+.admin-product-active {
+    color : rgb(47, 189, 224);
+    border : 1px solid rgb(47, 189, 224);
 }

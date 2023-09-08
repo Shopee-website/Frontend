@@ -5,6 +5,8 @@ import adminproductApi from 'api/adminproductAPI'
 import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import FormData from 'form-data'
+import axiosClient from 'api/axiosClient';
+import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
 
 
 function AdminProduct (){
@@ -16,6 +18,7 @@ function AdminProduct (){
     const [price, setPrice] = useState(0)
     const [quantity, setQuantity] = useState(0)
     const [show, setShow] = useState(false)
+    const [active, setActive] = useState(0)
     // Handle File
     const [files, setFiles] = useState([]);
 
@@ -41,6 +44,7 @@ function AdminProduct (){
     // Xử lý thay đổi trang
     const handlePageChange = (pageNumber) => {
       setCurrentPage(pageNumber);
+      setActive(pageNumber)
     };
   
     /// GET API
@@ -180,36 +184,38 @@ function AdminProduct (){
         }
         // handle image
         const formData = new FormData();
-        files.forEach(file => {
-            formData.set('image', file);
+        files.forEach((image) => {
+            formData.append("images", image);
         });
-        
-        const addProduct = async (params) => {
-            try {
-                const res = await adminproductApi.addAdminProduct(params);
-                console.log(res);
-            }
-            catch (err) {
-                console.error(err);
-            }
-        }
-        addProduct({
+        const params = {
             product_name : title,
             price : parseInt(price),
-            details : [
-                {
-                    color : "white",
-                    quantity : parseInt(quantity)
-                }
-            ],
-            formData
-        }, 
-        {
-            headers: {
-              'Content-Type': 'multipart/form-data'
+            details : {
+                color : "trắng",
+                quantity : parseInt(quantity)
             }
-          }
-        )
+        }
+        console.log(files)
+        const addProduct = async (params) => {
+            try {
+                const res =  await adminproductApi.addAdminProduct(params)
+                console.log(res);
+                formData.append("productId", res.data.id)
+                await axiosClient.post(
+                "/api/product/addPictures",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                },
+            );
+            }
+            catch (e){
+                console.error(e);
+            }
+        }
+        addProduct(params)
         setTitle('')
         setPrice(0)
         setQuantity(0)
@@ -315,8 +321,10 @@ function AdminProduct (){
                         <ul className='admin-product-pagination'>
                             {pageNumbers.map((pageNumber) => (
                             <li key={pageNumber} className='admin-product-pagination-list'>
-                                <button onClick={() => handlePageChange(pageNumber)}
-                                    className='admin-product-pagination-btn'
+                                <button 
+                                    value = {pageNumber} 
+                                onClick={() => handlePageChange(pageNumber)}
+                                    className= {active === pageNumber ? 'admin-product-pagination-btn admin-product-active' : 'admin-product-pagination-btn'}
                                 >{pageNumber}</button>
                             </li>
                             ))}
