@@ -12,7 +12,12 @@ const billAPI = {
     getAllBill : () => {
         const url = '/api/bill/all_bill_admin'
         return axiosClient.get(url)
+    },
+    UpdateBillById : (id, credentials) => {
+        const url = `/api/bill/${id}`
+        return axiosClient.patch(url, credentials)
     }
+
 }
 
 export default billAPI

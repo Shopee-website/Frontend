@@ -6,7 +6,9 @@ import { DownOutlined } from '@ant-design/icons';
 import { Badge, Dropdown, Space, Table, Select } from 'antd';
 import expandedRowRender from './product-trans';
 import userApi from 'api/userApi';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faNotesMedical, faFilter} from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment/moment';
 const Transport = () => {
   const [bills, setBills] = useState([]);
     
@@ -14,132 +16,78 @@ const Transport = () => {
         const getAllBill = async () => {
             const response = await billAPI.getAllBill();
             setBills(response.data.rows)
-            console.log(response.data.rows);
+            
         }
         getAllBill();
 
     }, [])
-    
+    const handleChangeSelect = (e) => {
+      const id = e.target.id;
+      const status = {ship_status: e.target.value}
+       
+      if(e.target.id != null && e.target.value !== null){
+        // console.log(id, status);
+          const updateBill = async () => {
+            try {
+              const res = await billAPI.UpdateBillById(id, status);
+              // console.log(res);
+              
+            } catch (error) {
+              console.log(error);
+            }
+            
+          }
+          updateBill();
+      }
 
-    const handleChangeSelect = (value) => {
-    
     };
 
-      const columns = [
-        {
-          title: 'Tên người nhận',
-          dataIndex: 'name',
-          key: 'name',
-        },
-        {
-          title: 'Số điện thoại',
-          dataIndex: 'phone_number',
-          key: 'platform',
-        },
-        {
-          title: 'Ngày đặt hàng',
-          dataIndex: 'createdAt',
-          key: 'version',
-        },
-        {
-          title: 'Trạng thái đơn hàng',
-          key: 'operation',
-          
-          render: () => (
-            <Space wrap>
-            <Select
-            defaultValue="Trạng thái vận chuyển"
-            style={{
-                width: 200,
-            }}
-            onChange={handleChangeSelect}
-            options={[
-                
-                {
-                    value: '1',
-                    label: 'Đang chuẩn bị',
-                },
-                {
-                    value: '2',
-                    label: 'Đang vận chuyển',
-                },
-                {
-                    value: '3',
-                    label: 'Vận chuyển thất bại',
-                },
-                {
-                    value: '4',
-                    label: 'Giao hàng thành công',
-                },
-                {
-                    value: '5',
-                    label: 'Giao hàng thất bại',
-                },
-            ]}
-            />
-        </Space>
-          ),
-        },
-      ];
-
-      // const [data, setData] = useState([]);
-
-      // const [user, setUser] = useState();
-
-      
-
-      // useEffect(()=> {
-      //   bills && bills.map((bill)=> {
-
-      //     const userInfo = async () => {
-      //       const res = await userApi.getUserByID(bill.user_id);
-      //       console.log(bill);
-
-      //       data.push ({
-      //         key: bill.id,
-      //         name: res.data.profile.name,
-      //         phone_number: res.data.profile.telephone,
-      //         createdAt: bill.createdAt
-      //       })
-      //     }
-      //     userInfo();
-
-      //   })
-      // }, [bills])
-
-
-      const data = [];
-
-      
-      for (let i = 0; i < 15; ++i) {
-        data.push({
-          key: i.toString(),
-          name: 'Tom ' + `${i}`,
-          phone_number: '1234567890',
-          createdAt: '2023-12-24 23:12:00',
-        });
-      }
 
     return (
         <div className='transport-wrapper'>
-            <div className='transport-header'>
+          <div className='transport-header'>
+            <FontAwesomeIcon icon={faNotesMedical} className='icon_header' />
+            <h3>Thông tin đơn hàng</h3>
+            <FontAwesomeIcon icon={faFilter}  className='icon_header'/>
+          </div>
+          <div className='transport-content'>
+            <table>
+              <thead>
+                <tr>
+                  <th>Người đặt hàng</th>
+                  <th>Số điện thoại</th>
+                  <th>Ngày đặt hàng</th>
+                  <th>Đơn vị vận chuyển</th>
+                  <th>Trạng thái đơn hàng</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bills && bills.map((bill) => {
+                  console.log(bill);
+                  return (
+                    <tr>
+
+                      <td>{bill.User.name}</td>
+                      <td>{bill.User.telephone}</td>
+                      <td>{moment(bill.createdAt).format('HH:mm:ss DD/MM/YYYY')}</td>
+                      <td>{bill.transport_method}</td>
+                      <td>  
+                        <select defaultValue={bill.ship_status} id={bill.id} onChange={handleChangeSelect}>
+                          <option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
+                          <option value="Đang vận chuyển">Đang vận chuyển</option>
+                          <option value="Đang giao hàng">Đang giao hàng</option>
+                          <option value="Giao hàng thành công">Giao hàng thành công</option>
+                          <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                        </select>
+                        
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
               
-            </div>
-            <div className='transport-content'>
-            <Table
-                columns={columns}
-                expandable={{
-                expandedRowRender,
-                // defaultExpandedRowKeys: ['0'],
-                }}
-                dataSource={data}
-                pagination={false} 
-                scroll={{
-                    // x: 1500,
-                    y: 500,
-                  }}
-            />
-            </div>
+            </table>
+          </div>
         </div>
     )
 }
