@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import FormData from 'form-data'
 import axiosClient from 'api/axiosClient';
 import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
-
+import AddProduct from './add';
 
 function AdminProduct (){
     const navigate = useNavigate()
@@ -222,7 +222,10 @@ function AdminProduct (){
         setFiles([])
        setProduct(prev => prev.concat(newProduct))
     }
-
+//test phien bản 2
+const handleValues2 = () => {
+    
+}
     function handleUpdate (event){
         event.preventDefault();
         const title = event.target.elements.title.value
@@ -250,6 +253,15 @@ function AdminProduct (){
         setShow(!show)
     }
     
+    //phieen test
+    const [show2, setShow2] = useState(false)
+
+    function handleAdd2(e) {
+        e.preventDefault();
+        setShow2(!show2)
+    }
+    
+    
 
     
     return (
@@ -258,8 +270,15 @@ function AdminProduct (){
                                 <button className='admin-product-add-button' 
                                 onClick={handleAdd}
                                 >Thêm sản phẩm</button>
+
+
+                                <button className='admin-product-add-button' 
+                                onClick={handleAdd2}
+                                style={{marginLeft: '30px'}}
+                                >Thêm sản phẩm ( phiên bản 2) </button>
+                                {show2 && <AddProduct />}
                                 <form 
-                                onSubmit={handleValues}
+                                onSubmit={handleValues2}
                                 >
                                     {show ?
                                         <>

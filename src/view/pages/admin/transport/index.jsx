@@ -2,12 +2,8 @@ import { useEffect, useState } from 'react';
 import './transport.scss'
 import billAPI from 'api/billApi';
 import React from 'react';
-import { DownOutlined } from '@ant-design/icons';
-import { Badge, Dropdown, Space, Table, Select } from 'antd';
-import expandedRowRender from './product-trans';
-import userApi from 'api/userApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNotesMedical, faFilter} from '@fortawesome/free-solid-svg-icons';
+import { faNotesMedical, faFilter, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment/moment';
 const Transport = () => {
   const [bills, setBills] = useState([]);
@@ -54,9 +50,10 @@ const Transport = () => {
             <table>
               <thead>
                 <tr>
+                  <th></th>
                   <th>Người đặt hàng</th>
                   <th>Số điện thoại</th>
-                  <th>Ngày đặt hàng</th>
+                  <th>Ngày đặt hàng  <FontAwesomeIcon icon={faCaretDown} /></th>
                   <th>Đơn vị vận chuyển</th>
                   <th>Trạng thái đơn hàng</th>
                 </tr>
@@ -65,23 +62,38 @@ const Transport = () => {
                 {bills && bills.map((bill) => {
                   console.log(bill);
                   return (
-                    <tr>
-
-                      <td>{bill.User.name}</td>
-                      <td>{bill.User.telephone}</td>
-                      <td>{moment(bill.createdAt).format('HH:mm:ss DD/MM/YYYY')}</td>
-                      <td>{bill.transport_method}</td>
-                      <td>  
-                        <select defaultValue={bill.ship_status} id={bill.id} onChange={handleChangeSelect}>
-                          <option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
-                          <option value="Đang vận chuyển">Đang vận chuyển</option>
-                          <option value="Đang giao hàng">Đang giao hàng</option>
-                          <option value="Giao hàng thành công">Giao hàng thành công</option>
-                          <option value="Giao hàng thất bại">Giao hàng thất bại</option>
-                        </select>
-                        
-                      </td>
-                    </tr>
+                    <>
+                      <tr>
+                        <td><FontAwesomeIcon icon={faCaretDown} /></td>
+                        <td>{bill.User.name}</td>
+                        <td>{bill.User.telephone}</td>
+                        <td>{moment(bill.createdAt).format('HH:mm:ss DD/MM/YYYY')}</td>
+                        <td>{bill.transport_method}</td>
+                        <td>  
+                          <select defaultValue={bill.ship_status} id={bill.id} onChange={handleChangeSelect}>
+                            <option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
+                            <option value="Đang vận chuyển">Đang vận chuyển</option>
+                            <option value="Đang giao hàng">Đang giao hàng</option>
+                            <option value="Giao hàng thành công">Giao hàng thành công</option>
+                            <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                          </select>
+                        </td>
+                      </tr>
+                      {/* <tr >
+                      <thead>
+                          <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Phân loại</th>
+                            <th>Số lượng</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                      </tr> */}
+                    </>
+                    
+                    
                   )
                 })}
               </tbody>

@@ -60,12 +60,12 @@ function Admin() {
                             Phản hồi
                             </button>
                         </li>
-                        <li className = {active === 5 ?'admin-navbar-item-list btn-active' : 'admin-navbar-item-list' }>
+                        {/* <li className = {active === 5 ?'admin-navbar-item-list btn-active' : 'admin-navbar-item-list' }>
                             <button value={5} onClick = {handleBtnClick}>
                             <FontAwesomeIcon icon = {faMoneyBill} className= 'admin-navbar-icon'/>
                             Thống kê thu nhập
                             </button>
-                        </li>
+                        </li> */}
                         <li className = {active === 6 ?'admin-navbar-item-list btn-active' : 'admin-navbar-item-list' }>
                             <button value={6} onClick = {handleBtnClick}>
                             <FontAwesomeIcon icon={faCartFlatbed} className= 'admin-navbar-icon' />
