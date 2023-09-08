@@ -12,6 +12,10 @@ const userApi = {
         const url = `/api/admin/all-user/${userId}`;
         return axiosClient.get(url)
     },
+    deleteUser(params){
+        const url = '/api/admin/delete-user';
+        return axiosClient.delete(url,params)
+    }
     
 };
 export default userApi;
