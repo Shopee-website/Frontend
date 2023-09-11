@@ -42,10 +42,10 @@
 .register-input {
     padding : 8px 12px;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 6px;
     border : 1px solid #ccc;
     border-radius: 3px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 .register-input:focus {
     box-shadow: 0 3px 10px 0 rgba(0,0,0,.14);
@@ -59,7 +59,7 @@
     padding : 8px 0;
     border : none;
     font-size: 15px;
-    margin : 20px 0;
+    margin : 0 0 20px 0;
     // opacity: 0.8;
 }
 .register-btn:hover {
@@ -130,4 +130,11 @@
 }
 .register-link:hover {
     cursor: pointer;
+}
+.register-password-toggle {
+    display: inline-block;
+    position: relative;
+    bottom : 32px;
+    left : 290px;
+    color: rgba(0,0,0,0.6)
 }

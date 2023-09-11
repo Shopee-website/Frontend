@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, Button, List, Skeleton } from 'antd';
 import './userList.scss'
 import userApi from 'api/userApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 
 function User(props) {
@@ -19,6 +21,9 @@ function User(props) {
     const [searchResults, setSearchResults] = useState([]);
     const [array, setArray] = useState([])
     const [users, setUsers] = useState([]);
+    const [active, setActive] = useState(0)
+    // handle show password
+    const [showPassword, setShowPassword] = useState(false);
     useEffect (() => {
     const fetchUser = async () => {
         const userList = await userApi.getAllUser();
@@ -32,6 +37,25 @@ function User(props) {
 
     fetchUser();
     }, [])
+
+    // Handle paging
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = list.slice(indexOfFirstItem, indexOfLastItem);
+  
+    // Tạo các nút phân trang
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(list.length / itemsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+  
+    // Xử lý thay đổi trang
+    const handlePageChange = (pageNumber) => {
+      setCurrentPage(pageNumber);
+      setActive(pageNumber)
+    };
 
 
     /// Remove user 
@@ -148,6 +172,10 @@ function User(props) {
     }, 5000)
   };
 
+  //handle show pass
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
 
     return (
         <>
@@ -181,10 +209,19 @@ function User(props) {
                 onChange={(e)=>setEmail(e.target.value)} 
                 /><br/>
                 <label for = "password" className='admin-user-label'>Nhập mật khẩu</label><br/>
-                <input type = "password" name = "password" value = {password}
+                <input  type={showPassword ? 'text' : 'password'} name = "password" value = {password}
                 id = "password" placeholder='Nhập mật khẩu' className='admin-user-input'
                 onChange={(e)=> setPassword(e.target.value)}
-                /><br/>
+                />
+                <span
+                  className="admin-user-password-toggle"
+                  onClick={toggleShowPassword}
+                >
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} 
+                  />
+                </span>
+                
+                <br/>
                 <button className='admin-user-add-btn'>Thêm</button>
               </form>
             </div> : <div></div>}
@@ -194,7 +231,7 @@ function User(props) {
                 loading={initLoading}
                 itemLayout="horizontal"
                 // loadMore={loadMore}
-                dataSource={list}
+                dataSource={currentItems}
                 renderItem={(item) => (
                   item.id === editID ? 
                 <EditUser item = {item} list = {list} setList = {setList}/>
@@ -221,6 +258,17 @@ function User(props) {
             />
             </div>
         </div>
+        <ul className='admin-user-pagination'>
+              {pageNumbers.map((pageNumber) => (
+              <li key={pageNumber} className='admin-user-pagination-list'>
+                  <button 
+                      value = {pageNumber} 
+                  onClick={() => handlePageChange(pageNumber)}
+                      className= {active === pageNumber ? 'admin-user-pagination-btn admin-user-active' : 'admin-user-pagination-btn'}
+                  >{pageNumber}</button>
+              </li>
+              ))}
+          </ul>
       </>
     );
 }

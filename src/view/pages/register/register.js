@@ -12,7 +12,8 @@ import useAuth from 'hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
 // import "~antd/dist/antd.css";
 import { Alert, Space } from 'antd';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -23,6 +24,8 @@ function Register (){
     const [password2, setPassword2] = useState('')
     const navigate = useNavigate();
     const [err, setErr] = useState([false, false, false])
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword1, setShowPassword1] = useState(false);
 
     // useEffect(()=> {
     //     if (localStorage.getItem('token')){
@@ -97,6 +100,13 @@ function Register (){
         sendPostRequest();
     }
 
+    // handle show password
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    }
+    const toggleShowPassword1 = () => {
+        setShowPassword1(!showPassword1);
+    }
 
     return (
             <div className='register-content' style ={{backgroundImage: `url(${Background})`}}>
@@ -119,13 +129,13 @@ function Register (){
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete= "off"
                         />
-                       
+                       <br/>
                        {err[0] && <p style = {{fontSize: '14px', color : 'red'}} >Email không đúng định dạng</p>}
 
                         <br/>
                         <label for= 'password' className='register-label'>Mật khẩu</label> <br/>
                         <input 
-                            type = 'password'
+                            type = {showPassword ? 'text' : 'password'}
                             id = 'password'
                             name = 'password'
                             placeholder='Nhập mật khẩu'
@@ -137,11 +147,18 @@ function Register (){
 
                         />
 
+                        <span
+                            className="register-password-toggle"
+                            onClick={toggleShowPassword}
+                            >
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} 
+                            />
+                        </span>
 
                         <br/>
                         <label for= 'confirm_password' className='register-label'>Nhập lại mật khẩu</label><br/>
                         <input 
-                            type = 'password'
+                            type = {showPassword1 ? 'text' : 'password'}
                             id = 'confirm_password'
                             name = 'confirm_password'
                             placeholder='Nhập lại mật khẩu'
@@ -152,10 +169,17 @@ function Register (){
                             autoComplete= "off"
 
                         />
+                        <span
+                            className="register-password-toggle"
+                            onClick={toggleShowPassword1}
+                            >
+                            <FontAwesomeIcon icon={showPassword1 ? faEyeSlash : faEye} 
+                            />
+                        </span>
 
                         {err[2] && <p style = {{fontSize: '14px', color : 'red'}}>Mật khẩu nhập lại không đúng</p>}
 
-                        <br/>
+                       
                         <button className='register-btn'>
                             TIẾP THEO
                         </button>
