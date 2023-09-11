@@ -6,6 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import auth from 'api/auth'
 import useAuth from 'hooks/useAuth'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 
 function Login_email() {
@@ -13,6 +15,7 @@ function Login_email() {
     const [password, setPassword] = useState('')
     const [err, setErr] = useState(false)
     const [err1, setErr1] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate()
 
     const { setToken } = useAuth()
@@ -66,6 +69,11 @@ function Login_email() {
         sendPostRequest()
     }
 
+     //handle show pass
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    }
+
 
     return ( 
         <div>
@@ -85,7 +93,7 @@ function Login_email() {
                         </div>
                        
 
-                        <input type="password" name='password' placeholder='Mật khẩu' 
+                        <input type = {showPassword ? 'text' : 'password'} name='password' placeholder='Mật khẩu' 
                         className='login-form-input' 
                         value = {password}
                         required
@@ -93,6 +101,13 @@ function Login_email() {
                         autoComplete = "off"
 
                         />
+                        <span
+                            className="login-password-toggle"
+                            onClick={toggleShowPassword}
+                            >
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} 
+                            />
+                        </span>
 
                         <div style={{height: '30px', display: 'flex', alignItems: 'center', marginLeft: '10px'}}>
                              {err1 && <p style = {{color : 'red', fontSize: '14px'}}>Mật khẩu sai</p>}

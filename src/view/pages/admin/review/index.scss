@@ -52,3 +52,32 @@
     border : 1px solid #ee4d2d;
     cursor: pointer;
 }
+.admin-review-pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-review-pagination-list {
+    display: inline-block;
+}
+.admin-review-pagination-btn {
+    padding : 6px 12px;
+    border : none;
+    margin: 10px;
+    font-size: 15px;
+    background-color: white;
+    border : 1px solid rgba(0,0,0,0.3);
+    border-radius: 4px;
+}
+.admin-review-pagination-btn:hover {
+    cursor: pointer;
+}
+.admin-review-active {
+    color : rgb(47, 189, 224);
+    border : 1px solid rgb(47, 189, 224);
+}
+.admin-review-active-btn {
+    color :#ee4d2d;
+    border : 1px solid #ee4d2d;
+}
